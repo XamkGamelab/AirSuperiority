@@ -1,0 +1,96 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Player1",
+            "id": "541cd4a4-81f4-4040-9e34-9effeed612b8",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "57e898b7-1de6-4953-9f2f-e38a47a43c8b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RotateLeft",
+                    "type": "Button",
+                    "id": "957ec006-ca00-46ff-8cf0-fd1e35961245",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateRight",
+                    "type": "Button",
+                    "id": "7082e575-a077-49dc-bd0d-5023d6efd07a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "25f3ac03-1a98-4bcd-8966-e9e129e5ee0f",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "bf0ce200-c34d-49fb-abb7-9cbb71fb2989",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9ef8b7da-cff5-4ccb-b581-093284cd9917",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4a179c76-f4fe-464a-9baa-5abe20d0cf09",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9320e228-f8c5-484b-a227-3561ef46cd52",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
