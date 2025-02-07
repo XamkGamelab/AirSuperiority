@@ -1,56 +1,56 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
+
     // Player Variables
     public float movementSpeed = 2;
     public float rotationSpeed = 90;
 
     // InputActions
-    InputAction moveAction;
-    InputAction rotateLeftAction;
-    InputAction rotateRightAction;
+    InputAction moveAction2;
+    InputAction rotateLeftAction2;
+    InputAction rotateRightAction2;
 
-    private void Start()
+    void Start()
     {
         // Get InputSystem actions
-        moveAction = InputSystem.actions.FindAction("Move");
-        rotateLeftAction = InputSystem.actions.FindAction("RotateLeft");
-        rotateRightAction = InputSystem.actions.FindAction("RotateRight");
+        moveAction2 = InputSystem.actions.FindAction("Player2Move");
+        rotateLeftAction2 = InputSystem.actions.FindAction("Player2RotateLeft");
+        rotateRightAction2 = InputSystem.actions.FindAction("Player2RotateRight");
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Move Player forward/backward
-        if (moveAction.IsPressed())
+        if (moveAction2.IsPressed())
         {
             MovePlayer();
         }
 
         // Player rotation inverted when moving backwards
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.DownArrow))
         {
             // Inverted player rotation
-            if (rotateLeftAction.IsPressed())
+            if (rotateLeftAction2.IsPressed())
                 transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
-            if (rotateRightAction.IsPressed())
+            if (rotateRightAction2.IsPressed())
                 transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
         }
-        else 
+        else
         {
             // Normal player rotation
-            if (rotateLeftAction.IsPressed())
+            if (rotateLeftAction2.IsPressed())
                 RotatePlayerLeft();
-            if (rotateRightAction.IsPressed())
+            if (rotateRightAction2.IsPressed())
                 RotatePlayerRight();
         }
     }
 
     void MovePlayer()
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        Vector2 moveValue = moveAction2.ReadValue<Vector2>();
         transform.Translate(new Vector2(0, moveValue.y) * movementSpeed * Time.deltaTime);
     }
 
@@ -63,5 +63,4 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
     }
-
 }
