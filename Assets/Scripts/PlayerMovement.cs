@@ -1,0 +1,68 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerMovement : MonoBehaviour
+{
+    // Player Variables
+    public float movementSpeed = 2;
+    public float leftRotationSpeed = 60;
+    public float rightRotationSpeed = -60;
+
+    // InputActions
+    InputAction moveAction;
+    InputAction rotateLeftAction;
+    InputAction rotateRightAction;
+
+    private void Start()
+    {
+        // Get InputSystem actions
+        moveAction = InputSystem.actions.FindAction("Move");
+        rotateLeftAction = InputSystem.actions.FindAction("RotateLeft");
+        rotateRightAction = InputSystem.actions.FindAction("RotateRight");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Move Player forward/backward
+        if (moveAction.IsPressed())
+        {
+            MovePlayer();
+        }
+
+        // Player rotation inverted when moving backwards
+        if (Input.GetKey(KeyCode.S))
+        {
+            // Inverted player rotation
+            if (rotateLeftAction.IsPressed())
+                transform.Rotate(0, 0, rightRotationSpeed * Time.deltaTime);
+            if (rotateRightAction.IsPressed())
+                transform.Rotate(0, 0, leftRotationSpeed * Time.deltaTime);
+        }
+        else 
+        {
+            // Normal player rotation
+            if (rotateLeftAction.IsPressed())
+                RotatePlayerLeft();
+            if (rotateRightAction.IsPressed())
+                RotatePlayerRight();
+        }
+    }
+
+    void MovePlayer()
+    {
+        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        transform.Translate(new Vector2(0, moveValue.y) * movementSpeed * Time.deltaTime);
+    }
+
+    void RotatePlayerLeft()
+    {
+        transform.Rotate(0, 0, leftRotationSpeed * Time.deltaTime);
+    }
+
+    void RotatePlayerRight()
+    {
+        transform.Rotate(0, 0, rightRotationSpeed * Time.deltaTime);
+    }
+
+}
