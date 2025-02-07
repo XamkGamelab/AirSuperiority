@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb600af6-8978-41c9-af97-999cdad4de4b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +119,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RotateLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56497bf1-5bbc-4362-99c5-c0b2491f24f2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a235a3a4-a6aa-468b-a295-73168b0c4aab"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -139,6 +170,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Player2RotateRight"",
                     ""type"": ""Button"",
                     ""id"": ""cba30179-b626-43e6-b082-80e99a78fc18"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Player2Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa283838-e8c5-4224-af09-7b56797dd9b0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -200,6 +240,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Player2RotateRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e97e9b9e-7108-4d61-bddb-0d013166fe11"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe69d7f4-9af8-4d6f-9dca-074c3feb8e93"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -211,11 +273,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
         m_Player1_RotateLeft = m_Player1.FindAction("RotateLeft", throwIfNotFound: true);
         m_Player1_RotateRight = m_Player1.FindAction("RotateRight", throwIfNotFound: true);
+        m_Player1_Shoot = m_Player1.FindAction("Shoot", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Player2Move = m_Player2.FindAction("Player2Move", throwIfNotFound: true);
         m_Player2_Player2RotateLeft = m_Player2.FindAction("Player2RotateLeft", throwIfNotFound: true);
         m_Player2_Player2RotateRight = m_Player2.FindAction("Player2RotateRight", throwIfNotFound: true);
+        m_Player2_Player2Shoot = m_Player2.FindAction("Player2Shoot", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -286,6 +350,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player1_Move;
     private readonly InputAction m_Player1_RotateLeft;
     private readonly InputAction m_Player1_RotateRight;
+    private readonly InputAction m_Player1_Shoot;
     public struct Player1Actions
     {
         private @PlayerControls m_Wrapper;
@@ -293,6 +358,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player1_Move;
         public InputAction @RotateLeft => m_Wrapper.m_Player1_RotateLeft;
         public InputAction @RotateRight => m_Wrapper.m_Player1_RotateRight;
+        public InputAction @Shoot => m_Wrapper.m_Player1_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -311,6 +377,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateRight.started += instance.OnRotateRight;
             @RotateRight.performed += instance.OnRotateRight;
             @RotateRight.canceled += instance.OnRotateRight;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
@@ -324,6 +393,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateRight.started -= instance.OnRotateRight;
             @RotateRight.performed -= instance.OnRotateRight;
             @RotateRight.canceled -= instance.OnRotateRight;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -348,6 +420,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player2_Player2Move;
     private readonly InputAction m_Player2_Player2RotateLeft;
     private readonly InputAction m_Player2_Player2RotateRight;
+    private readonly InputAction m_Player2_Player2Shoot;
     public struct Player2Actions
     {
         private @PlayerControls m_Wrapper;
@@ -355,6 +428,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Player2Move => m_Wrapper.m_Player2_Player2Move;
         public InputAction @Player2RotateLeft => m_Wrapper.m_Player2_Player2RotateLeft;
         public InputAction @Player2RotateRight => m_Wrapper.m_Player2_Player2RotateRight;
+        public InputAction @Player2Shoot => m_Wrapper.m_Player2_Player2Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -373,6 +447,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Player2RotateRight.started += instance.OnPlayer2RotateRight;
             @Player2RotateRight.performed += instance.OnPlayer2RotateRight;
             @Player2RotateRight.canceled += instance.OnPlayer2RotateRight;
+            @Player2Shoot.started += instance.OnPlayer2Shoot;
+            @Player2Shoot.performed += instance.OnPlayer2Shoot;
+            @Player2Shoot.canceled += instance.OnPlayer2Shoot;
         }
 
         private void UnregisterCallbacks(IPlayer2Actions instance)
@@ -386,6 +463,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Player2RotateRight.started -= instance.OnPlayer2RotateRight;
             @Player2RotateRight.performed -= instance.OnPlayer2RotateRight;
             @Player2RotateRight.canceled -= instance.OnPlayer2RotateRight;
+            @Player2Shoot.started -= instance.OnPlayer2Shoot;
+            @Player2Shoot.performed -= instance.OnPlayer2Shoot;
+            @Player2Shoot.canceled -= instance.OnPlayer2Shoot;
         }
 
         public void RemoveCallbacks(IPlayer2Actions instance)
@@ -408,11 +488,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotateLeft(InputAction.CallbackContext context);
         void OnRotateRight(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {
         void OnPlayer2Move(InputAction.CallbackContext context);
         void OnPlayer2RotateLeft(InputAction.CallbackContext context);
         void OnPlayer2RotateRight(InputAction.CallbackContext context);
+        void OnPlayer2Shoot(InputAction.CallbackContext context);
     }
 }
