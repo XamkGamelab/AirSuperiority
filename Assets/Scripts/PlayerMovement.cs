@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Player1 Variables
+    // Player Variables
     public float movementSpeed = 2;
     public float leftRotationSpeed = 60;
     public float rightRotationSpeed = -60;
@@ -24,32 +24,28 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move Player1 forward/backward
+        // Move Player forward/backward
         if (moveAction.IsPressed())
         {
             MovePlayer();
         }
 
-        // Rotate Player1 left ** KORJAA TÄMÄ **
-        if (rotateLeftAction.IsPressed())
+        // Player rotation inverted when moving backwards
+        if (Input.GetKey(KeyCode.S))
         {
-            RotatePlayerLeft();
-        } 
-        else if (rotateLeftAction.IsPressed() && Input.GetKey(KeyCode.S))
-        {
-            RotatePlayerBackwardLeft();
-            Debug.Log("Taaksepäinvasemmalle");
+            // Inverted player rotation
+            if (rotateLeftAction.IsPressed())
+                transform.Rotate(0, 0, rightRotationSpeed * Time.deltaTime);
+            if (rotateRightAction.IsPressed())
+                transform.Rotate(0, 0, leftRotationSpeed * Time.deltaTime);
         }
-
-        // Rotate Player1 right ** KORJAA TÄMÄ **
-        if (rotateRightAction.IsPressed())
+        else 
         {
-            RotatePlayerRight();
-        }
-        else if (rotateRightAction.IsPressed() && Input.GetKey(KeyCode.S))
-        {
-            RotatePlayerBackwardRight();
-            Debug.Log("Taaksepäinoikealle");
+            // Normal player rotation
+            if (rotateLeftAction.IsPressed())
+                RotatePlayerLeft();
+            if (rotateRightAction.IsPressed())
+                RotatePlayerRight();
         }
     }
 
@@ -64,18 +60,9 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0, 0, leftRotationSpeed * Time.deltaTime);
     }
 
-    void RotatePlayerBackwardLeft()
-    {
-        transform.Rotate(0, 0, leftRotationSpeed * Time.deltaTime);
-    }
-
     void RotatePlayerRight()
     {
         transform.Rotate(0, 0, rightRotationSpeed * Time.deltaTime);
     }
 
-    void RotatePlayerBackwardRight()
-    {
-        transform.Rotate(0, 0, rightRotationSpeed * Time.deltaTime);
-    }
 }
