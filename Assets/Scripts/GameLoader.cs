@@ -22,7 +22,7 @@ public class GameLoader : MonoBehaviour
         EnsureSingleton(statsManagerPrefab);
 
         //Scene to load after singleton setup
-        SceneManager.LoadScene("Level1");
+        //SceneManager.LoadScene("Level1");
     }
 
     private void EnsureSingleton(GameObject prefab)
