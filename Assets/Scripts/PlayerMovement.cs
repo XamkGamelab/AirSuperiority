@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         // Check player direction...
 
         // Instantiate bullet prefab...
-        bulletInst = Instantiate(normalBullet, bulletSpawnPoint);
+
     }
 
 }
