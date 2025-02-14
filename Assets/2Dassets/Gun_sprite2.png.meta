@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 67c1a2b07fc80d044ba2a4fb48b79c9c
-=======
-guid: f91f918dc3c8c6b49bcf45f1ed03b529
->>>>>>> Johanna
+guid: 195b78216a5d74d4287edf2283ba2df6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3785369381196905711
-    second: projectileTest_0
+      213: 3447029590129510424
+    second: Gun_sprite2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,8 +96,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-<<<<<<< HEAD
-=======
   - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
@@ -115,18 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
->>>>>>> Johanna
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: projectileTest_0
+      name: Gun_sprite2_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 13
-        width: 33
-        height: 70
+        x: 13
+        y: 39
+        width: 77
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fecb1ed7565588430800000000000000
-      internalID: 3785369381196905711
+      spriteID: 8180ee9262f46df20800000000000000
+      internalID: 3447029590129510424
       vertices: []
       indices: 
       edges: []
@@ -154,12 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-<<<<<<< HEAD
-    nameFileIdTable:
-      projectileTest_0: 3785369381196905711
-=======
     nameFileIdTable: {}
->>>>>>> Johanna
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
