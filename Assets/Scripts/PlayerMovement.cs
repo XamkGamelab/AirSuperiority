@@ -3,14 +3,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Player Variables
+    // Player variables
     public float movementSpeed = 2;
     public float rotationSpeed = 90;
+
+    // Weapon variables
+    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject normalBullet;
+
+    private GameObject bulletInst;
 
     // InputActions
     InputAction moveAction;
     InputAction rotateLeftAction;
     InputAction rotateRightAction;
+    InputAction shootAction;
 
     private void Start()
     {
@@ -18,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         rotateLeftAction = InputSystem.actions.FindAction("RotateLeft");
         rotateRightAction = InputSystem.actions.FindAction("RotateRight");
+        shootAction = InputSystem.actions.FindAction("Shoot");
     }
 
     // Update is called once per frame
@@ -46,6 +54,13 @@ public class PlayerMovement : MonoBehaviour
             if (rotateRightAction.IsPressed())
                 RotatePlayerRight();
         }
+
+        if (shootAction.IsPressed())
+        {
+            // Add cooldown between shots... 
+
+            PlayerShoot();
+        }
     }
 
     void MovePlayer()
@@ -62,6 +77,18 @@ public class PlayerMovement : MonoBehaviour
     void RotatePlayerRight()
     {
         transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
+    }
+
+    void PlayerShoot()
+    {
+        Debug.Log($"Shoot Action is Called");
+
+        // Check which weapon the player has...
+
+        // Check player direction...
+
+        // Instantiate bullet prefab...
+        bulletInst = Instantiate(normalBullet, bulletSpawnPoint);
     }
 
 }

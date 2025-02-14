@@ -12,6 +12,7 @@ public class Player2Movement : MonoBehaviour
     InputAction moveAction2;
     InputAction rotateLeftAction2;
     InputAction rotateRightAction2;
+    InputAction shootAction2;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class Player2Movement : MonoBehaviour
         moveAction2 = InputSystem.actions.FindAction("Player2Move");
         rotateLeftAction2 = InputSystem.actions.FindAction("Player2RotateLeft");
         rotateRightAction2 = InputSystem.actions.FindAction("Player2RotateRight");
+        shootAction2 = InputSystem.actions.FindAction("Player2Shoot");
     }
 
     void Update()
@@ -46,6 +48,13 @@ public class Player2Movement : MonoBehaviour
             if (rotateRightAction2.IsPressed())
                 RotatePlayerRight();
         }
+
+        if (shootAction2.IsPressed())
+        {
+            // Add cooldown between shots... 
+
+            PlayerShoot();
+        }
     }
 
     void MovePlayer()
@@ -62,5 +71,17 @@ public class Player2Movement : MonoBehaviour
     void RotatePlayerRight()
     {
         transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
+    }
+
+    void PlayerShoot()
+    {
+        Debug.Log($"Player2Shoot Action is Called");
+
+        // Check which weapon the player has...
+
+        // Check player direction...
+
+        // Instantiate bullet prefab...
+
     }
 }

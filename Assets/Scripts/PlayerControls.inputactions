@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "cb600af6-8978-41c9-af97-999cdad4de4b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -88,6 +97,28 @@
                     "action": "RotateLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56497bf1-5bbc-4362-99c5-c0b2491f24f2",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a235a3a4-a6aa-468b-a295-73168b0c4aab",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -117,6 +148,15 @@
                     "name": "Player2RotateRight",
                     "type": "Button",
                     "id": "cba30179-b626-43e6-b082-80e99a78fc18",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player2Shoot",
+                    "type": "Button",
+                    "id": "fa283838-e8c5-4224-af09-7b56797dd9b0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -176,6 +216,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Player2RotateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e97e9b9e-7108-4d61-bddb-0d013166fe11",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player2Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe69d7f4-9af8-4d6f-9dca-074c3feb8e93",
+                    "path": "<Keyboard>/rightCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player2Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
