@@ -343,6 +343,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &600000500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,6 +1981,8 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+=======
+>>>>>>> Antti
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2064,6 +2067,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &625076218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,6 +2297,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+=======
+>>>>>>> Antti
 --- !u!1 &1489207912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,6 +2386,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &2122523227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,6 +2419,9 @@ Transform:
   m_Father: {fileID: 1280858434}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7813230330853799988
+=======
+--- !u!1001 &2730647635560325306
+>>>>>>> Antti
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2419,6 +2429,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
     - target: {fileID: 2673714174168233199, guid: fcb13b72da01980468276d655d985cb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.18
@@ -2462,12 +2473,61 @@ PrefabInstance:
     - target: {fileID: 3369976401765945083, guid: fcb13b72da01980468276d655d985cb4, type: 3}
       propertyPath: m_Name
       value: TestBullet
+=======
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218314717160678832, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845119795106466041, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+      propertyPath: m_Name
+      value: StatsManager
+>>>>>>> Antti
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
+<<<<<<< HEAD
   m_SourcePrefab: {fileID: 100100000, guid: fcb13b72da01980468276d655d985cb4, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 2bfc3fc674775e54b897c9fc3d2d1f53, type: 3}
+>>>>>>> Antti
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2475,7 +2535,11 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1489207914}
+<<<<<<< HEAD
   - {fileID: 740025361}
   - {fileID: 625076220}
   - {fileID: 1094318447}
   - {fileID: 7813230330853799988}
+=======
+  - {fileID: 2730647635560325306}
+>>>>>>> Antti
