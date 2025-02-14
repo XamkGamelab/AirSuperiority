@@ -64,4 +64,16 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
     }
 
+    void PlayerShoot()
+    {
+        Debug.Log($"Shoot Action is Called");
+
+        // Check which weapon the player has...
+
+        // Check player direction...
+
+        // Instantiate bullet prefab...
+
+    }
+
 }
