@@ -3,9 +3,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Player Variables
+    // Player variables
     public float movementSpeed = 2;
     public float rotationSpeed = 90;
+
+    // Weapon variables
+    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject normalBullet;
+
+    private GameObject bulletInst;
 
     // InputActions
     InputAction moveAction;
@@ -82,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         // Check player direction...
 
         // Instantiate bullet prefab...
-
+        bulletInst = Instantiate(normalBullet, bulletSpawnPoint);
     }
 
 }
