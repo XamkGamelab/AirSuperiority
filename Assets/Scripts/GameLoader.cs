@@ -9,18 +9,17 @@ public class GameLoader : MonoBehaviour
     [SerializeField] private GameObject levelManagerPrefab;
     [SerializeField] private GameObject sceneControllerPrefab;
     [SerializeField] private GameObject gameManagerPrefab;
+    [SerializeField] private GameObject statsManagerPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        //Ensure non-MonoBehaviour singletons are created
-        _= ScoreManager.Instance;
-
         //Ensure MonoBehaviour singletons exist
         EnsureSingleton(spawnManagerPrefab);
         EnsureSingleton(levelManagerPrefab);
         EnsureSingleton(sceneControllerPrefab);
         EnsureSingleton(gameManagerPrefab);
+        EnsureSingleton(statsManagerPrefab);
 
         //Scene to load after singleton setup
         SceneManager.LoadScene("Level1");
@@ -37,6 +36,6 @@ public class GameLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class StatsManager : MonoBehaviour
 {
-    public static SpawnManager Instance { get; private set; }
+    public static StatsManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -14,16 +14,15 @@ public class SpawnManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-//        Debug.Log($"SpawnManager gives values 10 and 20 to scoreManagers sum method which returns: {ScoreManager.Instance.sum(20, 10)}");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
