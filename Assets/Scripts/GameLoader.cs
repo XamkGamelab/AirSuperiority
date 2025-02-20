@@ -3,6 +3,18 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
+/*
+ * 
+ On player death, onplayerDeath(int x)
+
+Player 1 score, GetScore(int 1)
+
+ * 
+ * 
+ * 
+ */
+
+
 public class GameLoader : MonoBehaviour
 {
     [SerializeField] private GameObject spawnManagerPrefab;
