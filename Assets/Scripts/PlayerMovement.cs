@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     // Player variables
-    public float movementSpeed = 2;
-    public float rotationSpeed = 90;
+    [SerializeField] private float movementSpeed = 2;
+    [SerializeField] private float rotationSpeed = 90;
 
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
@@ -56,9 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (shootAction.IsPressed())
-        {
-            // Add cooldown between shots... 
-
+        {  
             PlayerShoot();
         }
     }
@@ -66,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        transform.Translate(new Vector2(0, moveValue.y) * movementSpeed * Time.deltaTime);
+        transform.Translate(movementSpeed * Time.deltaTime * new Vector2(0, moveValue.y));
     }
 
     void RotatePlayerLeft()
@@ -85,10 +83,10 @@ public class PlayerMovement : MonoBehaviour
 
         // Check which weapon the player has...
 
-        // Check player direction...
-
+        // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
-
+        bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+ 
     }
 
 }
