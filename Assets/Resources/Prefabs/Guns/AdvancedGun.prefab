@@ -44,9 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d06071fd2668674b872281ac9076620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: 
-  fireRate: 1
-  ammoCount: 5
-  ammonition: 0
-  speed: 5
-  destroyTime: 3

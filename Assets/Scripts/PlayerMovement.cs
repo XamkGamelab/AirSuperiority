@@ -87,8 +87,9 @@ public class PlayerMovement : MonoBehaviour
         // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
         bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+//        Debug.Log($"Player shot with: {}");
         
- 
+
     }
 
     private void OnTriggerEnter(Collider other)
