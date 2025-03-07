@@ -28,6 +28,19 @@ public class StatsManager : MonoBehaviour
      * StatsManager.Instance.player[x]                      Read or affect PlayerData (Score, TotalScore, Health, Shield, CurrentGun)
      * StatsManager.Instance.gun[x]                         Read or affect GunData. (GunName, FireRate, AmmoCount, Ammonition)
      * 
+     * Resources
+     * public class Gundata
+     *  var gd = Resources.LoadALL("Weapons", typeof(GunData)).ToList();
+     *  
+     *  List<GunData> guns = new List<GunData>();
+     *  gd.ForEach(obj =>
+     *  {
+     *  var go = Instantiate<GameObject>(obj as GameObject).GetComponent<GunData>;
+     *  });
+     *  
+     *  Guns[4].Shoot();
+     *  
+     *  
      */
 
     //For time measuring
@@ -40,13 +53,14 @@ public class StatsManager : MonoBehaviour
     public PlayerData[] player = new PlayerData[2];         //Changing PlayerData[x] changes active player count
 
     //Gun information
-    public GunData[] gun = new GunData[3];
+    //public GunData[] gun = new GunData[3];
 
                                                             
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCountTimeCoroutine();                          //Start time counting coroutine
+        Debug.Log($"CountTimeCoroutine started.");
 
         for (int i = 0; i < player.Length; i++)
         {
@@ -73,19 +87,25 @@ public class StatsManager : MonoBehaviour
         public int CurrentGun = 0;
     }
 
+    /*
     [System.Serializable]
     public class GunData                                    //GunData that can be used. Read values from GunPrefabs marked with layer or tag
     {
         public string GunName = "DefaultGun";
         public float FireRate = 1;                          //Variable could be for example tide to deltaTime
         public float AmmoCount = 5;
-        public float Ammonition = 0;                        //Defines what kind of a projectile gun shoots 
-                    //This needs to be defined. 0 == projectile, 1 == laserTypeBeam, 2 == ObstacleCreator, etc.
+        public float Ammonition = 0;                        //Defines what kind of a projectile gun shoots
+        public float speed = 5f;                            //Bullet flying speed
+        public float destroyTime = 3f;                      //Time before bullet is destroyed
+
+        //This needs to be defined. 0 == projectile, 1 == laserTypeBeam, 2 == ObstacleCreator, etc.
     }
+    */
 
     public void StartCountTimeCoroutine()                   //Begin Time measuring coroutine
     {
         StartCoroutine(CountTimeCoroutine());
+        
     }
 
     public void StopCountTime()                             //Stop Time measuring coroutine

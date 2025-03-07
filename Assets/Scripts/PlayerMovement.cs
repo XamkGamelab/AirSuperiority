@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         rotateLeftAction = InputSystem.actions.FindAction("RotateLeft");
         rotateRightAction = InputSystem.actions.FindAction("RotateRight");
         shootAction = InputSystem.actions.FindAction("Shoot");
+        Debug.Log($"GameManager state isPlaying: {GameManager.Instance.isPlaying}");
     }
 
     // Update is called once per frame
@@ -86,7 +87,25 @@ public class PlayerMovement : MonoBehaviour
         // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
         bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+        
  
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+
+        Gun gun = other.GetComponent<Gun>();
+        if (gun != null)
+        {
+            EquipGun(gun.GetGunData());
+            Destroy(other.gameObject);      //Remove gun
+        }
+
+    }
+
+    private void EquipGun(GunData newGun)
+    {
+        
+
+    }
 }
