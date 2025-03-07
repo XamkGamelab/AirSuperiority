@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
     //NOTE2 to Toni!
     //Player[x] gun information is found from StatsManager.Instance.player[x].CurrentGun. First gun at the beginning of a game [0]. this is an Array.
     //StatsManager.Instance.gun[x]  will hold information of usable guns and their properties. This is an array. Not totally finished yet. There is no method
-    //to load every usable gun information to array.
+    //to load every usable gun information to array. Array initialization on game start in GameLoader script.
+
+    //Scenemanager and levels will be done similar way as gun array is done.
 
     //Note to US!!!
     //We need to design and implement how SceneController should work. Or do we have duplicates? SceneController vs LevelManager? Or do they have their own tasks?
