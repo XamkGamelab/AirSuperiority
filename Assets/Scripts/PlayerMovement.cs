@@ -1,6 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/****************************************************
+ *              Instructions
+ **************************************************** 
+ *
+ *       //Example how to use CurrentGun data inside PlayerData
+ *       Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
+ * 
+ * 
+ * 
+ * 
+ */
+
 public class PlayerMovement : MonoBehaviour
 {
     // Player variables
@@ -99,8 +111,11 @@ public class PlayerMovement : MonoBehaviour
         // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
         bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+        //Example how to use CurrentGun data inside PlayerData
+        Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
+        Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
         
- 
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -109,7 +124,12 @@ public class PlayerMovement : MonoBehaviour
         Gun gun = other.GetComponent<Gun>();
         if (gun != null)
         {
-            EquipGun(gun.GetGunData());
+            //            EquipGun(gun.GetGunData());                   //Possible to read data from instantiated gun script, prefer to use GunName and player index to call
+            //                                                          StatsManager.Instance.ChangeGun(int PlayerIndex, string gunName). Data is on preloaded GunData array.
+            string _name = gun.name;
+            Debug.Log($"Trying to Equip gun named: {_name}");
+            StatsManager.Instance.ChangeGun(player, _name);
+//            EquipGun(_name, player);                      //Dont use this method
             Destroy(other.gameObject);      //Remove gun
         }
 
@@ -125,15 +145,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void EquipGun(GunData newGun)
+    private void EquipGun(string newGun, int PlayerIndex)   //Do not use this method for changing gun, instead use StatsManager.Instance.ChangeGun(int PlayerIndex, string gunName)
     {
-        
+       StatsManager.Instance.EquipGun(newGun, PlayerIndex); //Cals method to change CurrentGun by gun name into PlayerData
 
     }
 
     // Calculate how much damage is taken and does damage affect shield or health
     private void CalculateDamage()
-    {
+    {   
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
         // ^^ This could maybe be GunData ^^
