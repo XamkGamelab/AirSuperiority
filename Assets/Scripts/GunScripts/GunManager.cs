@@ -1,6 +1,28 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/****************************************************
+ *              Instructions
+ **************************************************** 
+ *      GunData is read from GunPrefabs to GunData array which is used to store information about guns that can be used.
+ *      LoadGunData()               Is used for loading all prefabs and to store data to GunData array
+ *      GetGunData(string gunName)  Method returns GunData element for given name. Element includes all properties for the gun.
+ *                                  Normally this will be stored into PlayerData.CurrentGun
+ *      
+ *       //Example how to use CurrentGun data inside PlayerData
+ *       Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
+ * 
+ * Properties each gun has:
+ * 
+ *  public string GunName;                      //Name of the gun
+ *  public float FireRate;                      //Variable could be for example tide to deltaTime
+ *  public float AmmoCount;                     //Amount of ammonition that can be used
+ *  public float Ammonition;                    //Defines what kind of a projectile gun shoots
+ *  public float Speed;                         //Bullet flying speed
+ *  public float DestroyTime;                   //Time before bullet is destroyed
+ * 
+ * 
+ */
 public class GunManager : MonoBehaviour
 {
     public static GunManager Instance { get; private set; }
