@@ -14,6 +14,7 @@ public class StatsManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
     }
 
     /* Methods that can be called:
@@ -26,7 +27,13 @@ public class StatsManager : MonoBehaviour
      * 
      * Arrays with information:
      * StatsManager.Instance.player[x]                      Read or affect PlayerData (Score, TotalScore, Health, Shield, CurrentGun)
-     * StatsManager.Instance.gun[x]                         Read or affect GunData. (GunName, FireRate, AmmoCount, Ammonition)
+     * StatsManager.Instance.gun[x]        [DO NOT USE]                 Read or affect GunData. (GunName, FireRate, AmmoCount, Ammonition)
+     *                                     Instead, use:
+     *StatsManager.Instance.player[x].CurrentGun.xxxxxx     Includes all variables that gun has. These are variables that can and should be modified.
+     *                                                      For example ammoCount is used to track remaining bullets.
+     *                                                      GunData array on the other hand only keeps information of usable guns and their properties
+     *                                                      and is accessed by using gunName. When changing gun, array is read for specific gun to get data
+     *                                                      and then stored to PlayerData.CurrentGun.
      * 
      * Resources
      * public class Gundata
@@ -43,7 +50,7 @@ public class StatsManager : MonoBehaviour
      *  
      */
 
-    //For time measuring
+        //For time measuring
     public float startTime = 0;
     public float stopTime = 0;
     public float timeInterval = 0;
@@ -51,11 +58,13 @@ public class StatsManager : MonoBehaviour
 
     //Players information
     public PlayerData[] player = new PlayerData[2];         //Changing PlayerData[x] changes active player count
+    string defaultGun = "BasicGun";
 
     //Gun information
     //public GunData[] gun = new GunData[3];
 
-                                                            
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -64,9 +73,10 @@ public class StatsManager : MonoBehaviour
 
         for (int i = 0; i < player.Length; i++)
         {
-            player[i] = new PlayerData();                   //Initialize each PlayerData instance
-        }
+            player[i] = new PlayerData();                   //Initialize each PlayerData instance           
 
+        }
+        LoadDefaultGunData();
 //        ReadUsableGuns();                                 //Initialize all guns
 
     }
@@ -84,7 +94,23 @@ public class StatsManager : MonoBehaviour
         public int TotalScore = 0;
         public float Health = 100f;
         public float Shield = 100f;
-        public int CurrentGun = 0;
+//        public int CurrentGun = 0;
+        public GunData CurrentGun;                          //Gundata for CurrentGun inside PlayerData
+    }
+
+    public void LoadDefaultGunData()
+    {
+        for (int i = 0; i < player.Length; i++)
+        {
+            player[i].CurrentGun = GunManager.Instance.GetGunData(defaultGun);   //Get GunData by default gun name
+            Debug.Log($"Default Gun for Player {i} is {player[i].CurrentGun.GunName}");
+        }
+    }
+
+    public void EquipGun(string newGun, int PlayerIndex)
+    {
+        GunData gun = GunManager.Instance.GetGunData(newGun);   //Get currentGun data by name from array
+        player[PlayerIndex].CurrentGun = gun;               //Set received currentGun data to PlayerData
     }
 
     /*
@@ -153,10 +179,13 @@ public class StatsManager : MonoBehaviour
             case "ConsumeShield":                           //Negative value removes shield, positive value adds shield
                 player[playerIndex].Shield += value;
                 break;
-            case "ChangeGun":                               //Change gun ID
-                player[playerIndex].CurrentGun = (int)value;
-                break;
+
         }
+    }
+
+    public void ChangeGun(int PlayerIndex, string gunName)
+    {
+        player[PlayerIndex].CurrentGun = GunManager.Instance.GetGunData(gunName);   
     }
 
     public void ResetPlayerStats()                      //Reset every player stats, Exclude reseting TotalScore
@@ -166,15 +195,10 @@ public class StatsManager : MonoBehaviour
             player[i].Score = 0;
             player[i].Health = 100;
             player[i].Shield = 100;
-            player[i].CurrentGun = 0;
+            //            player[i].CurrentGun = 0;
+            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);
         }
 
-    }
-
-    public void ReadUsableGuns()        //This will propably be moved to GameLoader
-    {
-        //Everything needed to find GunPrefabs, read information and add information to GunData[x]
-        //How? Prefabs has layer "GUN", or tag "GUN", or something else...
     }
 
 
