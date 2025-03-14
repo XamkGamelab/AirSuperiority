@@ -114,8 +114,8 @@ public class PlayerMovement : MonoBehaviour
         //Example how to use CurrentGun data inside PlayerData
         Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
         Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
-        
-
+        Debug.Log($"Players GunSprite is {StatsManager.Instance.player[player].CurrentGun.gunSprite} .");
+        Debug.Log($"Players GunSprite is {StatsManager.Instance.player[player].CurrentGun.Ammonition} .");
     }
 
     private void OnTriggerEnter(Collider other)
