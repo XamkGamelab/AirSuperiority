@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject normalBullet;
     private float fireRate = 1f;
 
     private float time;
@@ -121,11 +121,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"Shoot Action is Called");
 
-        // Check which weapon the player has...
+        // Check bullet path
+        //string bulletPath = "Prefabs/Bullets"+StatsManager.Instance.player[player].CurrentGun.Ammonition;
 
         // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
-        bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+        
+        bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
         //Example how to use CurrentGun data inside PlayerData
         Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
         Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
