@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+//    public Rigidbody Rb => GetComponent<Rigidbody>();             //Just for reference how to get component with low resource consumption. Rb is also usable beefore Awake!
     public static GameManager Instance { get; private set; }
 
     private void Awake()
