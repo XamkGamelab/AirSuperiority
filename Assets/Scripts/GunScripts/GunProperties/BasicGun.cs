@@ -13,7 +13,8 @@ public class BasicGun : Gun
         ammonition = 1;
         speed = 5f;
         destroyTime = 3f;
-    }
+        damage = 10.0f;
+}
 }
 
 /**************************************************************************
