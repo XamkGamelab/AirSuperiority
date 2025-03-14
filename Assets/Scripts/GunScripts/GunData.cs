@@ -20,7 +20,7 @@ public class GunData
         Ammonition = ammonition;
         Speed = speed;
         DestroyTime = destroyTime;
-        Damage = Damage;
+        Damage = damage;
     }
 
 
