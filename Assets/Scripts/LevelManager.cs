@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log($"Levelmanager informs value from scoreManager {ScoreManager.Instance.numberVariable}");
+//        Debug.Log($"Levelmanager informs value from scoreManager {ScoreManager.Instance.numberVariable}");
     }
 
     // Update is called once per frame

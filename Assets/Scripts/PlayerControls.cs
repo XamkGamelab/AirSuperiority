@@ -53,6 +53,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb600af6-8978-41c9-af97-999cdad4de4b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Control"",
+                    ""type"": ""Button"",
+                    ""id"": ""868ee184-05ca-4b15-8edb-62f35a5d071e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +128,160 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RotateLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56497bf1-5bbc-4362-99c5-c0b2491f24f2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a235a3a4-a6aa-468b-a295-73168b0c4aab"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e82bb27-bb2f-4fa3-81ae-b9e91285b1cb"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Player2"",
+            ""id"": ""cd42df39-52c8-4063-8f96-c83bda28afce"",
+            ""actions"": [
+                {
+                    ""name"": ""Player2Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""fc4f224f-ce04-4ef5-af40-db9811682f99"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Player2RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf173279-f3d8-4fbd-889d-5abfb6212806"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Player2RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""cba30179-b626-43e6-b082-80e99a78fc18"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Player2Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa283838-e8c5-4224-af09-7b56797dd9b0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""ffa8127d-1fe3-4fbe-adbe-8f8b1898a9c2"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""430db19d-e3b1-4893-a856-ea67c4a9b300"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8ad5df53-d984-45d1-b9bf-0aeb60330ecb"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89e56464-5480-49c2-b635-1d9362179b32"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6938ef14-8287-465e-96e8-92bc94039228"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e97e9b9e-7108-4d61-bddb-0d013166fe11"",
+                    ""path"": ""<Keyboard>/numpadEnter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe69d7f4-9af8-4d6f-9dca-074c3feb8e93"",
+                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -121,11 +293,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
         m_Player1_RotateLeft = m_Player1.FindAction("RotateLeft", throwIfNotFound: true);
         m_Player1_RotateRight = m_Player1.FindAction("RotateRight", throwIfNotFound: true);
+        m_Player1_Shoot = m_Player1.FindAction("Shoot", throwIfNotFound: true);
+        m_Player1_Control = m_Player1.FindAction("Control", throwIfNotFound: true);
+        // Player2
+        m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
+        m_Player2_Player2Move = m_Player2.FindAction("Player2Move", throwIfNotFound: true);
+        m_Player2_Player2RotateLeft = m_Player2.FindAction("Player2RotateLeft", throwIfNotFound: true);
+        m_Player2_Player2RotateRight = m_Player2.FindAction("Player2RotateRight", throwIfNotFound: true);
+        m_Player2_Player2Shoot = m_Player2.FindAction("Player2Shoot", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_Player1.enabled, "This will cause a leak and performance issues, PlayerControls.Player1.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player2.enabled, "This will cause a leak and performance issues, PlayerControls.Player2.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -190,6 +371,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player1_Move;
     private readonly InputAction m_Player1_RotateLeft;
     private readonly InputAction m_Player1_RotateRight;
+    private readonly InputAction m_Player1_Shoot;
+    private readonly InputAction m_Player1_Control;
     public struct Player1Actions
     {
         private @PlayerControls m_Wrapper;
@@ -197,6 +380,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player1_Move;
         public InputAction @RotateLeft => m_Wrapper.m_Player1_RotateLeft;
         public InputAction @RotateRight => m_Wrapper.m_Player1_RotateRight;
+        public InputAction @Shoot => m_Wrapper.m_Player1_Shoot;
+        public InputAction @Control => m_Wrapper.m_Player1_Control;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -215,6 +400,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateRight.started += instance.OnRotateRight;
             @RotateRight.performed += instance.OnRotateRight;
             @RotateRight.canceled += instance.OnRotateRight;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+            @Control.started += instance.OnControl;
+            @Control.performed += instance.OnControl;
+            @Control.canceled += instance.OnControl;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
@@ -228,6 +419,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RotateRight.started -= instance.OnRotateRight;
             @RotateRight.performed -= instance.OnRotateRight;
             @RotateRight.canceled -= instance.OnRotateRight;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+            @Control.started -= instance.OnControl;
+            @Control.performed -= instance.OnControl;
+            @Control.canceled -= instance.OnControl;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -245,10 +442,89 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public Player1Actions @Player1 => new Player1Actions(this);
+
+    // Player2
+    private readonly InputActionMap m_Player2;
+    private List<IPlayer2Actions> m_Player2ActionsCallbackInterfaces = new List<IPlayer2Actions>();
+    private readonly InputAction m_Player2_Player2Move;
+    private readonly InputAction m_Player2_Player2RotateLeft;
+    private readonly InputAction m_Player2_Player2RotateRight;
+    private readonly InputAction m_Player2_Player2Shoot;
+    public struct Player2Actions
+    {
+        private @PlayerControls m_Wrapper;
+        public Player2Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Player2Move => m_Wrapper.m_Player2_Player2Move;
+        public InputAction @Player2RotateLeft => m_Wrapper.m_Player2_Player2RotateLeft;
+        public InputAction @Player2RotateRight => m_Wrapper.m_Player2_Player2RotateRight;
+        public InputAction @Player2Shoot => m_Wrapper.m_Player2_Player2Shoot;
+        public InputActionMap Get() { return m_Wrapper.m_Player2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
+        public void AddCallbacks(IPlayer2Actions instance)
+        {
+            if (instance == null || m_Wrapper.m_Player2ActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Player2ActionsCallbackInterfaces.Add(instance);
+            @Player2Move.started += instance.OnPlayer2Move;
+            @Player2Move.performed += instance.OnPlayer2Move;
+            @Player2Move.canceled += instance.OnPlayer2Move;
+            @Player2RotateLeft.started += instance.OnPlayer2RotateLeft;
+            @Player2RotateLeft.performed += instance.OnPlayer2RotateLeft;
+            @Player2RotateLeft.canceled += instance.OnPlayer2RotateLeft;
+            @Player2RotateRight.started += instance.OnPlayer2RotateRight;
+            @Player2RotateRight.performed += instance.OnPlayer2RotateRight;
+            @Player2RotateRight.canceled += instance.OnPlayer2RotateRight;
+            @Player2Shoot.started += instance.OnPlayer2Shoot;
+            @Player2Shoot.performed += instance.OnPlayer2Shoot;
+            @Player2Shoot.canceled += instance.OnPlayer2Shoot;
+        }
+
+        private void UnregisterCallbacks(IPlayer2Actions instance)
+        {
+            @Player2Move.started -= instance.OnPlayer2Move;
+            @Player2Move.performed -= instance.OnPlayer2Move;
+            @Player2Move.canceled -= instance.OnPlayer2Move;
+            @Player2RotateLeft.started -= instance.OnPlayer2RotateLeft;
+            @Player2RotateLeft.performed -= instance.OnPlayer2RotateLeft;
+            @Player2RotateLeft.canceled -= instance.OnPlayer2RotateLeft;
+            @Player2RotateRight.started -= instance.OnPlayer2RotateRight;
+            @Player2RotateRight.performed -= instance.OnPlayer2RotateRight;
+            @Player2RotateRight.canceled -= instance.OnPlayer2RotateRight;
+            @Player2Shoot.started -= instance.OnPlayer2Shoot;
+            @Player2Shoot.performed -= instance.OnPlayer2Shoot;
+            @Player2Shoot.canceled -= instance.OnPlayer2Shoot;
+        }
+
+        public void RemoveCallbacks(IPlayer2Actions instance)
+        {
+            if (m_Wrapper.m_Player2ActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayer2Actions instance)
+        {
+            foreach (var item in m_Wrapper.m_Player2ActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Player2ActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public Player2Actions @Player2 => new Player2Actions(this);
     public interface IPlayer1Actions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotateLeft(InputAction.CallbackContext context);
         void OnRotateRight(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnControl(InputAction.CallbackContext context);
+    }
+    public interface IPlayer2Actions
+    {
+        void OnPlayer2Move(InputAction.CallbackContext context);
+        void OnPlayer2RotateLeft(InputAction.CallbackContext context);
+        void OnPlayer2RotateRight(InputAction.CallbackContext context);
+        void OnPlayer2Shoot(InputAction.CallbackContext context);
     }
 }
