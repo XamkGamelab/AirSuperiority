@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
         // ^^ This could maybe be GunData ^^
-        float bulletDamage = -50f;
+        float bulletDamage = -StatsManager.Instance.player[player].CurrentGun.Damage;
 
         if (StatsManager.Instance.player[player].Shield == 0)
         {
