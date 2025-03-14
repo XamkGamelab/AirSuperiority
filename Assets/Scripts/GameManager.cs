@@ -1,4 +1,7 @@
+//using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -45,12 +48,17 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;                     //Use if needed
     public bool updateHud = false;                      //Updating HUD information
 
+    InputAction controlAction;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isPlaying = true;
+        controlAction = InputSystem.actions.FindAction("Control");
         
     }
+
 
     // Update is called once per frame
     void Update()
@@ -71,6 +79,12 @@ public class GameManager : MonoBehaviour
             updateHud = false;
             isPlaying = false;
         }
+
+        if (controlAction.IsPressed())
+        {
+            QuitGame();
+        }
+
     }
 
     public void StartGame()                             //Use method when first time starting game
@@ -119,6 +133,13 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         isPlaying = true;
         updateHud = true;
+    }
+
+    public static void QuitGame()
+    {
+
+//            if (Application.isPlaying)
+                Application.Quit();
     }
 
 }
