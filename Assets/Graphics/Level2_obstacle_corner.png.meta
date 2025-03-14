@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Level2_obstacle_corner_0: 3265489701396701466
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
