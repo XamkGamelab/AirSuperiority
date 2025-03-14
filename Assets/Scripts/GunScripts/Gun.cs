@@ -5,10 +5,11 @@ public class Gun : MonoBehaviour
     protected string gunName = "DefaultGun";
     protected float fireRate = 1.0f;
     protected float ammoCount = 5.0f;
-    protected float ammonition = 0.0f;
+    protected string ammonition = "TestBullet1";
     protected float speed = 5.0f;
     protected float destroyTime = 3.0f;
     protected float damage = 1.0f;
+    protected Sprite gunSprite;
     protected virtual void Awake()
     {
         if (string.IsNullOrEmpty(gunName))
@@ -21,7 +22,7 @@ public class Gun : MonoBehaviour
     //Constructor call
     public virtual GunData GetGunData()
     {
-        return new GunData(gunName, fireRate, ammoCount, ammonition, speed, destroyTime, damage);        
+        return new GunData(gunName, fireRate, ammoCount, ammonition, speed, destroyTime, damage, gunSprite);        
     }
 
 }
