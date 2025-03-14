@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -78,11 +79,25 @@ public class PlayerMovement : MonoBehaviour
                     RotatePlayerRight();
             }
 
-            if (shootAction.IsPressed() && time > fireRate)
+            // Player shooting action
+            if (shootAction.IsPressed())
             {
-                PlayerShoot();
-                time = 0;
-            }
+                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
+                {
+                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate) 
+                    { 
+                    PlayerShoot();
+                    time = 0;
+                    }
+                } else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
+                {
+                    if (time > fireRate) 
+                    {
+                    PlayerShoot();
+                    time = 0;
+                    }
+                }
+            } 
         }
     }
 
@@ -114,8 +129,6 @@ public class PlayerMovement : MonoBehaviour
         //Example how to use CurrentGun data inside PlayerData
         Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
         Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
-        
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -150,6 +163,13 @@ public class PlayerMovement : MonoBehaviour
        StatsManager.Instance.EquipGun(newGun, PlayerIndex); //Cals method to change CurrentGun by gun name into PlayerData
 
     }
+
+    /*
+    private void PlayerNewGun()
+    {
+        StatsManager.Instance.ChangeGun(player, GET THE GUN NAME)
+    }
+    */
 
     // Calculate how much damage is taken and does damage affect shield or health
     private void CalculateDamage()
