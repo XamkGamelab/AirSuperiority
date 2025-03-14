@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject normalBullet;
     private float fireRate = 1f;
 
     private float time;
@@ -78,11 +79,25 @@ public class PlayerMovement : MonoBehaviour
                     RotatePlayerRight();
             }
 
-            if (shootAction.IsPressed() && time > fireRate)
+            // Player shooting action
+            if (shootAction.IsPressed())
             {
-                PlayerShoot();
-                time = 0;
-            }
+                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
+                {
+                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate) 
+                    { 
+                    PlayerShoot();
+                    time = 0;
+                    }
+                } else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
+                {
+                    if (time > fireRate) 
+                    {
+                    PlayerShoot();
+                    time = 0;
+                    }
+                }
+            } 
         }
     }
 
@@ -106,16 +121,16 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"Shoot Action is Called");
 
-        // Check which weapon the player has...
+        // Check bullet path
+        //string bulletPath = "Prefabs/Bullets"+StatsManager.Instance.player[player].CurrentGun.Ammonition;
 
         // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
-        bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+        
+        bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
         //Example how to use CurrentGun data inside PlayerData
         Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
         Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
-        Debug.Log($"Players GunSprite is {StatsManager.Instance.player[player].CurrentGun.gunSprite} .");
-        Debug.Log($"Players GunSprite is {StatsManager.Instance.player[player].CurrentGun.Ammonition} .");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -151,13 +166,20 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    /*
+    private void PlayerNewGun()
+    {
+        StatsManager.Instance.ChangeGun(player, GET THE GUN NAME)
+    }
+    */
+
     // Calculate how much damage is taken and does damage affect shield or health
     private void CalculateDamage()
     {   
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
         // ^^ This could maybe be GunData ^^
-        float bulletDamage = -50f;
+        float bulletDamage = -StatsManager.Instance.player[player].CurrentGun.Damage;
 
         if (StatsManager.Instance.player[player].Shield == 0)
         {
