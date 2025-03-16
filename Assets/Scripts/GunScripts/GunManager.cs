@@ -20,6 +20,7 @@ using System.Collections.Generic;
  *  public float Ammonition;                    //Defines what kind of a projectile gun shoots
  *  public float Speed;                         //Bullet flying speed
  *  public float DestroyTime;                   //Time before bullet is destroyed
+ *  public float Damage;                         //Bullet Damage
  * 
  * 
  */

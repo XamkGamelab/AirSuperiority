@@ -65,10 +65,25 @@ public class Player2Movement : MonoBehaviour
                     RotatePlayerRight();
             }
 
-            if (shootAction2.IsPressed() && time > fireRate)
+            // Player shooting action
+            if (shootAction2.IsPressed())
             {
-                PlayerShoot();
-                time = 0;
+                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
+                {
+                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate)
+                    {
+                        PlayerShoot();
+                        time = 0;
+                    }
+                }
+                else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
+                {
+                    if (time > fireRate)
+                    {
+                        PlayerShoot();
+                        time = 0;
+                    }
+                }
             }
         }
     }
@@ -113,7 +128,7 @@ public class Player2Movement : MonoBehaviour
     {
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
-        float bulletDamage = -50;
+        float bulletDamage = -StatsManager.Instance.player[player].CurrentGun.Damage; ;
 
         if (StatsManager.Instance.player[player].Shield == 0)
         {

@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class NormalBullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float destroyTime = 3f;
+    private float speed = 5f;
+    private float destroyTime = 3f;
+
+    private void Awake()
+    {
+        speed = StatsManager.Instance.player[0].CurrentGun.Speed;
+        destroyTime = StatsManager.Instance.player[0].CurrentGun.DestroyTime;
+    }
 
     // Update is called once per frame
     void Update()
