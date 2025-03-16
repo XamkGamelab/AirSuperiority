@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class NormalBullet : MonoBehaviour
 {
-    private float speed = 5f;
-    private float destroyTime = 3f;
+    private float speed;
+    private float destroyTime;
+    public int whoShot;
 
     private void Awake()
     {
-        speed = StatsManager.Instance.player[0].CurrentGun.Speed;
-        destroyTime = StatsManager.Instance.player[0].CurrentGun.DestroyTime;
+        speed = StatsManager.Instance.player[whoShot].CurrentGun.Speed;
+        destroyTime = StatsManager.Instance.player[whoShot].CurrentGun.DestroyTime;
     }
 
     // Update is called once per frame
@@ -21,6 +22,7 @@ public class NormalBullet : MonoBehaviour
         Destroy(gameObject, destroyTime);
     }
 
+    // Detect if the bullet hit a player
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

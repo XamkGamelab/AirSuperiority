@@ -44,10 +44,15 @@ public class GameManager : MonoBehaviour
      * GameManager.Instance.ExitPauseState()    Call this when PauseState != isPaused
      */
 
+    [Header("General controls")]
     public bool isPlaying = false;
     public bool isPaused = false;
     public bool isGameOver = false;                     //Use if needed
     public bool updateHud = false;                      //Updating HUD information
+    [Header("SpawnManager controls")]                   //Control spawning  [NOTE: spawnActive activates spawning for everything]
+    public bool spawnActive = false;                    //Spawn everything (
+    public bool spawnItemActive = false;                //Spawn Items       [NOTE: spanactive == false, spawnItemActive == true => Only items spawns]
+    public bool spawnGunActive = false;                 //Spawn Guns
 
     InputAction controlAction;
 
@@ -91,6 +96,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()                             //Use method when first time starting game
     {
         //Every action needed for game to begin correctly
+
+        LevelManager.Instance.OnGameBegin();
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -102,6 +109,7 @@ public class GameManager : MonoBehaviour
     {
         //Every action needed for next level to begin correctly
 
+        LevelManager.Instance.OnGameBegin();
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         isGameOver = false;
         isPlaying = true;

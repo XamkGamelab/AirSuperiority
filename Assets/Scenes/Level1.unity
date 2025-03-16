@@ -313,8 +313,8 @@ GameObject:
   - component: {fileID: 336142576}
   - component: {fileID: 336142578}
   - component: {fileID: 336142577}
-  m_Layer: 0
-  m_Name: Background
+  m_Layer: 10
+  m_Name: PlayArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2144,7 +2144,7 @@ MonoBehaviour:
   player: 0
   enemy: 1
   bulletSpawnPoint: {fileID: 738246340}
-  normalBullet: {fileID: 2981792394537350006, guid: 0c4a5ece4d95afe45b82b764bc0c9d5d, type: 3}
+  normalBulletScript: {fileID: 0}
 --- !u!4 &1076728537
 Transform:
   m_ObjectHideFlags: 0
@@ -2349,7 +2349,7 @@ GameObject:
   - component: {fileID: 1804785924}
   - component: {fileID: 1804785923}
   - component: {fileID: 1804785922}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4034,7 +4034,7 @@ MonoBehaviour:
   player: 1
   enemy: 0
   bulletSpawnPoint: {fileID: 747245385}
-  normalBullet: {fileID: 2981792394537350006, guid: 0c4a5ece4d95afe45b82b764bc0c9d5d, type: 3}
+  normalBulletScript: {fileID: 0}
 --- !u!4 &1901329912
 Transform:
   m_ObjectHideFlags: 0

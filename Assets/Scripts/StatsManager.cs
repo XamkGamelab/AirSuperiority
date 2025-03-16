@@ -50,15 +50,15 @@ public class StatsManager : MonoBehaviour
      *  
      */
 
-        //For time measuring
+    [Header("Time measuring")]    //For time measuring
     public float startTime = 0;
     public float stopTime = 0;
     public float timeInterval = 0;
     public bool calculateTimeRef = false;
 
-    //Players information
+    [Header("Player information")]//Players information
     public PlayerData[] player = new PlayerData[2];         //Changing PlayerData[x] changes active player count
-    string defaultGun = "BasicGun";
+    [SerializeField] private string defaultGun = "BasicGun";
 
     //Gun information
     //public GunData[] gun = new GunData[3];
@@ -196,7 +196,8 @@ public class StatsManager : MonoBehaviour
             player[i].Health = 100;
             player[i].Shield = 100;
             //            player[i].CurrentGun = 0;
-            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);
+            player[i].CurrentGun = GunManager.Instance.GetGunData(defaultGun);   //Set players gun to default 
+            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);       //Get default gunData
         }
 
     }
