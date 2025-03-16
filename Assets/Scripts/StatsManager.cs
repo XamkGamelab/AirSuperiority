@@ -196,7 +196,8 @@ public class StatsManager : MonoBehaviour
             player[i].Health = 100;
             player[i].Shield = 100;
             //            player[i].CurrentGun = 0;
-            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);
+            player[i].CurrentGun = GunManager.Instance.GetGunData(defaultGun);   //Set players gun to default 
+            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);       //Get default gunData
         }
 
     }

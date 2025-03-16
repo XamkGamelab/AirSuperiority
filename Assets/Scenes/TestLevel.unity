@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 783348554}
   - component: {fileID: 783348553}
   - component: {fileID: 783348555}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collisions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2163,8 +2163,8 @@ GameObject:
   - component: {fileID: 1351146823}
   - component: {fileID: 1351146825}
   - component: {fileID: 1351146824}
-  m_Layer: 0
-  m_Name: Background
+  m_Layer: 10
+  m_Name: PlayArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
