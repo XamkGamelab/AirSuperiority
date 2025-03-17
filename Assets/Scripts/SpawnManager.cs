@@ -2,6 +2,29 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Collections;
+
+/************************************************************************************************************
+ *                                          INFORMATION 
+ ************************************************************************************************************
+ *  SpawnManager is controlled through GameManager. Three booleans control either item- or gunSpawning or
+ *  sets both active:
+ *  spawnActive = true      => Item and gun are spawning
+ *  spawnItemActive = true  => Only items are spawning
+ *  spawnGunActive = true   => Only guns are spawning
+ *  
+ *  itemSpawnRate is a factor for randomizing time when spawning to happen. Minumum value is factor * 0.8 and
+ *  maximun value can be 1.6 x factor
+ * 
+ *  gunSpawnRate is a factor for randomizing time when spawning to happen. Minumum value is factor * 0.8 and
+ *  maximun value can be 1.6 x factor
+ * 
+ * --------------------
+ * onceDone bool controls loading current map spawnpoints. Bool must be set to false when changing level
+ * to enable new level spawnpoit information loading. GameManager can control this boolean.
+ * 
+ * 
+ */
 
 public class SpawnManager : MonoBehaviour
 {
@@ -17,8 +40,13 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] itemsToSpawn;
     private GameObject[] gunsToSpawn;
     private List<Vector3> validSpawnPositions = new List<Vector3>();
+    [Header("Spawning variables")]
+    private float itemSpawnRate = 15.0f;                     //Define Item spawnRate
+    private float gunSpawnRate = 15.0f;                      //Define Gun spawnRate
+    [SerializeField] private bool spawningItems = false;
+    [SerializeField] private bool spawningGuns = false;
 
-    private bool onceDone = false;
+    public bool onceDone = false;                           //Controls spawnpoint loading.
 
     private void Awake()
     {
@@ -30,7 +58,7 @@ public class SpawnManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        //Load Spawnable Objects
+                                                            //Load Spawnable Objects
         LoadSpawnableObjects();
         LoadSpawnableGuns();
     }
@@ -38,18 +66,22 @@ public class SpawnManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //        LoadLevelSpawnPoints();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.isPlaying && !onceDone)
+
+        if (GameManager.Instance.isPlaying && !onceDone)                //This is done once
         {
-            LoadLevelSpawnPoints();
-            SpawnGun();
-            onceDone = true;
+            LoadLevelSpawnPoints();                                     //Load current level spawnPoints
+//            SpawnGun();
+            onceDone = true;                                            //Control through GameManager when starting new map
         }
+
+        StartSpawning();
+
     }
 
     public void LoadLevelSpawnPoints()                                  //Call for level spawnPoint Initialization
@@ -58,27 +90,27 @@ public class SpawnManager : MonoBehaviour
         FindPlayAreaBounds();
         CollectValidSpawnPositions();
     }
-    private void LoadSpawnableObjects()
+    private void LoadSpawnableObjects()                                 //Load Spawnable items from Resources folder
     {
         itemsToSpawn = Resources.LoadAll<GameObject>(resourcesFolder1);
         if (itemsToSpawn.Length == 0)
             Debug.LogWarning($"No spawnable items found in Resources/{resourcesFolder1}");
     }
 
-    private void LoadSpawnableGuns()
+    private void LoadSpawnableGuns()                                    //Load Spawnable guns from Resource folder
     {
         gunsToSpawn = Resources.LoadAll<GameObject>(resourcesFolder2);
         if (itemsToSpawn.Length == 0)
             Debug.LogWarning($"No spawnable guns found in Resources/{resourcesFolder2}");
     }
 
-    private void FindPlayAreaBounds()
+    private void FindPlayAreaBounds()                                   //Determine tilemap boundaries
     {
         GameObject tilemapParent = GameObject.Find("Tilemap");  //Search tilemap by layerName
 
         if (tilemapParent)
         {
-            //Find correct (PlayArea) Tilemap inside parent
+                                                                        //Find correct (PlayArea) Tilemap inside parent
             foreach (Tilemap tilemap in tilemapParent.GetComponentsInChildren<Tilemap>())
             {
                 if (tilemap.gameObject.layer == LayerMask.NameToLayer("PlayArea"))
@@ -97,7 +129,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void CollectValidSpawnPositions()
+    private void CollectValidSpawnPositions()                           //Determine valid spawnPoints
     {
         validSpawnPositions.Clear();
 
@@ -118,27 +150,94 @@ public class SpawnManager : MonoBehaviour
             Debug.LogWarning("No valid spawn positions found!");
         }
     }
+    public void StartSpawning()                                         //Begins Coroutines for item- and gunSpawning by GameManagers booleans 
+    {
+        if (!spawningItems && (GameManager.Instance.spawnItemActive || GameManager.Instance.spawnActive))
+        {
+//            Debug.Log($"Starting coroutine SpawnItemroutine ({spawningItems})");
+            StartCoroutine(SpawnItemRoutine());                         //ItemSpawner
+        }
+
+        if (!spawningGuns && (GameManager.Instance.spawnGunActive || GameManager.Instance.spawnActive))
+        {
+            StartCoroutine(SpawnGunRoutine());                          //GunSpawner
+        }
+    }
+
+    private IEnumerator SpawnItemRoutine()                              //ItemSpawner
+    {
+        spawningItems = true;
+
+        while (GameManager.Instance.spawnItemActive || GameManager.Instance.spawnActive)
+        {
+            Debug.Log("Spawning items Coroutine");
+            float itemWaitTime = Random.Range(itemSpawnRate * 0.8f, itemSpawnRate * 1.6f);      //Randomize spawnTime using itemSpawnRate factor
+            yield return new WaitForSeconds(itemWaitTime);
+            SpawnItem();
+        }
+
+        spawningItems = false;
+    }
     public void SpawnItem()
     {
-        if (validSpawnPositions.Count == 0 || itemsToSpawn.Length == 0)
+        if (validSpawnPositions.Count == 0 || itemsToSpawn.Length == 0)                         //Check that valid spawnpositions exist
             return;
 
-        Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];
+        Debug.Log("Spawning Items");
+        Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];    //Randomize spanPosition
+
         Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity);
+    }
+
+    private IEnumerator SpawnGunRoutine()                               //GunSpawner
+    {
+        spawningGuns = true;
+
+        while (GameManager.Instance.spawnGunActive || GameManager.Instance.spawnActive)
+        {
+
+            float gunWaitTime = Random.Range(gunSpawnRate * 0.8f, gunSpawnRate * 1.6f);         //Randomize spawnTime using gunSpawnRate factor
+            Debug.Log($"Spawning Guns Coroutine. Wait time {gunWaitTime}");
+            yield return new WaitForSeconds(gunWaitTime);
+            SpawnGun();
+        }
+
+        spawningGuns = false;
     }
 
     public void SpawnGun()
     {
-        if (validSpawnPositions.Count == 0 || gunsToSpawn.Length == 0)
+
+        if (validSpawnPositions.Count == 0 || gunsToSpawn.Length == 0)                          //Check that valid spawnpositions exist
             return;
-
-        Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];
-
+//        Debug.Log("Spawning Guns");
+        Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];    //Randomize spanPosition
+        Debug.Log("Spawning guns");
         Debug.Log($"Spawning at: {spawnPosition}");
 
         GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
 
-        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
+        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);       //Make sure spawning happens on right depth (this was partly for debugging)
     }
 
+    public void StopSpawning()                                                                  //Stops spawner coroutines
+    {
+        if (!GameManager.Instance.spawnActive && !GameManager.Instance.spawnGunActive && !GameManager.Instance.spawnItemActive)
+        {
+            StopAllCoroutines();
+            spawningItems = false;
+            spawningGuns = false;
+        }
+        else if (!GameManager.Instance.spawnActive && !GameManager.Instance.spawnItemActive)
+        {
+            StopCoroutine(SpawnItemRoutine());
+            spawningItems = false;
+        }
+        else if (!GameManager.Instance.spawnActive && !GameManager.Instance.spawnGunActive)
+        {
+            StopCoroutine(SpawnGunRoutine());
+            spawningGuns = false;
+        }
+
+    }
 }
