@@ -15,6 +15,12 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    [Header("SpawnManager controls")]                   //Control spawning  [NOTE: spawnActive activates spawning for everything]
+    public bool spawnActive = false;                    //Spawn everything (
+    public bool spawnItemActive = false;                //Spawn Items       [NOTE: spanactive == false, spawnItemActive == true => Only items spawns]
+    public bool spawnGunActive = false;                 //Spawn Guns
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
