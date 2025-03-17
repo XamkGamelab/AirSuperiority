@@ -26,4 +26,14 @@ public class SceneController : MonoBehaviour
     {
         
     }
+
+    void LoadUsableMaps()
+    {
+
+    }
+
+    void BeginRandomMap()
+    {
+
+    }
 }
