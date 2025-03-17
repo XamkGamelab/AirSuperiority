@@ -7,7 +7,7 @@ using System.Collections;
 /************************************************************************************************************
  *                                          INFORMATION 
  ************************************************************************************************************
- *  SpawnManager is controlled through GameManager. Three booleans control either item- or gunSpawning or
+ *  SpawnManager is controlled through LevelManager. Three booleans control either item- or gunSpawning or
  *  sets both active:
  *  spawnActive = true      => Item and gun are spawning
  *  spawnItemActive = true  => Only items are spawning
@@ -152,13 +152,13 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawning()                                         //Begins Coroutines for item- and gunSpawning by GameManagers booleans 
     {
-        if (!spawningItems && (GameManager.Instance.spawnItemActive || GameManager.Instance.spawnActive))
+        if (!spawningItems && (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive))
         {
 //            Debug.Log($"Starting coroutine SpawnItemroutine ({spawningItems})");
             StartCoroutine(SpawnItemRoutine());                         //ItemSpawner
         }
 
-        if (!spawningGuns && (GameManager.Instance.spawnGunActive || GameManager.Instance.spawnActive))
+        if (!spawningGuns && (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive))
         {
             StartCoroutine(SpawnGunRoutine());                          //GunSpawner
         }
@@ -168,7 +168,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawningItems = true;
 
-        while (GameManager.Instance.spawnItemActive || GameManager.Instance.spawnActive)
+        while (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive)
         {
             Debug.Log("Spawning items Coroutine");
             float itemWaitTime = Random.Range(itemSpawnRate * 0.8f, itemSpawnRate * 1.6f);      //Randomize spawnTime using itemSpawnRate factor
@@ -193,7 +193,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawningGuns = true;
 
-        while (GameManager.Instance.spawnGunActive || GameManager.Instance.spawnActive)
+        while (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive)
         {
 
             float gunWaitTime = Random.Range(gunSpawnRate * 0.8f, gunSpawnRate * 1.6f);         //Randomize spawnTime using gunSpawnRate factor
@@ -222,18 +222,18 @@ public class SpawnManager : MonoBehaviour
 
     public void StopSpawning()                                                                  //Stops spawner coroutines
     {
-        if (!GameManager.Instance.spawnActive && !GameManager.Instance.spawnGunActive && !GameManager.Instance.spawnItemActive)
+        if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnGunActive && !LevelManager.Instance.spawnItemActive)
         {
             StopAllCoroutines();
             spawningItems = false;
             spawningGuns = false;
         }
-        else if (!GameManager.Instance.spawnActive && !GameManager.Instance.spawnItemActive)
+        else if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnItemActive)
         {
             StopCoroutine(SpawnItemRoutine());
             spawningItems = false;
         }
-        else if (!GameManager.Instance.spawnActive && !GameManager.Instance.spawnGunActive)
+        else if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnGunActive)
         {
             StopCoroutine(SpawnGunRoutine());
             spawningGuns = false;
