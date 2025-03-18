@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-//        Debug.Log($"Levelmanager informs value from scoreManager {ScoreManager.Instance.numberVariable}");
+
     }
 
     // Update is called once per frame
@@ -35,8 +35,13 @@ public class LevelManager : MonoBehaviour
 
     public void OnGameBegin()
     {
-
+        if (GameManager.Instance.loadRandomMap)
+        {
+            SceneController.Instance.LoadRandomMap();
+        }
         //Load Level before SpawnPoints
-        SpawnManager.Instance.LoadLevelSpawnPoints();
+//        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
+
+        spawnActive = true;
     }
 }
