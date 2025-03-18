@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool isGameOver = false;                     //Use if needed
     public bool updateHud = false;                      //Updating HUD information
+    public bool loadRandomMap = true;
+    public bool ActivateNextMap = false;
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
@@ -90,6 +92,15 @@ public class GameManager : MonoBehaviour
             QuitGame();
         }
 
+        if (StatsManager.Instance.playerXDead)
+        {
+            IsGameOver();
+        }
+        
+        if (ActivateNextMap)
+        {
+            BeginNextLevel();
+        }
     }
 
     public void StartGame()                             //Use method when first time starting game
@@ -104,6 +115,13 @@ public class GameManager : MonoBehaviour
         //Call SceneController method
     }
 
+    public void IsGameOver()
+    {
+        isGameOver= true;
+        isPlaying = false;
+        updateHud = false;
+    }
+
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
@@ -113,8 +131,9 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
+        StatsManager.Instance.playerXDead = false;
 
-        //Call SceneController method....
+        ActivateNextMap = false;
     }
 
     public void EndLevel()                              //When level ends, do these functions
