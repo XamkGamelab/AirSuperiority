@@ -49,10 +49,9 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool isGameOver = false;                     //Use if needed
     public bool updateHud = false;                      //Updating HUD information
-    [Header("SpawnManager controls")]                   //Control spawning  [NOTE: spawnActive activates spawning for everything]
-    public bool spawnActive = false;                    //Spawn everything (
-    public bool spawnItemActive = false;                //Spawn Items       [NOTE: spanactive == false, spawnItemActive == true => Only items spawns]
-    public bool spawnGunActive = false;                 //Spawn Guns
+    [Header("Audio controls")]
+    public bool menuMusic = false;
+    public bool inGameMusic = false;
 
     InputAction controlAction;
 
