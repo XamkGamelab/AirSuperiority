@@ -21,6 +21,7 @@ public class SceneController : MonoBehaviour
     }
 
     private List<string> availableLevels = new List<string>();
+    public string currentLevel;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,7 +35,7 @@ public class SceneController : MonoBehaviour
     {
         
     }
-
+    
     public void LoadScenesFromBuildSettings()
     {
         availableLevels.Clear();
@@ -62,6 +63,7 @@ public class SceneController : MonoBehaviour
             return;
         }
         string nextLevel = availableLevels[Random.Range(0, availableLevels.Count)];
+        currentLevel = nextLevel;
         Debug.Log($"Opening {nextLevel} scene");
         SceneManager.LoadScene(nextLevel);
     }
@@ -70,6 +72,7 @@ public class SceneController : MonoBehaviour
     {
         if (!availableLevels.Contains(levelName))
         {
+            currentLevel = levelName;
             SceneManager.LoadScene(levelName);
         }
         else
