@@ -61,8 +61,9 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isPlaying = true;
+//        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
+        StartGame();
         
     }
 
