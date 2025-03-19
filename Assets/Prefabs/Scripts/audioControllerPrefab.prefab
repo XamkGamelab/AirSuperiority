@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5656086210891382511
+--- !u!1 &8413525374867687297
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2224297424804445058}
-  - component: {fileID: 2677628602520770122}
+  - component: {fileID: 3393101985205905111}
+  - component: {fileID: 5780436730081111133}
   m_Layer: 0
-  m_Name: spawnManagerPrefab
+  m_Name: audioControllerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2224297424804445058
+--- !u!4 &3393101985205905111
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5656086210891382511}
+  m_GameObject: {fileID: 8413525374867687297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.31214255, y: -1.1682639, z: -9.989881}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2677628602520770122
+--- !u!114 &5780436730081111133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5656086210891382511}
+  m_GameObject: {fileID: 8413525374867687297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd59366e88257f4ebaa60035d6aea5e, type: 3}
+  m_Script: {fileID: 11500000, guid: c737b811fa66f9540957f9a713918851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemapObjectName: PlayArea;
-  levelElementLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  resourcesFolder1: Prefabs/SpawnItems
-  resourcesFolder2: Prefabs/Guns
