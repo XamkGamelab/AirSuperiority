@@ -178,18 +178,31 @@ public class PlayerMovement : MonoBehaviour
 
     // Calculate how much damage is taken and does damage affect shield or health
     private void CalculateDamage()
-    {   
+    {
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
         // ^^ This could maybe be GunData ^^
-        float bulletDamage = -StatsManager.Instance.player[enemy].CurrentGun.Damage;
 
-        if (StatsManager.Instance.player[player].Shield == 0)
+        /*if (StatsManager.Instance.player[player].Shield == 0)
         {
             StatsManager.Instance.AffectPlayer(player, "TakeDamage", bulletDamage);
         } else if (StatsManager.Instance.player[player].Shield != 0)
         {
             StatsManager.Instance.AffectPlayer(player, "ConsumeShield", bulletDamage);
+        }*/
+
+        float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
+
+        for (int i = 0; i < bulletDamage; i++)
+        {
+            if (StatsManager.Instance.player[player].Shield == 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
+            }
+            else if (StatsManager.Instance.player[player].Shield != 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
+            }
         }
 
         // Check if player is alive, if not alive -> destroy player, or hide player?
@@ -198,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
             Destroy(gameObject);
         }
+
     }
 
 }
