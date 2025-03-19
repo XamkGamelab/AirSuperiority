@@ -291,7 +291,6 @@ MonoBehaviour:
   gameManagerPrefab: {fileID: 3279321723879039239, guid: 9e9316c2dad851842b8621979167af58, type: 3}
   statsManagerPrefab: {fileID: 5966112434793963234, guid: 639c814aa4358fe4987f83f4da4b1a68, type: 3}
   GunManagerPrefab: {fileID: 209828298354663693, guid: 976675ce6f871c14c82476fd12ca4f6b, type: 3}
-  audioControllerPrefab: {fileID: 8413525374867687297, guid: fd80036d4fc1e7d4f99cf899c7b6c204, type: 3}
 --- !u!4 &1087673703
 Transform:
   m_ObjectHideFlags: 0

@@ -6,14 +6,12 @@ public class GunData
     public string GunName;
     public float FireRate;                          //Variable could be for example tide to deltaTime
     public float AmmoCount;
-    public string Ammonition;                        //Defines what kind of a projectile gun shoots
-    public float Speed;                             //Bullet flying speed
-    public float DestroyTime;                       //Time before bullet is destroyed
-    public float Damage;                            //Affected damage to player
-    public Sprite gunSprite;
+    public float Ammonition;                        //Defines what kind of a projectile gun shoots
+    public float Speed;                            //Bullet flying speed
+    public float DestroyTime;                      //Time before bullet is destroyed
 
     //Constructor
-    public GunData(string gunName, float fireRate, float ammoCount, string ammonition, float speed, float destroyTime, float damage, Sprite gunSprite)
+    public GunData(string gunName, float fireRate, float ammoCount, float ammonition, float speed, float destroyTime)
     {
         GunName = gunName;
         FireRate = fireRate;
@@ -21,8 +19,6 @@ public class GunData
         Ammonition = ammonition;
         Speed = speed;
         DestroyTime = destroyTime;
-        Damage = damage;
-        this.gunSprite = gunSprite;
     }
 
 

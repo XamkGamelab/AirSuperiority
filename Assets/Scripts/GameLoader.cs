@@ -23,7 +23,6 @@ public class GameLoader : MonoBehaviour
     [SerializeField] private GameObject gameManagerPrefab;
     [SerializeField] private GameObject statsManagerPrefab;
     [SerializeField] private GameObject GunManagerPrefab;
-    [SerializeField] private GameObject audioControllerPrefab;
 //    [SerializeField] private GameObject GunDataPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,7 +36,6 @@ public class GameLoader : MonoBehaviour
         EnsureSingleton(sceneControllerPrefab);
         EnsureSingleton(gameManagerPrefab);
         EnsureSingleton(statsManagerPrefab);
-        EnsureSingleton(audioControllerPrefab);
 
         //Scene to load after singleton setup
         //SceneManager.LoadScene("Level1");

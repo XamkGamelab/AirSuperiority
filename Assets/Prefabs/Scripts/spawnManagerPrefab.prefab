@@ -44,9 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd59366e88257f4ebaa60035d6aea5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemapObjectName: PlayArea;
-  levelElementLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  resourcesFolder1: Prefabs/SpawnItems
-  resourcesFolder2: Prefabs/Guns

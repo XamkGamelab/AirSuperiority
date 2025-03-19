@@ -50,17 +50,15 @@ public class StatsManager : MonoBehaviour
      *  
      */
 
-    [Header("Time measuring")]    //For time measuring
+        //For time measuring
     public float startTime = 0;
     public float stopTime = 0;
     public float timeInterval = 0;
     public bool calculateTimeRef = false;
 
-    [Header("Player information")]//Players information
+    //Players information
     public PlayerData[] player = new PlayerData[2];         //Changing PlayerData[x] changes active player count
-    [SerializeField] private string defaultGun = "BasicGun";
-    [SerializeField] public bool playerXDead = false;
-    [SerializeField] public string deadPlayerName;
+    string defaultGun = "BasicGun";
 
     //Gun information
     //public GunData[] gun = new GunData[3];
@@ -76,7 +74,7 @@ public class StatsManager : MonoBehaviour
         for (int i = 0; i < player.Length; i++)
         {
             player[i] = new PlayerData();                   //Initialize each PlayerData instance           
-            player[i].name = $"Player{i}";
+
         }
         LoadDefaultGunData();
 //        ReadUsableGuns();                                 //Initialize all guns
@@ -86,23 +84,18 @@ public class StatsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerXDead)
-        {
-            deadPlayerName = WhichPlayerIsDead();
-        }
+
     }
 
     [System.Serializable]
     public class PlayerData                                 //PlayerData that can be used
     {
-        public string name = "Player";
         public int Score = 0;
         public int TotalScore = 0;
         public float Health = 100f;
         public float Shield = 100f;
 //        public int CurrentGun = 0;
         public GunData CurrentGun;                          //Gundata for CurrentGun inside PlayerData
-        public bool playerDead = false;
     }
 
     public void LoadDefaultGunData()
@@ -166,7 +159,6 @@ public class StatsManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
     }
 
-
     public float GetPlayTime()                              //Get elapsed time
     {
         return timeInterval;
@@ -183,19 +175,9 @@ public class StatsManager : MonoBehaviour
                 break;
             case "TakeDamage":                              //Negative value removes Health, positive adds health
                 player[playerIndex].Health += value;
-                if (player[playerIndex].Health < 0)
-                { 
-                    player[playerIndex].Health = 0;
-                    player[playerIndex].playerDead = true;
-                    playerXDead = true;
-                }
                 break;
             case "ConsumeShield":                           //Negative value removes shield, positive value adds shield
                 player[playerIndex].Shield += value;
-                if (player[playerIndex].Shield < 0)
-                {
-                    player[playerIndex].Shield = 0;
-                }
                 break;
 
         }
@@ -214,25 +196,10 @@ public class StatsManager : MonoBehaviour
             player[i].Health = 100;
             player[i].Shield = 100;
             //            player[i].CurrentGun = 0;
-            player[i].CurrentGun = GunManager.Instance.GetGunData(defaultGun);   //Set players gun to default 
-            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);       //Get default gunData
-            player[i].playerDead = false;
+            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);
         }
 
     }
 
-    public string WhichPlayerIsDead()
-    {
-        //Determine which player is dead
-        for (int i = 0; i < player.Length; i++)
-        {
-            if (player[i].playerDead)
-            {
-                return player[i].name;                
-            }            
-        }
-
-        return null;
-    }
 
 }

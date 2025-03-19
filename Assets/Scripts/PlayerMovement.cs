@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,8 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private GameObject normalBullet;
     private float fireRate = 1f;
-    public NormalBullet normalBulletScript;
 
     private float time;
 
@@ -46,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         rotateRightAction = InputSystem.actions.FindAction("RotateRight");
         shootAction = InputSystem.actions.FindAction("Shoot");
         Debug.Log($"GameManager state isPlaying: {GameManager.Instance.isPlaying}");
-        normalBulletScript.GetComponent<NormalBullet>();
     }
 
     // Update is called once per frame
@@ -81,24 +78,10 @@ public class PlayerMovement : MonoBehaviour
                     RotatePlayerRight();
             }
 
-            // Player shooting action
-            if (shootAction.IsPressed())
+            if (shootAction.IsPressed() && time > fireRate)
             {
-                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
-                {
-                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate) 
-                    {
-                        PlayerShoot();
-                        time = 0;
-                    }
-                } else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
-                {
-                    if (time > fireRate) 
-                    {
-                        PlayerShoot();
-                        time = 0;
-                    }
-                }
+                PlayerShoot();
+                time = 0;
             }
         }
     }
@@ -123,17 +106,16 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"Shoot Action is Called");
 
-        // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
-       
-        // Tell the bullet script which player shot. The current implementation might need to be changed if the player is also turned into a prefab.
-        normalBulletScript.whoShot = player;
+        // Check which weapon the player has...
 
+        // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
         // Instantiate bullet prefab...
-        bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
-        
+        bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
         //Example how to use CurrentGun data inside PlayerData
         Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
         Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
+        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -169,20 +151,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    /*
-    private void PlayerNewGun()
-    {
-        StatsManager.Instance.ChangeGun(player, GET THE GUN NAME)
-    }
-    */
-
     // Calculate how much damage is taken and does damage affect shield or health
     private void CalculateDamage()
     {   
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
         // ^^ This could maybe be GunData ^^
-        float bulletDamage = -StatsManager.Instance.player[enemy].CurrentGun.Damage;
+        float bulletDamage = -50f;
 
         if (StatsManager.Instance.player[player].Shield == 0)
         {

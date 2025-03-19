@@ -3,18 +3,15 @@ using UnityEngine;
 
 public class AdvancedGun : Gun
 {
-    [SerializeField] private Sprite GunSprite;
     protected override void Awake()
     {
         base.Awake();
         gunName = "AdvancedGun";
         fireRate = 2.0f;
         ammoCount = 3f;
-        ammonition = "Gun2Bullet";
+        ammonition = 2.0f;
         speed = 7.0f;
         destroyTime = 3.0f;
-        damage = 30.0f;
-        gunSprite = GunSprite;
     }
 }
 
