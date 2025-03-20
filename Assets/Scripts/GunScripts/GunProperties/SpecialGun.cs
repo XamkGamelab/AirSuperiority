@@ -7,7 +7,7 @@ public class SpecialGun : Gun
     protected override void Awake()
     {
         base.Awake();
-        gunName = "AdvancedGun";
+        gunName = "SpecialGun";
         fireRate = 2.0f;
         ammoCount = 3f;
         ammonition = "Gun3Bullet";

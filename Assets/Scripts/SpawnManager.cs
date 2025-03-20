@@ -41,8 +41,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] gunsToSpawn;
     private List<Vector3> validSpawnPositions = new List<Vector3>();
     [Header("Spawning variables")]
-    private float itemSpawnRate = 15.0f;                     //Define Item spawnRate
-    private float gunSpawnRate = 15.0f;                      //Define Gun spawnRate
+    private float itemSpawnRate = 1f;                     //Define Item spawnRate
+    private float gunSpawnRate = 1f;                      //Define Gun spawnRate
     [SerializeField] private bool spawningItems = false;
     [SerializeField] private bool spawningGuns = false;
 
