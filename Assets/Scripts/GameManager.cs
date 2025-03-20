@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
-        SpawnManager.Instance.onceDone = false;
+//        SpawnManager.Instance.onceDone = false;
 
         //Method propably Ending to StartGame();
         //Or method BeginNextLevel();

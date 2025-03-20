@@ -41,8 +41,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] gunsToSpawn;
     private List<Vector3> validSpawnPositions = new List<Vector3>();
     [Header("Spawning variables")]
-    [SerializeField] private float itemSpawnRate = 15.0f;                     //Define Item spawnRate
-    [SerializeField] private float gunSpawnRate = 15.0f;                      //Define Gun spawnRate
+    private float itemSpawnRate = 1f;                     //Define Item spawnRate
+    private float gunSpawnRate = 1f;                      //Define Gun spawnRate
     [SerializeField] private bool spawningItems = false;
     [SerializeField] private bool spawningGuns = false;
 
@@ -117,7 +117,6 @@ public class SpawnManager : MonoBehaviour
                 {
                     playAreaTilemap = tilemap;
                     spawnBounds = playAreaTilemap.cellBounds;
-                    Debug.Log($"Stored tilemap {tilemap} boundaries.");
                     return;
                 }
             }
@@ -150,7 +149,6 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.LogWarning("No valid spawn positions found!");
         }
-        else Debug.Log($"{validSpawnPositions.Count} spawnpostions SET!");
     }
     public void StartSpawning()                                         //Begins Coroutines for item- and gunSpawning by GameManagers booleans 
     {
