@@ -133,6 +133,10 @@ public class SpawnManager : MonoBehaviour
 
     private void CollectValidSpawnPositions()                           //Determine valid spawnPoints
     {
+        LevelElementLayer = LayerMask.GetMask("LevelElement");
+        Debug.Log($"LevelElement LayerMask Value: {LevelElementLayer.value}");
+        Debug.Log($"LayerMask for 'LevelElement': {1 << LayerMask.NameToLayer("LevelElement")}");
+
         validSpawnPositions.Clear();
         Debug.Log($"Valid SpawnPositions Cleared: {validSpawnPositions.Count}");
         string temp = LevelElementLayer.ToString();
@@ -142,9 +146,19 @@ public class SpawnManager : MonoBehaviour
             if (playAreaTilemap.HasTile(cellPosition))                  //Check if the tile exist in the playArea
             {
                 Vector3 worldPosition = playAreaTilemap.GetCellCenterWorld(cellPosition);
-                if (!Physics2D.OverlapCircle(worldPosition, 0.3f, LevelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
+                if (!Physics2D.OverlapCircle(worldPosition, 0.5f, LevelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
                 {
                     validSpawnPositions.Add(worldPosition);
+
+                    Collider2D hit = Physics2D.OverlapCircle(worldPosition, 0.3f, LevelElementLayer);
+                    if (hit == null)
+                    {
+                        validSpawnPositions.Add(worldPosition);
+                    }
+                    else
+                    {
+                        Debug.Log($"Blocked by: {hit.gameObject.name} at {worldPosition}");
+                    }
                 }
             }
         }
