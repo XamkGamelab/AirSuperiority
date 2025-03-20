@@ -21,5 +21,7 @@ public class GunData
         DestroyTime = destroyTime;
     }
 
+    public Sprite GunIcon;  // This will hold the image for the gun
+
 
 }
