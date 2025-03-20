@@ -130,15 +130,18 @@ public class Player2Movement : MonoBehaviour
     {
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
-        float bulletDamage = -StatsManager.Instance.player[enemy].CurrentGun.Damage;
+        float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
 
-        if (StatsManager.Instance.player[player].Shield == 0)
+        for (int i = 0; i < bulletDamage; i++)
         {
-            StatsManager.Instance.AffectPlayer(player, "TakeDamage", bulletDamage);
-        }
-        else if (StatsManager.Instance.player[player].Shield != 0)
-        {
-            StatsManager.Instance.AffectPlayer(player, "ConsumeShield", bulletDamage);
+            if (StatsManager.Instance.player[player].Shield == 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
+            }
+            else if (StatsManager.Instance.player[player].Shield != 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
+            }
         }
 
         // Check if player is alive, if not alive -> destroy player, or hide player?
