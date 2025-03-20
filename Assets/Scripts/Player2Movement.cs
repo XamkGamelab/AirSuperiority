@@ -116,6 +116,31 @@ public class Player2Movement : MonoBehaviour
         bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
     }
 
+    // Detect a gun pickup
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("BasicGun"))
+        {
+            Debug.Log($"BASIC GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "BasicGun");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("AdvancedGun"))
+        {
+            Debug.Log($"ADVANCED GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "AdvancedGun");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("SpecialGun"))
+        {
+            Debug.Log($"Special GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "SpecialGun");
+            Destroy(collision.gameObject);
+        }
+    }
+
     // Detect bullet collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
