@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         //Every action needed for game to begin correctly
 
         LevelManager.Instance.OnGameBegin();
+        SpawnManager.Instance.LoadLevelSpawnPoints();
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
         //Every action needed for next level to begin correctly
 
         LevelManager.Instance.OnGameBegin();
+        SpawnManager.Instance.LoadLevelSpawnPoints();
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         isGameOver = false;
         isPlaying = true;
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
-        SpawnManager.Instance.onceDone = false;
+//        SpawnManager.Instance.onceDone = false;
 
         //Method propably Ending to StartGame();
         //Or method BeginNextLevel();

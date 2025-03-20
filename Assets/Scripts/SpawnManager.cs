@@ -30,8 +30,8 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { get; private set; }
 
-    public string tilemapObjectName = "PlayArea;";          //Tilemap area where spawning is possible
-    public LayerMask levelElementLayer;                     //LayerMask for LevelElement collision detection
+    public string tilemapObjectName = "PlayArea";          //Tilemap area where spawning is possible
+    public LayerMask LevelElementLayer;                     //LayerMask for LevelElement collision detection
     public string resourcesFolder1 = "Prefabs/SpawnItems";  //Resources folder for spawnable items
     public string resourcesFolder2 = "Prefabs/Guns";        //Resources folder for spawnable guns
 
@@ -73,12 +73,12 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
 
-        if (GameManager.Instance.isPlaying && !onceDone)                //This is done once
-        {
-            LoadLevelSpawnPoints();                                     //Load current level spawnPoints
+//        if (GameManager.Instance.isPlaying && !onceDone)                //This is done once
+//        {
+//            LoadLevelSpawnPoints();                                     //Load current level spawnPoints
 //            SpawnGun();
-            onceDone = true;                                            //Control through GameManager when starting new map
-        }
+//            onceDone = true;                                            //Control through GameManager when starting new map
+//        }
 
         StartSpawning();
 
@@ -107,6 +107,7 @@ public class SpawnManager : MonoBehaviour
     private void FindPlayAreaBounds()                                   //Determine tilemap boundaries
     {
         GameObject tilemapParent = GameObject.Find("Tilemap");  //Search tilemap by layerName
+        Debug.Log($"Found GameObject {tilemapParent.name}");
 
         if (tilemapParent)
         {
@@ -117,6 +118,7 @@ public class SpawnManager : MonoBehaviour
                 {
                     playAreaTilemap = tilemap;
                     spawnBounds = playAreaTilemap.cellBounds;
+                    Debug.Log($"Found bound values x: {spawnBounds.x} y: {spawnBounds.y}");
                     return;
                 }
             }
@@ -132,19 +134,21 @@ public class SpawnManager : MonoBehaviour
     private void CollectValidSpawnPositions()                           //Determine valid spawnPoints
     {
         validSpawnPositions.Clear();
-
+        Debug.Log($"Valid SpawnPositions Cleared: {validSpawnPositions.Count}");
+        string temp = LevelElementLayer.ToString();
+        Debug.Log($"Using LayerMask {LevelElementLayer.value} for detecting overlap.");
         foreach (Vector3Int cellPosition in spawnBounds.allPositionsWithin)
         {
             if (playAreaTilemap.HasTile(cellPosition))                  //Check if the tile exist in the playArea
             {
                 Vector3 worldPosition = playAreaTilemap.GetCellCenterWorld(cellPosition);
-                if (!Physics2D.OverlapCircle(worldPosition, 0.3f, levelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
+                if (!Physics2D.OverlapCircle(worldPosition, 0.3f, LevelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
                 {
                     validSpawnPositions.Add(worldPosition);
                 }
             }
         }
-
+        Debug.Log($"Valid SpawnPositions: {validSpawnPositions.Count}");
         if (validSpawnPositions.Count == 0)
         {
             Debug.LogWarning("No valid spawn positions found!");
