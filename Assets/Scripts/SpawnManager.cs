@@ -31,7 +31,7 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager Instance { get; private set; }
 
     public string tilemapObjectName = "PlayArea;";          //Tilemap area where spawning is possible
-    public LayerMask levelElementLayer;                     //LayerMask for LevelElement collision detection
+    public LayerMask LevelElementLayer;                     //LayerMask for LevelElement collision detection
     public string resourcesFolder1 = "Prefabs/SpawnItems";  //Resources folder for spawnable items
     public string resourcesFolder2 = "Prefabs/Guns";        //Resources folder for spawnable guns
 
@@ -73,12 +73,12 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
 
-        if (GameManager.Instance.isPlaying && !onceDone)                //This is done once
-        {
-            LoadLevelSpawnPoints();                                     //Load current level spawnPoints
+//        if (GameManager.Instance.isPlaying && !onceDone)                //This is done once
+//        {
+//            LoadLevelSpawnPoints();                                     //Load current level spawnPoints
 //            SpawnGun();
-            onceDone = true;                                            //Control through GameManager when starting new map
-        }
+//            onceDone = true;                                            //Control through GameManager when starting new map
+//        }
 
         StartSpawning();
 
@@ -138,7 +138,7 @@ public class SpawnManager : MonoBehaviour
             if (playAreaTilemap.HasTile(cellPosition))                  //Check if the tile exist in the playArea
             {
                 Vector3 worldPosition = playAreaTilemap.GetCellCenterWorld(cellPosition);
-                if (!Physics2D.OverlapCircle(worldPosition, 0.3f, levelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
+                if (!Physics2D.OverlapCircle(worldPosition, 0.3f, LevelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
                 {
                     validSpawnPositions.Add(worldPosition);
                 }

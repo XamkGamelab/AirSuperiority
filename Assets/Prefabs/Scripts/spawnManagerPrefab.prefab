@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemapObjectName: PlayArea;
-  levelElementLayer:
+  LevelElementLayer:
     serializedVersion: 2
     m_Bits: 2048
   resourcesFolder1: Prefabs/SpawnItems
   resourcesFolder2: Prefabs/Guns
+  spawningItems: 0
+  spawningGuns: 0
+  onceDone: 0
