@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private GameObject normalBullet;
     private float fireRate = 1f;
+    public NormalBullet normalBulletScript;
 
     private float time;
 
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         rotateRightAction = InputSystem.actions.FindAction("RotateRight");
         shootAction = InputSystem.actions.FindAction("Shoot");
         Debug.Log($"GameManager state isPlaying: {GameManager.Instance.isPlaying}");
+        normalBulletScript.GetComponent<NormalBullet>();
     }
 
     // Update is called once per frame
@@ -78,10 +80,24 @@ public class PlayerMovement : MonoBehaviour
                     RotatePlayerRight();
             }
 
-            if (shootAction.IsPressed() && time > fireRate)
+            // Player shooting action
+            if (shootAction.IsPressed())
             {
-                PlayerShoot();
-                time = 0;
+                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
+                {
+                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate) 
+                    {
+                        PlayerShoot();
+                        time = 0;
+                    }
+                } else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
+                {
+                    if (time > fireRate) 
+                    {
+                        PlayerShoot();
+                        time = 0;
+                    }
+                }
             }
         }
     }
@@ -106,22 +122,44 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"Shoot Action is Called");
 
-        // Check which weapon the player has...
-
         // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
+       
+        // Tell the bullet script which player shot. The current implementation might need to be changed if the player is also turned into a prefab.
+        normalBulletScript.whoShot = player;
+
         // Instantiate bullet prefab...
-        bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
+        bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
+        
         //Example how to use CurrentGun data inside PlayerData
         Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
         Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
-        
-
     }
 
-    private void OnTriggerEnter(Collider other)
+    // Detect a gun pickup
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("BasicGun"))
+        {
+            Debug.Log($"BASIC GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "BasicGun");
+            Destroy(collision.gameObject);
+        }
 
-        Gun gun = other.GetComponent<Gun>();
+        if (collision.gameObject.layer == LayerMask.NameToLayer("AdvancedGun"))
+        {
+            Debug.Log($"ADVANCED GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "AdvancedGun");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("SpecialGun"))
+        {
+            Debug.Log($"Special GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "SpecialGun");
+            Destroy(collision.gameObject);
+        }
+
+        /*Gun gun = other.GetComponent<Gun>();
         if (gun != null)
         {
             //            EquipGun(gun.GetGunData());                   //Possible to read data from instantiated gun script, prefer to use GunName and player index to call
@@ -131,8 +169,9 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.ChangeGun(player, _name);
 //            EquipGun(_name, player);                      //Dont use this method
             Destroy(other.gameObject);      //Remove gun
-        }
 
+        }
+        */
     }
 
     // Detect bullet collision
@@ -143,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log($"!!!!! Player1 hit !!!!!");
             CalculateDamage();
         }
+
     }
 
     private void EquipGun(string newGun, int PlayerIndex)   //Do not use this method for changing gun, instead use StatsManager.Instance.ChangeGun(int PlayerIndex, string gunName)
@@ -151,20 +191,43 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    /*
+    private void PlayerNewGun()
+    {
+        StatsManager.Instance.ChangeGun(player, GET THE GUN NAME)
+    }
+    */
+
     // Calculate how much damage is taken and does damage affect shield or health
     private void CalculateDamage()
-    {   
+    {
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
         // ^^ This could maybe be GunData ^^
-        float bulletDamage = -50f;
 
-        if (StatsManager.Instance.player[player].Shield == 0)
+        /*if (StatsManager.Instance.player[player].Shield == 0)
         {
             StatsManager.Instance.AffectPlayer(player, "TakeDamage", bulletDamage);
         } else if (StatsManager.Instance.player[player].Shield != 0)
         {
             StatsManager.Instance.AffectPlayer(player, "ConsumeShield", bulletDamage);
+        }*/
+
+        float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
+
+        for (int i = 0; i < bulletDamage; i++)
+        {
+            if (StatsManager.Instance.player[player].Health == 0)
+                bulletDamage = i;
+
+            if (StatsManager.Instance.player[player].Shield == 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
+            }
+            else if (StatsManager.Instance.player[player].Shield != 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
+            }
         }
 
         // Check if player is alive, if not alive -> destroy player, or hide player?
@@ -173,6 +236,7 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
             Destroy(gameObject);
         }
+
     }
 
 }

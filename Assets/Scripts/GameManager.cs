@@ -1,10 +1,12 @@
 //using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 
 public class GameManager : MonoBehaviour
 {
+//    public Rigidbody Rb => GetComponent<Rigidbody>();             //Just for reference how to get component with low resource consumption. Rb is also usable beefore Awake!
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -43,10 +45,16 @@ public class GameManager : MonoBehaviour
      * GameManager.Instance.ExitPauseState()    Call this when PauseState != isPaused
      */
 
+    [Header("General controls")]
     public bool isPlaying = false;
     public bool isPaused = false;
     public bool isGameOver = false;                     //Use if needed
     public bool updateHud = false;                      //Updating HUD information
+    public bool loadRandomMap = true;
+    public bool ActivateNextMap = false;
+    [Header("Audio controls")]
+    public bool menuMusic = false;
+    public bool inGameMusic = false;
 
     InputAction controlAction;
 
@@ -54,8 +62,9 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isPlaying = true;
+//        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
+        StartGame();
         
     }
 
@@ -85,11 +94,23 @@ public class GameManager : MonoBehaviour
             QuitGame();
         }
 
+        if (StatsManager.Instance.playerXDead)
+        {
+            IsGameOver();
+        }
+        
+        if (ActivateNextMap)
+        {
+            BeginNextLevel();
+        }
     }
 
     public void StartGame()                             //Use method when first time starting game
     {
         //Every action needed for game to begin correctly
+
+        LevelManager.Instance.OnGameBegin();
+        StartCoroutine(DelaydStart());
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -97,16 +118,38 @@ public class GameManager : MonoBehaviour
         //Call SceneController method
     }
 
+    private IEnumerator DelaydStart()
+    {
+        Debug.Log("Entering DelaydStart");
+
+        yield return new WaitForSeconds(2);
+        SpawnManager.Instance.LoadLevelSpawnPoints();
+        StopCoroutine(DelaydStart());
+    }
+
+    public void IsGameOver()
+    {
+        SpawnManager.Instance.StopSpawning();
+        SpawnManager.Instance.spawningAllowed = false;
+        isGameOver= true;
+        isPlaying = false;
+        updateHud = false;
+        ActivateNextMap = true;
+    }
+
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
 
+        LevelManager.Instance.OnGameBegin();
+        StartCoroutine(DelaydStart());
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
+        StatsManager.Instance.playerXDead = false;
 
-        //Call SceneController method....
+        ActivateNextMap = false;
     }
 
     public void EndLevel()                              //When level ends, do these functions
@@ -115,6 +158,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
+//        SpawnManager.Instance.onceDone = false;
 
         //Method propably Ending to StartGame();
         //Or method BeginNextLevel();

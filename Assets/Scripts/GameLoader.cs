@@ -23,19 +23,21 @@ public class GameLoader : MonoBehaviour
     [SerializeField] private GameObject gameManagerPrefab;
     [SerializeField] private GameObject statsManagerPrefab;
     [SerializeField] private GameObject GunManagerPrefab;
+    [SerializeField] private GameObject audioControllerPrefab;
 //    [SerializeField] private GameObject GunDataPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         //Ensure MonoBehaviour singletons exist
-//        EnsureSingleton(GunDataPrefab);
-        EnsureSingleton(GunManagerPrefab);
-        EnsureSingleton(spawnManagerPrefab);
-        EnsureSingleton(levelManagerPrefab);
-        EnsureSingleton(sceneControllerPrefab);
+        //        EnsureSingleton(GunDataPrefab);
         EnsureSingleton(gameManagerPrefab);
         EnsureSingleton(statsManagerPrefab);
+        EnsureSingleton(GunManagerPrefab);
+        EnsureSingleton(sceneControllerPrefab);
+        EnsureSingleton(levelManagerPrefab);
+        EnsureSingleton(spawnManagerPrefab);
+        EnsureSingleton(audioControllerPrefab);
 
         //Scene to load after singleton setup
         //SceneManager.LoadScene("Level1");
