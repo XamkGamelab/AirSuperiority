@@ -8,12 +8,12 @@ public class SpecialGun : Gun
     {
         base.Awake();
         gunName = "SpecialGun";
-        fireRate = 2.0f;
+        fireRate = 1.0f;
         ammoCount = 3f;
         ammonition = "Gun3Bullet";
-        speed = 7.0f;
+        speed = 5.0f;
         destroyTime = 3.0f;
-        damage = 30.0f;
+        damage = 70.0f;
         gunSprite = GunSprite;
     }
 }

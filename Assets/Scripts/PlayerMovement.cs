@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -218,6 +217,9 @@ public class PlayerMovement : MonoBehaviour
 
         for (int i = 0; i < bulletDamage; i++)
         {
+            if (StatsManager.Instance.player[player].Health == 0)
+                bulletDamage = i;
+
             if (StatsManager.Instance.player[player].Shield == 0)
             {
                 StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);

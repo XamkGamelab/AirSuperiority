@@ -41,10 +41,11 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] gunsToSpawn;
     private List<Vector3> validSpawnPositions = new List<Vector3>();
     [Header("Spawning variables")]
-    private float itemSpawnRate = 1f;                     //Define Item spawnRate
-    private float gunSpawnRate = 1f;                      //Define Gun spawnRate
+    private float itemSpawnRate = 15f;                     //Define Item spawnRate
+    private float gunSpawnRate = 10f;                      //Define Gun spawnRate
     [SerializeField] private bool spawningItems = false;
     [SerializeField] private bool spawningGuns = false;
+    [SerializeField] public bool spawningAllowed = false;
 
     public bool onceDone = false;                           //Controls spawnpoint loading.
 
@@ -87,8 +88,10 @@ public class SpawnManager : MonoBehaviour
     public void LoadLevelSpawnPoints()                                  //Call for level spawnPoint Initialization
     {
         Debug.Log("Begin loading spawnpoints.");
+
         FindPlayAreaBounds();
         CollectValidSpawnPositions();
+        spawningAllowed = true;
     }
     private void LoadSpawnableObjects()                                 //Load Spawnable items from Resources folder
     {
@@ -170,13 +173,13 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawning()                                         //Begins Coroutines for item- and gunSpawning by GameManagers booleans 
     {
-        if (!spawningItems && (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive))
+        if (!spawningItems && GameManager.Instance.isPlaying && spawningAllowed && (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive))
         {
 //            Debug.Log($"Starting coroutine SpawnItemroutine ({spawningItems})");
             StartCoroutine(SpawnItemRoutine());                         //ItemSpawner
         }
 
-        if (!spawningGuns && (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive))
+        if (!spawningGuns && GameManager.Instance.isPlaying && spawningAllowed && (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive))
         {
             StartCoroutine(SpawnGunRoutine());                          //GunSpawner
         }
@@ -186,7 +189,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawningItems = true;
 
-        while (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive)
+        while (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive && spawningAllowed && !GameManager.Instance.isGameOver && !StatsManager.Instance.playerXDead)
         {
             Debug.Log("Spawning items Coroutine");
             float itemWaitTime = Random.Range(itemSpawnRate * 0.8f, itemSpawnRate * 1.6f);      //Randomize spawnTime using itemSpawnRate factor
@@ -211,7 +214,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawningGuns = true;
 
-        while (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive)
+        while (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive && spawningAllowed && !GameManager.Instance.isGameOver && !StatsManager.Instance.playerXDead)
         {
 
             float gunWaitTime = Random.Range(gunSpawnRate * 0.8f, gunSpawnRate * 1.6f);         //Randomize spawnTime using gunSpawnRate factor
@@ -240,18 +243,18 @@ public class SpawnManager : MonoBehaviour
 
     public void StopSpawning()                                                                  //Stops spawner coroutines
     {
-        if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnGunActive && !LevelManager.Instance.spawnItemActive)
+        if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnGunActive && !LevelManager.Instance.spawnItemActive && !GameManager.Instance.isPlaying)
         {
             StopAllCoroutines();
             spawningItems = false;
             spawningGuns = false;
         }
-        else if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnItemActive)
+        else if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnItemActive && GameManager.Instance.isPlaying)
         {
             StopCoroutine(SpawnItemRoutine());
             spawningItems = false;
         }
-        else if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnGunActive)
+        else if (!LevelManager.Instance.spawnActive && !LevelManager.Instance.spawnGunActive && GameManager.Instance.isPlaying)
         {
             StopCoroutine(SpawnGunRoutine());
             spawningGuns = false;
