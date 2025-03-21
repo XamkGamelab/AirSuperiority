@@ -30,13 +30,13 @@ public class GameLoader : MonoBehaviour
     private void Awake()
     {
         //Ensure MonoBehaviour singletons exist
-//        EnsureSingleton(GunDataPrefab);
-        EnsureSingleton(GunManagerPrefab);
-        EnsureSingleton(spawnManagerPrefab);
-        EnsureSingleton(levelManagerPrefab);
-        EnsureSingleton(sceneControllerPrefab);
+        //        EnsureSingleton(GunDataPrefab);
         EnsureSingleton(gameManagerPrefab);
         EnsureSingleton(statsManagerPrefab);
+        EnsureSingleton(GunManagerPrefab);
+        EnsureSingleton(sceneControllerPrefab);
+        EnsureSingleton(levelManagerPrefab);
+        EnsureSingleton(spawnManagerPrefab);
         EnsureSingleton(audioControllerPrefab);
 
         //Scene to load after singleton setup

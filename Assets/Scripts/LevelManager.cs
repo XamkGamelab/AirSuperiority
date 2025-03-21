@@ -20,17 +20,29 @@ public class LevelManager : MonoBehaviour
     public bool spawnItemActive = false;                //Spawn Items       [NOTE: spanactive == false, spawnItemActive == true => Only items spawns]
     public bool spawnGunActive = false;                 //Spawn Guns
 
+    private bool spawning = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Instance.isPlaying && !spawning)
+        {
+            spawnActive = true;
+            spawning = true;
+        }
+
+        if (spawning && !GameManager.Instance.isPlaying) 
+        {
+            spawnActive = false;
+            spawning = false;
+        }
     }
 
     public void OnGameBegin()
@@ -42,6 +54,5 @@ public class LevelManager : MonoBehaviour
         //Load Level before SpawnPoints
 //        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
 
-        spawnActive = true;
     }
 }
