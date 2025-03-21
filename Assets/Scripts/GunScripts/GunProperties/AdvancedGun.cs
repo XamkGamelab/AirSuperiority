@@ -12,6 +12,8 @@ public class AdvancedGun : Gun
         ammonition = 2.0f;
         speed = 7.0f;
         destroyTime = 3.0f;
+        damage = 70.0f;
+        gunSprite = GunSprite;
     }
 }
 

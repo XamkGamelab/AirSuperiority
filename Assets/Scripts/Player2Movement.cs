@@ -99,6 +99,31 @@ public class Player2Movement : MonoBehaviour
         bulletInst = Instantiate(normalBullet, bulletSpawnPoint.position, transform.rotation);
     }
 
+    // Detect a gun pickup
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("BasicGun"))
+        {
+            Debug.Log($"BASIC GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "BasicGun");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("AdvancedGun"))
+        {
+            Debug.Log($"ADVANCED GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "AdvancedGun");
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("SpecialGun"))
+        {
+            Debug.Log($"Special GUN PICKED UP");
+            StatsManager.Instance.ChangeGun(player, "SpecialGun");
+            Destroy(collision.gameObject);
+        }
+    }
+
     // Detect bullet collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -113,15 +138,21 @@ public class Player2Movement : MonoBehaviour
     {
         // Check which bullet hit the player for better damage calculation
         // Write method for getting current gun bullet damage
-        float bulletDamage = -50;
+        float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
 
-        if (StatsManager.Instance.player[player].Shield == 0)
+        for (int i = 0; i < bulletDamage; i++)
         {
-            StatsManager.Instance.AffectPlayer(player, "TakeDamage", bulletDamage);
-        }
-        else if (StatsManager.Instance.player[player].Shield != 0)
-        {
-            StatsManager.Instance.AffectPlayer(player, "ConsumeShield", bulletDamage);
+            if (StatsManager.Instance.player[player].Health == 0)
+                bulletDamage = i;
+
+            if (StatsManager.Instance.player[player].Shield == 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
+            }
+            else if (StatsManager.Instance.player[player].Shield != 0)
+            {
+                StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
+            }
         }
 
         // Check if player is alive, if not alive -> destroy player, or hide player?

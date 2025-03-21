@@ -17,11 +17,11 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayArea
+  - LevelElement
+  - BasicGun
+  - AdvancedGun
+  - SpecialGun
   - 
   - 
   - 

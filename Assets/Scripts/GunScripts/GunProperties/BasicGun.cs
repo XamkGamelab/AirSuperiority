@@ -10,10 +10,11 @@ public class BasicGun : Gun
         gunName = "BasicGun";
         fireRate = 1;
         ammoCount = 4;
-        ammonition = 1;
-        speed = 5f;
+        ammonition = "Gun1Bullet";
+        speed = 10f;
         destroyTime = 3f;
-    }
+        damage = 60.0f;
+        gunSprite = GunSprite;
 }
 
 /**************************************************************************

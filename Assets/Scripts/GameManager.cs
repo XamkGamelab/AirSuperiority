@@ -1,6 +1,7 @@
 //using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 
 public class GameManager : MonoBehaviour
@@ -90,6 +91,9 @@ public class GameManager : MonoBehaviour
     public void StartGame()                             //Use method when first time starting game
     {
         //Every action needed for game to begin correctly
+
+        LevelManager.Instance.OnGameBegin();
+        StartCoroutine(DelaydStart());
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -97,10 +101,31 @@ public class GameManager : MonoBehaviour
         //Call SceneController method
     }
 
+    private IEnumerator DelaydStart()
+    {
+        Debug.Log("Entering DelaydStart");
+
+        yield return new WaitForSeconds(2);
+        SpawnManager.Instance.LoadLevelSpawnPoints();
+        StopCoroutine(DelaydStart());
+    }
+
+    public void IsGameOver()
+    {
+        SpawnManager.Instance.StopSpawning();
+        SpawnManager.Instance.spawningAllowed = false;
+        isGameOver= true;
+        isPlaying = false;
+        updateHud = false;
+        ActivateNextMap = true;
+    }
+
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
 
+        LevelManager.Instance.OnGameBegin();
+        StartCoroutine(DelaydStart());
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         isGameOver = false;
         isPlaying = true;
@@ -115,6 +140,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
+//        SpawnManager.Instance.onceDone = false;
 
         //Method propably Ending to StartGame();
         //Or method BeginNextLevel();

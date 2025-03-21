@@ -21,5 +21,10 @@ public class NormalBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("LevelElement"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
