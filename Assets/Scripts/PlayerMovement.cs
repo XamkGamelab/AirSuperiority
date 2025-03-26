@@ -17,8 +17,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     // Player variables
-    [SerializeField] private float movementSpeed = 2;
-    [SerializeField] private float rotationSpeed = 90;
+    private float acceleration = 2f;
+    private float deceleration = 1f;
+    [SerializeField] private float maxSpeed = 5f;
+    private Vector2 direction = Vector2.zero;
+    private Vector2 moveValue = Vector2.zero;
+    private Vector2 velocity = Vector2.zero;
+    [SerializeField] private float rotationSpeed = 90f;
     [SerializeField] private int player = 0;
     [SerializeField] private int enemy = 1;
 
@@ -56,29 +61,30 @@ public class PlayerMovement : MonoBehaviour
             // Count time for firerate
             time += Time.deltaTime;
 
+            Vector2 moveValue = moveAction.ReadValue<Vector2>();
+
             // Move Player forward/backward
             if (moveAction.IsPressed())
             {
-                MovePlayer();
+                direction = moveValue.normalized;
+                velocity += direction * acceleration * Time.deltaTime;
+
+                velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
+            } 
+            else if (!moveAction.IsPressed()) 
+            {
+                velocity = Vector2.MoveTowards(velocity, Vector2.zero, deceleration * Time.deltaTime);
             }
 
-            // Player rotation inverted when moving backwards
-            if (Input.GetKey(KeyCode.S))
-            {
-                // Inverted player rotation
-                if (rotateLeftAction.IsPressed())
-                    transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
-                if (rotateRightAction.IsPressed())
-                    transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
-            }
-            else 
-            {
-                // Normal player rotation
-                if (rotateLeftAction.IsPressed())
-                    RotatePlayerLeft();
-                if (rotateRightAction.IsPressed())
-                    RotatePlayerRight();
-            }
+            transform.Translate(velocity * Time.deltaTime);
+
+
+            // Normal player rotation
+            if (rotateLeftAction.IsPressed())
+                RotatePlayerLeft();
+            if (rotateRightAction.IsPressed())
+                RotatePlayerRight();
+            
 
             // Player shooting action
             if (shootAction.IsPressed())
@@ -104,8 +110,8 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        transform.Translate(movementSpeed * Time.deltaTime * new Vector2(0, moveValue.y));
+        
+        
     }
 
     void RotatePlayerLeft()
