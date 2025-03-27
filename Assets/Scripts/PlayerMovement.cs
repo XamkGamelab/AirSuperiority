@@ -23,7 +23,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 direction = Vector2.zero;
     private Vector2 moveValue = Vector2.zero;
     private Vector2 velocity = Vector2.zero;
-    [SerializeField] private float rotationSpeed = 90f;
+    [SerializeField] private bool isMoving = false;
+
+    [SerializeField] private float rotationSpeed = 120f;
+    [SerializeField] private float rotMoveSpeed = 60f;
+    private float rotDecel = 40f;
+
     [SerializeField] private int player = 0;
     [SerializeField] private int enemy = 1;
 
@@ -66,13 +71,15 @@ public class PlayerMovement : MonoBehaviour
             // Move Player forward/backward
             if (moveAction.IsPressed())
             {
+                isMoving = true;
                 direction = moveValue.normalized;
-                velocity += direction * acceleration * Time.deltaTime;
+                velocity += acceleration * Time.deltaTime * direction;
 
                 velocity = Vector2.ClampMagnitude(velocity, maxSpeed);
             } 
             else if (!moveAction.IsPressed()) 
             {
+                isMoving = false;
                 velocity = Vector2.MoveTowards(velocity, Vector2.zero, deceleration * Time.deltaTime);
             }
 
@@ -116,12 +123,39 @@ public class PlayerMovement : MonoBehaviour
 
     void RotatePlayerLeft()
     {
-        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        if (!isMoving)
+        {
+            rotationSpeed = 120f;
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        } 
+        else if (isMoving)
+        {
+            if (rotationSpeed >= rotMoveSpeed)
+            {
+                rotationSpeed -= rotDecel * Time.deltaTime;
+            }
+
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        }
+        
     }
 
     void RotatePlayerRight()
     {
-        transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
+        if (!isMoving)
+        {
+            rotationSpeed = 120f;
+            transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
+        }
+        else if (isMoving)
+        {
+            if (rotationSpeed >= rotMoveSpeed)
+            {
+                rotationSpeed -= rotDecel * Time.deltaTime;
+            }
+
+            transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
+        }
     }
 
     void PlayerShoot()
