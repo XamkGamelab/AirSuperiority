@@ -84,11 +84,17 @@ public class BattleHUDController : MonoBehaviour
         }
     }
 
-    void EnterPauseMenu()
+    private void EnterPauseMenu()
     {
-        
+        //Actions to do when entering pause menu. PauseMenu overlay etc.
+        //Some button or shit to call exit pause menu method after continue
     }
 
+    private void ExitPauseMenu()
+    {
+        //Leave this to be last line
+        GameManager.Instance.isPaused = false;
+    }
 
     //Here will be coroutine for Updating Hud
 }
