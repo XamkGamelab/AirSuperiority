@@ -261,8 +261,8 @@ public class PlayerMovement : MonoBehaviour
         if (!kamikaze) { 
             float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
 
-            for (int i = 0; i < bulletDamage; i++)
-            {
+        for (int i = 0; i < bulletDamage; i++)
+        {
 
                 if (StatsManager.Instance.player[player].Shield == 0)
                 {

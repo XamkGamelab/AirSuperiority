@@ -54,6 +54,7 @@ public class StatsManager : MonoBehaviour
     public float startTime = 0;
     public float stopTime = 0;
     public float timeInterval = 0;
+    public float playTime = 0;
     public bool calculateTimeRef = false;
 
     [Header("Player information")]//Players information
@@ -98,6 +99,7 @@ public class StatsManager : MonoBehaviour
         public string name = "Player";
         public int Score = 0;
         public int TotalScore = 0;
+        public int Victories = 0;
         public float Health = 100f;
         public float Shield = 100f;
 //        public int CurrentGun = 0;
@@ -148,7 +150,8 @@ public class StatsManager : MonoBehaviour
 
     IEnumerator CountTimeCoroutine()                        //Time measuring coroutine
     {
-        if (GameManager.Instance.isPlaying != calculateTimeRef)
+
+        if (GameManager.Instance.isPlaying != calculateTimeRef && !GameManager.Instance.isPaused)
         {
             startTime = Time.unscaledDeltaTime;             //Get start time
             calculateTimeRef = true;
@@ -161,15 +164,27 @@ public class StatsManager : MonoBehaviour
 
         }
 
-        timeInterval = Time.unscaledDeltaTime - startTime;  //Elapsed time
+        if (GameManager.Instance.isPaused && !calculateTimeRef)
+        {
+            playTime += timeInterval;
 
+            while (GameManager.Instance.isPaused)
+            {
+                yield return new WaitForSeconds(1.0f);
+            }
+
+            calculateTimeRef = true;
+        }
+
+        timeInterval = Time.unscaledDeltaTime - startTime;  //Elapsed time
+        
         yield return new WaitForSeconds(1.0f);
     }
 
 
     public float GetPlayTime()                              //Get elapsed time
     {
-        return timeInterval;
+        return timeInterval + playTime;
     }
 
     public void AffectPlayer(int playerIndex, string action, float value)   //Affect player statistics
@@ -183,7 +198,7 @@ public class StatsManager : MonoBehaviour
                 break;
             case "TakeDamage":                              //Negative value removes Health, positive adds health
                 player[playerIndex].Health += value;
-                if (player[playerIndex].Health < 0)
+                if (player[playerIndex].Health <= 0)
                 { 
                     player[playerIndex].Health = 0;
                     player[playerIndex].playerDead = true;
