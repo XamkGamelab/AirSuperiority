@@ -11,8 +11,12 @@ public class BattleHUDController : MonoBehaviour
     public Slider healthSlider1;
     public Slider shieldSlider1;
 
-    [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI playerNameText0;
+    [SerializeField] private TextMeshProUGUI playerNameText1;
+    [SerializeField] private TextMeshProUGUI scoreText0;
+    [SerializeField] private TextMeshProUGUI scoreText1;
+    [SerializeField] private TextMeshProUGUI ammoCount0;
+    [SerializeField] private TextMeshProUGUI ammoCount1;
     [SerializeField] private Image currentGunSprite0;
     [SerializeField] private Image currentGunSprite1;
 
@@ -35,6 +39,14 @@ public class BattleHUDController : MonoBehaviour
             updatingHud = true;
             Debug.Log("Updating HUD...");
 
+            //Setting Player names
+            playerNameText0.text = ($"{StatsManager.Instance.player[0].name}");
+            playerNameText1.text = ($"{StatsManager.Instance.player[1].name}");
+
+            //Score
+            scoreText0.text = ($"Score:{StatsManager.Instance.player[0].Score}");
+            scoreText1.text = ($"Score:{StatsManager.Instance.player[1].Score}");
+
             //Updating sliders
             healthSlider0.value = StatsManager.Instance.player[0].Health;
             healthSlider1.value = StatsManager.Instance.player[1].Health;
@@ -45,6 +57,9 @@ public class BattleHUDController : MonoBehaviour
             //Updating gun sprites and ammocount
             currentGunSprite0.sprite = StatsManager.Instance.player[0].CurrentGun.gunSprite;
             currentGunSprite1.sprite = StatsManager.Instance.player[1].CurrentGun.gunSprite;
+
+            ammoCount0.text = ($"{StatsManager.Instance.player[0].CurrentGun.AmmoCount}");
+            ammoCount1.text = ($"{StatsManager.Instance.player[1].CurrentGun.AmmoCount}");
 
         }
         else if (!GameManager.Instance.updateHud && GameManager.Instance.isPaused)
