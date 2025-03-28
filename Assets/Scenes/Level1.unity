@@ -3591,8 +3591,12 @@ MonoBehaviour:
   shieldSlider0: {fileID: 1936751752}
   healthSlider1: {fileID: 208026925}
   shieldSlider1: {fileID: 859238158}
-  playerNameText: {fileID: 169183197}
-  scoreText: {fileID: 902248973}
+  playerNameText0: {fileID: 169183197}
+  playerNameText1: {fileID: 416838263}
+  scoreText0: {fileID: 902248973}
+  scoreText1: {fileID: 1342910916}
+  ammoCount0: {fileID: 2040750723}
+  ammoCount1: {fileID: 1046478950}
   currentGunSprite0: {fileID: 2044865693}
   currentGunSprite1: {fileID: 1550581380}
 --- !u!1001 &590686567
@@ -5268,8 +5272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 228, y: -30}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchoredPosition: {x: 241, y: -30}
+  m_SizeDelta: {x: 100, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550581380
 MonoBehaviour:
@@ -7443,8 +7447,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -230, y: -30}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchoredPosition: {x: -243, y: -30}
+  m_SizeDelta: {x: 100, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2044865693
 MonoBehaviour:
