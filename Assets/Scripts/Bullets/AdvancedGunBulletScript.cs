@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NormalBullet : MonoBehaviour
+public class AdvancedGunBulletScript : MonoBehaviour
 {
     private float speed;
     private float destroyTime;
@@ -8,8 +8,8 @@ public class NormalBullet : MonoBehaviour
 
     private void Awake()
     {
-        speed = GunManager.Instance.GetGunData("BasicGun").Speed;
-        destroyTime = GunManager.Instance.GetGunData("BasicGun").DestroyTime;
+        speed = GunManager.Instance.GetGunData("AdvancedGun").Speed;
+        destroyTime = GunManager.Instance.GetGunData("AdvancedGun").DestroyTime;
     }
 
     // Update is called once per frame

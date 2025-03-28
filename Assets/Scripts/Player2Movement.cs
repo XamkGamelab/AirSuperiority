@@ -24,7 +24,6 @@ public class Player2Movement : MonoBehaviour
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
     private float fireRate = 1f;
-    public NormalBullet normalBulletScript;
 
     private float time;
 
@@ -44,7 +43,6 @@ public class Player2Movement : MonoBehaviour
         rotateRightAction2 = InputSystem.actions.FindAction("Player2RotateRight");
         shootAction2 = InputSystem.actions.FindAction("Player2Shoot");
         Debug.Log($"GameManager state isPlaying: {GameManager.Instance.isPlaying}");
-        normalBulletScript.GetComponent<NormalBullet>();
     }
 
     void Update()
@@ -151,9 +149,6 @@ public class Player2Movement : MonoBehaviour
     void PlayerShoot()
     {
         Debug.Log($"Player2Shoot Action is Called");
-
-        // Tell the bullet script which player shot. The current implementation might need to be changed if the player is also turned into a prefab.
-        normalBulletScript.whoShot = player;
 
         // Instantiate bullet prefab...
         bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);

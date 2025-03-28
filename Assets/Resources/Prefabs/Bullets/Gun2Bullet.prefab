@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7534493226617885898}
   - component: {fileID: 6990368057857365260}
   - component: {fileID: 6802198096123055906}
-  - component: {fileID: 864851151951547955}
   - component: {fileID: -22383723474554198}
+  - component: {fileID: 244478886210839616}
   m_Layer: 0
   m_Name: Gun2Bullet
   m_TagString: Bullet
@@ -164,19 +164,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &864851151951547955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7519751148010600833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e38ec4085686bc4f8855c5936e6072f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whoShot: 0
 --- !u!82 &-22383723474554198
 AudioSource:
   m_ObjectHideFlags: 0
@@ -274,3 +261,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &244478886210839616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519751148010600833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3a0fbad2b08114284e0af6b0d802b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whoShot: 0
