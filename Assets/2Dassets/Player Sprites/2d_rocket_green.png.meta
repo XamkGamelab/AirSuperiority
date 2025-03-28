@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      2d_rocket_green_0: 8576578337146248817
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
