@@ -10,6 +10,10 @@ public class BattleHUDController : MonoBehaviour
     public Slider shieldSlider0;
     public Slider healthSlider1;
     public Slider shieldSlider1;
+    [SerializeField] private TextMeshProUGUI healthValue0;
+    [SerializeField] private TextMeshProUGUI healthValue1;
+    [SerializeField] private TextMeshProUGUI shieldValue0;
+    [SerializeField] private TextMeshProUGUI shieldValue1;
 
     [SerializeField] private TextMeshProUGUI playerNameText0;
     [SerializeField] private TextMeshProUGUI playerNameText1;
@@ -44,8 +48,8 @@ public class BattleHUDController : MonoBehaviour
             playerNameText1.text = ($"{StatsManager.Instance.player[1].name}");
 
             //Score
-            scoreText0.text = ($"Score:{StatsManager.Instance.player[0].Score}");
-            scoreText1.text = ($"Score:{StatsManager.Instance.player[1].Score}");
+            scoreText0.text = ($"Score: {StatsManager.Instance.player[0].Score}");
+            scoreText1.text = ($"Score: {StatsManager.Instance.player[1].Score}");
 
             //Updating sliders
             healthSlider0.value = StatsManager.Instance.player[0].Health;
@@ -53,6 +57,12 @@ public class BattleHUDController : MonoBehaviour
 
             shieldSlider0.value = StatsManager.Instance.player[0].Shield;
             shieldSlider1.value = StatsManager.Instance.player[1].Shield;
+
+            healthValue0.text = ($"{StatsManager.Instance.player[0].Health}/100");
+            healthValue1.text = ($"{StatsManager.Instance.player[1].Health}/100");
+
+            shieldValue0.text = ($"{StatsManager.Instance.player[0].Shield}/100");
+            shieldValue1.text = ($"{StatsManager.Instance.player[1].Shield}/100");
 
             //Updating gun sprites and ammocount
             currentGunSprite0.sprite = StatsManager.Instance.player[0].CurrentGun.gunSprite;
