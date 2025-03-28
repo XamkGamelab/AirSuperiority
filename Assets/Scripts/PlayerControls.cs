@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7577c0c-1cdd-4e60-a616-11b091f0dddf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -159,6 +168,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1fa4e01d-97d8-41e4-998f-4e1fc4524289"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -295,6 +315,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player1_RotateRight = m_Player1.FindAction("RotateRight", throwIfNotFound: true);
         m_Player1_Shoot = m_Player1.FindAction("Shoot", throwIfNotFound: true);
         m_Player1_Control = m_Player1.FindAction("Control", throwIfNotFound: true);
+        m_Player1_PauseMenu = m_Player1.FindAction("PauseMenu", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Player2Move = m_Player2.FindAction("Player2Move", throwIfNotFound: true);
@@ -373,6 +394,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player1_RotateRight;
     private readonly InputAction m_Player1_Shoot;
     private readonly InputAction m_Player1_Control;
+    private readonly InputAction m_Player1_PauseMenu;
     public struct Player1Actions
     {
         private @PlayerControls m_Wrapper;
@@ -382,6 +404,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @RotateRight => m_Wrapper.m_Player1_RotateRight;
         public InputAction @Shoot => m_Wrapper.m_Player1_Shoot;
         public InputAction @Control => m_Wrapper.m_Player1_Control;
+        public InputAction @PauseMenu => m_Wrapper.m_Player1_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -406,6 +429,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Control.started += instance.OnControl;
             @Control.performed += instance.OnControl;
             @Control.canceled += instance.OnControl;
+            @PauseMenu.started += instance.OnPauseMenu;
+            @PauseMenu.performed += instance.OnPauseMenu;
+            @PauseMenu.canceled += instance.OnPauseMenu;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
@@ -425,6 +451,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Control.started -= instance.OnControl;
             @Control.performed -= instance.OnControl;
             @Control.canceled -= instance.OnControl;
+            @PauseMenu.started -= instance.OnPauseMenu;
+            @PauseMenu.performed -= instance.OnPauseMenu;
+            @PauseMenu.canceled -= instance.OnPauseMenu;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -519,6 +548,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRotateRight(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnControl(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {

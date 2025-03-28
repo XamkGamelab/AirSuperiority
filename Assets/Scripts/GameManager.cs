@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public bool inGameMusic = false;
 
     InputAction controlAction;
+    InputAction pauseMenuAction;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
+        pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
         StartGame();
         
     }
@@ -91,8 +93,14 @@ public class GameManager : MonoBehaviour
 
         if (controlAction.IsPressed())
         {
-            QuitGame();
+//            QuitGame();
+            EnterMainMenu();
         }
+        if (pauseMenuAction.IsPressed())
+        {
+            isPaused = true;
+        }
+
 
         if (StatsManager.Instance.playerXDead)
         {
@@ -179,6 +187,12 @@ public class GameManager : MonoBehaviour
         updateHud = true;
     }
 
+    public void EnterMainMenu()
+    {
+        EndLevel();
+//        SceneController.Instance.LoadSpecificLevel(MainMenu);
+        QuitGame();
+    }
     public static void QuitGame()
     {
 
