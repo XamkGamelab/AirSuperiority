@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      2d_rocket_purple_0: -1963881812111598811
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
