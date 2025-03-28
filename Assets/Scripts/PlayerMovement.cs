@@ -125,12 +125,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void MovePlayer()
-    {
-        
-        
-    }
-
     void RotatePlayerLeft()
     {
         if (!isMoving)
@@ -274,8 +268,6 @@ public class PlayerMovement : MonoBehaviour
 
             for (int i = 0; i < bulletDamage; i++)
             {
-                if (StatsManager.Instance.player[player].Health == 0)
-                    bulletDamage = i;
 
                 if (StatsManager.Instance.player[player].Shield == 0)
                 {
@@ -292,7 +284,6 @@ public class PlayerMovement : MonoBehaviour
                 // Check if player is alive, if not alive -> destroy player, or hide player?
                 StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
                 Destroy(gameObject);
-                StatsManager.Instance.playerXDead = true;
             }
         }
         else if (kamikaze)
