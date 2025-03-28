@@ -148,7 +148,7 @@ public class Player2Movement : MonoBehaviour
 
     void PlayerShoot()
     {
-        Debug.Log($"Shoot Action is Called");
+        Debug.Log($"Shoot Action is Called By player {player}");
 
         if (StatsManager.Instance.player[player].CurrentGun.AmmoCount >= 1)
         {

@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
         LevelManager.Instance.OnGameBegin();
         StartCoroutine(DelaydStart());
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
+        LevelManager.Instance.InstantiateHUD();
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -189,13 +190,13 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        EndLevel();
+        //EndLevel();
 //        SceneController.Instance.LoadSpecificLevel(MainMenu);
         QuitGame();
     }
     public static void QuitGame()
     {
-
+        Debug.Log("Quit Game called");
 //            if (Application.isPlaying)
                 Application.Quit();
     }
