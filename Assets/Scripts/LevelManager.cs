@@ -55,4 +55,9 @@ public class LevelManager : MonoBehaviour
 //        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
 
     }
+
+    public void InstantiateHUD()
+    {
+
+    }
 }

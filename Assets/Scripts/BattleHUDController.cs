@@ -21,8 +21,11 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText1;
     [SerializeField] private TextMeshProUGUI ammoCount0;
     [SerializeField] private TextMeshProUGUI ammoCount1;
+    [SerializeField] private TextMeshProUGUI gameTime;
     [SerializeField] private Image currentGunSprite0;
     [SerializeField] private Image currentGunSprite1;
+
+    [SerializeField] private GameObject pauseMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,6 +74,9 @@ public class BattleHUDController : MonoBehaviour
             ammoCount0.text = ($"{StatsManager.Instance.player[0].CurrentGun.AmmoCount}");
             ammoCount1.text = ($"{StatsManager.Instance.player[1].CurrentGun.AmmoCount}");
 
+            //Game time update
+            gameTime.text = ($"Game time: {StatsManager.Instance.GetPlayTime()}");
+
         }
         else if (!GameManager.Instance.updateHud && GameManager.Instance.isPaused)
         {
@@ -88,10 +94,14 @@ public class BattleHUDController : MonoBehaviour
     {
         //Actions to do when entering pause menu. PauseMenu overlay etc.
         //Some button or shit to call exit pause menu method after continue
+
+        pauseMenu.SetActive(true);
+
     }
 
-    private void ExitPauseMenu()
+    public void ExitPauseMenu()
     {
+        pauseMenu.SetActive(false);
         //Leave this to be last line
         GameManager.Instance.isPaused = false;
     }
