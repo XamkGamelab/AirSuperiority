@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public bool spawnGunActive = false;                 //Spawn Guns
 
     private bool spawning = false;
+    [SerializeField] private Canvas HUD;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +48,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnGameBegin()
     {
-        if (GameManager.Instance.loadRandomMap)
+        if (GameManager.Instance.loadRandomMap)             //If randomMap loading Active
         {
             SceneController.Instance.LoadRandomMap();
         }
@@ -58,6 +59,6 @@ public class LevelManager : MonoBehaviour
 
     public void InstantiateHUD()
     {
-
+        Instantiate(HUD);
     }
 }
