@@ -169,6 +169,8 @@ public class PlayerMovement : MonoBehaviour
             //Substract player ammoCount by 1 
             StatsManager.Instance.player[player].CurrentGun.AmmoCount -= 1;
 
+            Debug.Log($"Player1 ammoCount: {StatsManager.Instance.player[0].CurrentGun.AmmoCount}, Player2 ammoCount: {StatsManager.Instance.player[1].CurrentGun.AmmoCount}");
+
             // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
 
             // Instantiate bullet prefab...

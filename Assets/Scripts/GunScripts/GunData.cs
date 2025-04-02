@@ -25,5 +25,20 @@ public class GunData
         this.gunSprite = gunSprite;
     }
 
+    public GunData(GunData other)
+    {
+        if (other == null)
+            return;
+        GunName = other.GunName;
+        FireRate = other.FireRate;
+        AmmoCount = other.AmmoCount;
+        Ammonition = other.Ammonition;
+        Speed = other.Speed;
+        DestroyTime = other.DestroyTime;
+        Damage = other.Damage;
+        this.gunSprite = other.gunSprite;
+
+    }
+
 
 }
