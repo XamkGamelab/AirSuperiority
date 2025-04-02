@@ -4,7 +4,8 @@ public class SpecialGunBulletScript : MonoBehaviour
 {
     private float speed;
     private float destroyTime;
-    public int whoShot;
+    private int bounceCount = 0;
+    private bool bounced;
 
     private void Awake()
     {
@@ -15,11 +16,17 @@ public class SpecialGunBulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Bullet flies forward
-        transform.position += transform.up * Time.deltaTime * speed;
+        if(bounced)
+        {
+            // Bullet bounces based on angle
+            transform.position += speed * Time.deltaTime * -transform.up;
+        } 
+        else if (!bounced)
+        {
+            // Bullet flies forward
+            transform.position += speed * Time.deltaTime * transform.up;
+        }
 
-        // Destroy bullets 
-        Destroy(gameObject, destroyTime);
     }
 
     // Detect if the bullet hit a player
@@ -32,7 +39,18 @@ public class SpecialGunBulletScript : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("LevelElement"))
         {
-            Destroy(gameObject);
+            if (bounceCount >= 2)
+            {
+                Destroy(gameObject);
+                bounced = false;
+                bounceCount = 0; 
+            } 
+            else
+            {
+                bounced = true;
+                bounceCount++;
+            }
+
         }
     }
 }

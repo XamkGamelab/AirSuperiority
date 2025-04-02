@@ -4,7 +4,6 @@ public class AdvancedGunBulletScript : MonoBehaviour
 {
     private float speed;
     private float destroyTime;
-    public int whoShot;
 
     private void Awake()
     {
@@ -16,7 +15,7 @@ public class AdvancedGunBulletScript : MonoBehaviour
     void Update()
     {
         // Bullet flies forward
-        transform.position += transform.up * Time.deltaTime * speed;
+        transform.position += speed * Time.deltaTime * transform.up;
 
         // Destroy bullets 
         Destroy(gameObject, destroyTime);
