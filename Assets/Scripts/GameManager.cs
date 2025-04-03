@@ -125,8 +125,10 @@ public class GameManager : MonoBehaviour
     {
         //Every action needed for game to begin correctly
         SceneController.Instance.LoadSpecificLevel("PlayScene");    //Check if PlayScene is active / Load if different scene
-//        SceneController.Instance.LoadPlayScene();
-        StartCoroutine(Delay2Sec());
+                                                                    //        SceneController.Instance.LoadPlayScene();
+        StartCoroutine(TimeDelay());
+        gameObject.SetActive(true);
+
         LevelManager.Instance.OnGameBegin();
         SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
@@ -136,13 +138,10 @@ public class GameManager : MonoBehaviour
 
         //Call SceneController method
     }
-    private IEnumerator Delay2Sec()
+
+    private IEnumerator TimeDelay()
     {
-        while (!SceneController.Instance.sceneReady)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
-        StopCoroutine(Delay2Sec());
+        yield return new WaitForSeconds(2);
     }
     private IEnumerator DelaydStart()
     {

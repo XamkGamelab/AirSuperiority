@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
         //        SceneController.Instance.LoadSpecificLevel("PlayScene");
 //        ClearLevel();
         InstantiateMAP();
-        InstantiateHUD();
+//        InstantiateHUD();
 
 /*
         if (GameManager.Instance.loadRandomMap)             //If randomMap loading Active
@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
 
     public void ClearLevel()
     {
-        DestroyActiveHud();
+//        DestroyActiveHud();
         DestroyActiveMap();
     }
     private void LoadMaps()

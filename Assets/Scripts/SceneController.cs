@@ -88,8 +88,8 @@ public class SceneController : MonoBehaviour
             else
             {
                 currentLevel = levelName;
-                //                SceneManager.LoadScene(levelName);
-                StartCoroutine(LoadSceneAsync(levelName));
+                SceneManager.LoadScene(levelName);
+//                StartCoroutine(LoadSceneAsync(levelName));
             }
         }
         else
@@ -106,7 +106,7 @@ public class SceneController : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             // Check if the scene has finished loading (progress reaches 0.9)
-            if (asyncLoad.progress >= 0.9f)
+            if (asyncLoad.isDone    )
             {
                 Debug.Log("Scene is loaded and ready!");
                 asyncLoad.allowSceneActivation = true; // Now activate the scene
