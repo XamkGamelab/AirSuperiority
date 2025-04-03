@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SpecialGunBulletScript : MonoBehaviour
 {
     private float speed;
     private float destroyTime;
-    private int bounceCount = 0;
-    private bool bounced;
+    private int life = 6;
+    private Vector2 velocity;
 
     private void Awake()
     {
@@ -13,20 +14,20 @@ public class SpecialGunBulletScript : MonoBehaviour
         destroyTime = GunManager.Instance.GetGunData("SpecialGun").DestroyTime;
     }
 
+    void Start()
+    {
+        // initial velocity in the direction the bullet is facing
+        velocity = transform.up * speed; 
+
+        // Destroy bullets 
+        Destroy(gameObject, destroyTime);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(bounced)
-        {
-            // Bullet bounces based on angle
-            transform.position += speed * Time.deltaTime * -transform.up;
-        } 
-        else if (!bounced)
-        {
-            // Bullet flies forward
-            transform.position += speed * Time.deltaTime * transform.up;
-        }
-
+        // Bullet flies forward
+        transform.position += (Vector3)velocity * Time.deltaTime;
     }
 
     // Detect if the bullet hit a player
@@ -37,20 +38,18 @@ public class SpecialGunBulletScript : MonoBehaviour
             Destroy(gameObject);
         }
 
+        life--;
+        if (life <= 0)
+        {
+            Destroy(gameObject);
+        }
+ 
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("LevelElement"))
         {
-            if (bounceCount >= 2)
-            {
-                Destroy(gameObject);
-                bounced = false;
-                bounceCount = 0; 
-            } 
-            else
-            {
-                bounced = true;
-                bounceCount++;
-            }
-
+            // Reflect the bullet's velocity based on the collision normal
+            velocity = Vector2.Reflect(velocity, collision.contacts[0].normal);
         }
+
     }
 }
