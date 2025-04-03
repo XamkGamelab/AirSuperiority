@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c495d14192d61b14b8c10d4e08910235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnActive: 0
+  spawnItemActive: 0
+  spawnGunActive: 0
+  HUD: {fileID: 5289978044110978263, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+  mapsToLoad: []
+  map: {fileID: 0}

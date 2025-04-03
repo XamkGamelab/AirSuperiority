@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LevelManager : MonoBehaviour
 {
@@ -23,11 +24,13 @@ public class LevelManager : MonoBehaviour
     private bool spawning = false;
     [SerializeField] private Canvas HUD;
 
+    [SerializeField] private GameObject[] mapsToLoad;
+    public GameObject map;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        LoadMaps();
     }
 
     // Update is called once per frame
@@ -48,17 +51,53 @@ public class LevelManager : MonoBehaviour
 
     public void OnGameBegin()
     {
+        //        SceneController.Instance.LoadSpecificLevel("PlayScene");
+//        ClearLevel();
+        InstantiateMAP();
+        InstantiateHUD();
+
+/*
         if (GameManager.Instance.loadRandomMap)             //If randomMap loading Active
         {
             SceneController.Instance.LoadRandomMap();
         }
         //Load Level before SpawnPoints
 //        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
-
+*/
     }
 
+    public void ClearLevel()
+    {
+        DestroyActiveHud();
+        DestroyActiveMap();
+    }
+    private void LoadMaps()
+    {
+        mapsToLoad = Resources.LoadAll<GameObject>("Prefabs/Maps");
+    }
+    public void InstantiateMAP()
+    {
+        int ran = Random.Range(0, mapsToLoad.Length - 1);
+//        int ran = 1;
+        //        map = mapsToLoad[0];
+        Instantiate(mapsToLoad[ran]);
+    }
     public void InstantiateHUD()
     {
         Instantiate(HUD);
+    }
+
+    public void DestroyActiveMap()
+    {
+        if (map == null) return;
+
+        Destroy(map);
+    }
+
+    public void DestroyActiveHud()
+    {
+        if (HUD ==  null) return;
+
+        Destroy(HUD);
     }
 }

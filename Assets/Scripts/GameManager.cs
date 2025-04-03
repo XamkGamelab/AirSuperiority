@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
-        StartGame();
+//        StartGame();
         
     }
 
@@ -112,25 +112,43 @@ public class GameManager : MonoBehaviour
             BeginNextLevel();
         }
     }
+    private void OnDisable()
+    {
+        Debug.Log("Disabled");
+    }
 
+    private void OnEnable()
+    {
+        Debug.Log("Enabled)");
+    }
     public void StartGame()                             //Use method when first time starting game
     {
         //Every action needed for game to begin correctly
-
+        SceneController.Instance.LoadSpecificLevel("PlayScene");    //Check if PlayScene is active / Load if different scene
+//        SceneController.Instance.LoadPlayScene();
+        StartCoroutine(Delay2Sec());
         LevelManager.Instance.OnGameBegin();
-        StartCoroutine(DelaydStart());
+        SpawnManager.Instance.LoadLevelSpawnPoints();
+        //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
 
         //Call SceneController method
     }
-
+    private IEnumerator Delay2Sec()
+    {
+        while (!SceneController.Instance.sceneReady)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        StopCoroutine(Delay2Sec());
+    }
     private IEnumerator DelaydStart()
     {
         Debug.Log("Entering DelaydStart");
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         SpawnManager.Instance.LoadLevelSpawnPoints();
         StopCoroutine(DelaydStart());
     }

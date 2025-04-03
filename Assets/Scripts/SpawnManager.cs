@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /************************************************************************************************************
  *                                          INFORMATION 
@@ -89,9 +90,16 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Begin loading spawnpoints.");
 
-        FindPlayAreaBounds();
-        CollectValidSpawnPositions();
-        spawningAllowed = true;
+        StartCoroutine(wait2sec());                                     //Just in case wait taht scene change is completed
+        
+            FindPlayAreaBounds();
+            CollectValidSpawnPositions();
+            spawningAllowed = true;
+        
+        }
+    private IEnumerator wait2sec()
+    {
+        yield return new WaitForSeconds(2);
     }
     private void LoadSpawnableObjects()                                 //Load Spawnable items from Resources folder
     {
