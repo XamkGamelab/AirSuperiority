@@ -234,7 +234,7 @@ public class SpawnManager : MonoBehaviour
             spawnContainer = new GameObject("spawnContainer");
         }
 
-        spawnContainer = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
+        GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
     }
 
     private IEnumerator SpawnGunRoutine()                               //GunSpawner
@@ -269,7 +269,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         //        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
-        spawnContainer = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
+        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
 
 //        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);       //Make sure spawning happens on right depth (this was partly for debugging)
     }
