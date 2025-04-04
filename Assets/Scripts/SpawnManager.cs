@@ -40,6 +40,7 @@ public class SpawnManager : MonoBehaviour
     private BoundsInt spawnBounds;
     private GameObject[] itemsToSpawn;
     private GameObject[] gunsToSpawn;
+    private GameObject spawnContainer;
     private List<Vector3> validSpawnPositions = new List<Vector3>();
     [Header("Spawning variables")]
     private float itemSpawnRate = 15f;                     //Define Item spawnRate
@@ -47,9 +48,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private bool spawningItems = false;
     [SerializeField] private bool spawningGuns = false;
     [SerializeField] public bool spawningAllowed = false;
-
-    //[SerializeField] private GameObject spawnedGun;
-    //[SerializeField] private GameObject spawnedItem;
 
     public bool onceDone = false;                           //Controls spawnpoint loading.
 
@@ -66,6 +64,10 @@ public class SpawnManager : MonoBehaviour
                                                             //Load Spawnable Objects
         LoadSpawnableObjects();
         LoadSpawnableGuns();
+        if (spawnContainer == null)
+        {
+            spawnContainer = new GameObject("spawnContainer");
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -93,16 +95,25 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Begin loading spawnpoints.");
 
-        StartCoroutine(wait2sec());                                     //Just in case wait taht scene change is completed
+//        StartCoroutine(wait2sec());                                     //Just in case wait taht scene change is completed
         
             FindPlayAreaBounds();
             CollectValidSpawnPositions();
+            PrepareSpawnContainer();
             spawningAllowed = true;
         
         }
     private IEnumerator wait2sec()
     {
         yield return new WaitForSeconds(2);
+    }
+
+    public void PrepareSpawnContainer()
+    {
+        if (spawnContainer == null)
+        {
+            spawnContainer = new GameObject("spawnContainer");
+        }
     }
     private void LoadSpawnableObjects()                                 //Load Spawnable items from Resources folder
     {
@@ -218,7 +229,12 @@ public class SpawnManager : MonoBehaviour
         Debug.Log("Spawning Items");
         Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];    //Randomize spanPosition
 
-        GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity);
+        if (spawnContainer == null)
+        {
+            spawnContainer = new GameObject("spawnContainer");
+        }
+
+        GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
     }
 
     private IEnumerator SpawnGunRoutine()                               //GunSpawner
@@ -245,11 +261,17 @@ public class SpawnManager : MonoBehaviour
 //        Debug.Log("Spawning Guns");
         Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];    //Randomize spanPosition
         Debug.Log("Spawning guns");
-        Debug.Log($"Spawning at: {spawnPosition}");
+//        Debug.Log($"Spawning at: {spawnPosition}");
 
-        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
+        if (spawnContainer == null)
+        {
+            spawnContainer = new GameObject("spawnContainer");
+        }
 
-        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);       //Make sure spawning happens on right depth (this was partly for debugging)
+        //        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
+        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
+
+//        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);       //Make sure spawning happens on right depth (this was partly for debugging)
     }
 
     public void StopSpawning()                                                                  //Stops spawner coroutines
@@ -271,5 +293,14 @@ public class SpawnManager : MonoBehaviour
             spawningGuns = false;
         }
 
+    }
+
+    public void ClearSpawns()
+    {
+        if (spawnContainer != null)
+        { 
+            Destroy(spawnContainer);
+            spawnContainer = null;
+        }
     }
 }

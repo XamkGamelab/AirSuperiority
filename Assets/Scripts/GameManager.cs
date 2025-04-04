@@ -143,12 +143,17 @@ public class GameManager : MonoBehaviour
     {
         LevelManager.Instance.OnGameBegin();
         SpawnManager.Instance.LoadLevelSpawnPoints();
+        //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
 
     }
 
+    private IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(2);
+    }
     private IEnumerator DelaydStart()
     {
         Debug.Log("Entering DelaydStart");
@@ -171,11 +176,11 @@ public class GameManager : MonoBehaviour
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
-
+        SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();
-//        StartCoroutine(DelaydStart());
+        StartCoroutine(DelaydStart());
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
-        LevelManager.Instance.InstantiateHUD();
+//        LevelManager.Instance.InstantiateHUD();
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -190,11 +195,17 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
+        
+//        SpawnManager.Instance.onceDone = false;
+
+        //Method propably Ending to StartGame();
+        //Or method BeginNextLevel();
+        //StartGame();
+        //BeginNextLevel();
     }
 
     public void GamePaused()                            //Enter PauseState
     {
-        isPaused = true;
         isPlaying = false;
         updateHud = false;
     }
@@ -208,9 +219,9 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        EndLevel();
-        SceneController.Instance.LoadSpecificLevel("MainMenu", OnPlaySceneLoaded);
-//        QuitGame();
+        //EndLevel();
+//        SceneController.Instance.LoadSpecificLevel(MainMenu);
+        QuitGame();
     }
     public static void QuitGame()
     {
