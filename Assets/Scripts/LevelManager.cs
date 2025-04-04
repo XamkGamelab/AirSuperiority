@@ -24,6 +24,9 @@ public class LevelManager : MonoBehaviour
     private bool spawning = false;
     [SerializeField] private Canvas HUD;
 
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
+
     [SerializeField] private GameObject[] mapsToLoad;
     public GameObject map;
 
@@ -52,18 +55,20 @@ public class LevelManager : MonoBehaviour
     public void OnGameBegin()
     {
         //        SceneController.Instance.LoadSpecificLevel("PlayScene");
-//        ClearLevel();
+        ClearLevel();
         InstantiateMAP();
-//        InstantiateHUD();
+        Player1Present();
+        Player2Present();
+        //        InstantiateHUD();
 
-/*
-        if (GameManager.Instance.loadRandomMap)             //If randomMap loading Active
-        {
-            SceneController.Instance.LoadRandomMap();
-        }
-        //Load Level before SpawnPoints
-//        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
-*/
+        /*
+                if (GameManager.Instance.loadRandomMap)             //If randomMap loading Active
+                {
+                    SceneController.Instance.LoadRandomMap();
+                }
+                //Load Level before SpawnPoints
+        //        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
+        */
     }
 
     public void ClearLevel()
@@ -79,8 +84,23 @@ public class LevelManager : MonoBehaviour
     {
         int ran = Random.Range(0, mapsToLoad.Length - 1);
 //        int ran = 1;
-        //        map = mapsToLoad[0];
-        Instantiate(mapsToLoad[ran]);
+        map = mapsToLoad[ran];
+        Instantiate(map);
+    }
+
+    private void Player1Present()
+    {
+        if (player1 != null)
+            return;
+
+        Instantiate(player1);
+    }
+    private void Player2Present()
+    {
+        if (player2 != null)
+            return;
+
+        Instantiate(player2);
     }
     public void InstantiateHUD()
     {

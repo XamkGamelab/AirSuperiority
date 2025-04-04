@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System;
 using System.Collections;
 
 public class SceneController : MonoBehaviour
@@ -69,13 +70,14 @@ public class SceneController : MonoBehaviour
             Debug.LogWarning("No available Levels to Load!");
             return;
         }
-        string nextLevel = availableLevels[Random.Range(0, availableLevels.Count)];
+        //        string nextLevel = availableLevels[Random.Range(0, availableLevels.Count)];
+        string nextLevel = availableLevels[1];
         currentLevel = nextLevel;
         Debug.Log($"Opening {nextLevel} scene");
         SceneManager.LoadScene(nextLevel);
     }
 
-    public void LoadSpecificLevel(string levelName)
+    public void LoadSpecificLevel(string levelName, Action onLoaded = null)
     {
         sceneReady = false;
         Debug.Log($"Trying to load level: {levelName}");
@@ -83,13 +85,14 @@ public class SceneController : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == levelName)
             {
+                onLoaded?.Invoke();
                 return;
             }
             else
             {
                 currentLevel = levelName;
-                SceneManager.LoadScene(levelName);
-//                StartCoroutine(LoadSceneAsync(levelName));
+//                SceneManager.LoadScene(levelName);
+                StartCoroutine(LoadSceneAsync(levelName, onLoaded));
             }
         }
         else
@@ -98,21 +101,15 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadSceneAsync(string sceneName)
+    private IEnumerator LoadSceneAsync(string levelName, Action onLoaded)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        asyncLoad.allowSceneActivation = false; // Prevents scene activation until it's fully loaded
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName);
+//        asyncLoad.allowSceneActivation = false; // Prevents scene activation until it's fully loaded
 
         while (!asyncLoad.isDone)
         {
-            // Check if the scene has finished loading (progress reaches 0.9)
-            if (asyncLoad.isDone    )
-            {
-                Debug.Log("Scene is loaded and ready!");
-                asyncLoad.allowSceneActivation = true; // Now activate the scene
-                sceneReady = true;
-            }
             yield return null;
         }
+        onLoaded?.Invoke();
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -112,23 +113,34 @@ public class GameManager : MonoBehaviour
             BeginNextLevel();
         }
     }
-    private void OnDisable()
-    {
-        Debug.Log("Disabled");
-    }
-
     private void OnEnable()
     {
-        Debug.Log("Enabled)");
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameObject.SetActive(true); // Re-activate this object after a new scene is loaded
+    }
+
     public void StartGame()                             //Use method when first time starting game
     {
         //Every action needed for game to begin correctly
-        SceneController.Instance.LoadSpecificLevel("PlayScene");    //Check if PlayScene is active / Load if different scene
+        SceneController.Instance.LoadSpecificLevel("PlayScene", OnPlaySceneLoaded);    //Check if PlayScene is active / Load if different scene
                                                                     //        SceneController.Instance.LoadPlayScene();
-        StartCoroutine(TimeDelay());
-        gameObject.SetActive(true);
+//        StartCoroutine(TimeDelay());
 
+
+        //Call SceneController method
+    }
+
+    private void OnPlaySceneLoaded()
+    {
         LevelManager.Instance.OnGameBegin();
         SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
@@ -136,7 +148,6 @@ public class GameManager : MonoBehaviour
         isPlaying = true;
         updateHud = true;
 
-        //Call SceneController method
     }
 
     private IEnumerator TimeDelay()

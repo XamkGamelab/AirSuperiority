@@ -48,5 +48,7 @@ MonoBehaviour:
   spawnItemActive: 0
   spawnGunActive: 0
   HUD: {fileID: 5289978044110978263, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+  player1: {fileID: 4158045514999014194, guid: f295b4067a8cef949995786e268b74d6, type: 3}
+  player2: {fileID: 3509320161749202890, guid: c5589fbc5f5aaba438b56e665967b7ee, type: 3}
   mapsToLoad: []
   map: {fileID: 0}

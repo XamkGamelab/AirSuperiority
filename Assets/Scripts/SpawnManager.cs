@@ -117,7 +117,7 @@ public class SpawnManager : MonoBehaviour
 
     private void FindPlayAreaBounds()                                   //Determine tilemap boundaries
     {
-        GameObject tilemapParent = GameObject.Find("Tilemap");  //Search tilemap by layerName
+        GameObject tilemapParent = GameObject.FindWithTag("Map");  //Search tilemap by layerName
         Debug.Log($"Found GameObject {tilemapParent.name}");
 
         if (tilemapParent)
