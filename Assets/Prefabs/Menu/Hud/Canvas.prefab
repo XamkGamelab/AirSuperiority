@@ -779,6 +779,8 @@ MonoBehaviour:
   ammoCount0: {fileID: 5357256981326985939}
   ammoCount1: {fileID: 4745381478787663122}
   gameTime: {fileID: 1171968191944727095}
+  player1Victories: {fileID: 1242892164499300792}
+  player2Victories: {fileID: 6694452619809983052}
   currentGunSprite0: {fileID: 8769014641148892116}
   currentGunSprite1: {fileID: 1134448632699705279}
   pauseMenu: {fileID: 8032477333865981042}
@@ -3759,7 +3761,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3829522300227067576, guid: 035c33f0967e43e4a8bed916c5d0abd4, type: 3}
+  m_Sprite: {fileID: 5903574543054207377, guid: 303efa809fca8094a9a9e16bf025ceb8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
