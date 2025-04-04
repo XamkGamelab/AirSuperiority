@@ -169,6 +169,8 @@ public class PlayerMovement : MonoBehaviour
             //Substract player ammoCount by 1 
             StatsManager.Instance.player[player].CurrentGun.AmmoCount -= 1;
 
+            Debug.Log($"Player1 ammoCount: {StatsManager.Instance.player[0].CurrentGun.AmmoCount}, Player2 ammoCount: {StatsManager.Instance.player[1].CurrentGun.AmmoCount}");
+
             // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
 
             // Instantiate bullet prefab...
@@ -207,6 +209,49 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.ChangeGun(player, "SpecialGun");
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Health"))
+        {
+            Debug.Log($"HEALTH PICKED UP");
+            Destroy(collision.gameObject);
+            for (int j = 0; j < 25; j++) 
+            {
+                
+                if (StatsManager.Instance.player[player].Health <= 0)
+                {
+                    return;
+                }
+                else if (StatsManager.Instance.player[player].Health != 100)
+                {
+                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", 1f);
+                }
+                else
+                {
+                    return;
+                }
+                
+            } 
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            Debug.Log($"HEALTH PICKED UP");
+            Destroy(collision.gameObject);
+            for (int l = 0; l < 25; l++)
+            {
+                if (StatsManager.Instance.player[player].Shield != 100)
+                {
+                    StatsManager.Instance.AffectPlayer(player, "ConsumeShield", 1f);
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+        }
+
+
 
         /*Gun gun = other.GetComponent<Gun>();
         if (gun != null)

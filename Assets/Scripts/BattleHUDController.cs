@@ -102,8 +102,8 @@ public class BattleHUDController : MonoBehaviour
     public void ExitPauseMenu()
     {
         pauseMenu.SetActive(false);
-        //Leave this to be last line
-        GameManager.Instance.isPaused = false;
+        
+        GameManager.Instance.ExitPauseState();
     }
 
     //Here will be coroutine for Updating Hud
