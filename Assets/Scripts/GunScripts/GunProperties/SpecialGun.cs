@@ -13,7 +13,7 @@ public class SpecialGun : Gun
         ammonition = "Gun3Bullet";
         speed = 5.0f;
         destroyTime = 3.0f;
-        damage = 70.0f;
+        damage = 75.0f;
         gunSprite = GunSprite;
     }
 }
