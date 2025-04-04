@@ -274,6 +274,8 @@ public class Player2Movement : MonoBehaviour
                 bulletDamage = GunManager.Instance.GetGunData("SpecialGun").Damage;
             }
 
+            StatsManager.Instance.AffectPlayer(enemy, "AddScore", bulletDamage);
+
             for (int i = 0; i < bulletDamage; i++)
             {
                 if (StatsManager.Instance.player[player].Health <= 0)

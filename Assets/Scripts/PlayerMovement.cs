@@ -334,6 +334,8 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log(gunPointer + " Didnt work properly");
             }
 
+            StatsManager.Instance.AffectPlayer(enemy, "AddScore", bulletDamage);
+
                 for (int i = 0; i < bulletDamage; i++)
                 {
                     if (StatsManager.Instance.player[player].Health <= 0)
