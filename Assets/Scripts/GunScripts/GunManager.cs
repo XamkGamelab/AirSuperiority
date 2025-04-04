@@ -82,7 +82,10 @@ public class GunManager : MonoBehaviour
     public GunData GetGunData(string gunName)
     {
         //Get Gun and properties by gunName from GunData array
-        return gunDataDictionary.TryGetValue(gunName, out GunData gunData) ? gunData : null;
+        GunData data = new GunData(gunDataDictionary.TryGetValue(gunName, out GunData Data) ? Data : null);
+
+        return data;
+//        return gunDataDictionary.TryGetValue(gunName, out GunData gunData) ? gunData : null;
     }
 }
 
