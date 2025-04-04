@@ -195,6 +195,8 @@ public class StatsManager : MonoBehaviour
             case "AddScore":                                //Add/substract score by amount of value
                 player[playerIndex].Score += (int)value;
                 Debug.Log($"Player{playerIndex} score is: {player[playerIndex].Score}");
+                if (player[playerIndex].TotalScore < player[playerIndex].Score)
+                    player[playerIndex].TotalScore += (int)value;
                 break;
             case "TakeDamage":                              //Negative value removes Health, positive adds health
                 player[playerIndex].Health += value;
