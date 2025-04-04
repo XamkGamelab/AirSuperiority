@@ -22,6 +22,8 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoCount0;
     [SerializeField] private TextMeshProUGUI ammoCount1;
     [SerializeField] private TextMeshProUGUI gameTime;
+    [SerializeField] private TextMeshProUGUI player1Victories;
+    [SerializeField] private TextMeshProUGUI player2Victories;
     [SerializeField] private Image currentGunSprite0;
     [SerializeField] private Image currentGunSprite1;
 
@@ -44,7 +46,7 @@ public class BattleHUDController : MonoBehaviour
         {
             //Start Coroutine for updating Hud
             updatingHud = true;
-            Debug.Log("Updating HUD...");
+            //Debug.Log("Updating HUD...");
 
             //Setting Player names
             playerNameText0.text = ($"{StatsManager.Instance.player[0].name}");
@@ -73,6 +75,10 @@ public class BattleHUDController : MonoBehaviour
 
             ammoCount0.text = ($"{StatsManager.Instance.player[0].CurrentGun.AmmoCount}");
             ammoCount1.text = ($"{StatsManager.Instance.player[1].CurrentGun.AmmoCount}");
+
+            //Updating victory counter
+            player1Victories.text = ($"{StatsManager.Instance.player[0].Victories}");
+            player2Victories.text = ($"{StatsManager.Instance.player[1].Victories}");
 
             //Game time update
             gameTime.text = ($"Game time: {StatsManager.Instance.GetPlayTime()}");

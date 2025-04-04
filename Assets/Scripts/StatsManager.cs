@@ -102,7 +102,6 @@ public class StatsManager : MonoBehaviour
         public int Victories = 0;
         public float Health = 100f;
         public float Shield = 100f;
-//        public int CurrentGun = 0;
         public GunData CurrentGun;                          //Gundata for CurrentGun inside PlayerData
         public bool playerDead = false;
     }
@@ -195,14 +194,31 @@ public class StatsManager : MonoBehaviour
         {
             case "AddScore":                                //Add/substract score by amount of value
                 player[playerIndex].Score += (int)value;
+                Debug.Log($"Player{playerIndex} score is: {player[playerIndex].Score}");
+                if (player[playerIndex].TotalScore < player[playerIndex].Score)
+                    player[playerIndex].TotalScore += (int)value;
                 break;
             case "TakeDamage":                              //Negative value removes Health, positive adds health
                 player[playerIndex].Health += value;
                 if (player[playerIndex].Health <= 0)
-                { 
+                {
+                    Debug.Log($"Player 2 health {player[1].Health}, player 2 {player[1].Victories}");
+                    Debug.Log($"Player 1 health {player[0].Health}, player 1 {player[0].Victories}");
                     player[playerIndex].Health = 0;
                     player[playerIndex].playerDead = true;
-                    playerXDead = true;
+                    
+                    if (playerIndex == 0 && !playerXDead)
+                    {
+                        player[1].Victories++;
+                        Debug.Log($"player {player[1].Victories}");
+                        playerXDead = true;
+                    }
+                    else if (playerIndex == 1 && !playerXDead)
+                    {
+                        player[0].Victories++;
+                        Debug.Log($"player {player[0].Victories}");
+                        playerXDead = true;
+                    }
                 }
                 break;
             case "ConsumeShield":                           //Negative value removes shield, positive value adds shield
