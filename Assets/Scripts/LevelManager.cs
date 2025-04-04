@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LevelManager : MonoBehaviour
 {
@@ -21,12 +22,21 @@ public class LevelManager : MonoBehaviour
     public bool spawnGunActive = false;                 //Spawn Guns
 
     private bool spawning = false;
+    [SerializeField] private Canvas HUD;
 
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
+
+    [SerializeField] private GameObject _player1;
+    [SerializeField] private GameObject _player2;
+
+    [SerializeField] private GameObject[] mapsToLoad;
+    public GameObject map;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        LoadMaps();
     }
 
     // Update is called once per frame
@@ -47,17 +57,70 @@ public class LevelManager : MonoBehaviour
 
     public void OnGameBegin()
     {
-        if (GameManager.Instance.loadRandomMap)
-        {
-            SceneController.Instance.LoadRandomMap();
-        }
-        //Load Level before SpawnPoints
-//        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
+        //        SceneController.Instance.LoadSpecificLevel("PlayScene");
+        ClearLevel();
+        InstantiateMAP();
+        Player1Present();
+        Player2Present();
+        //        InstantiateHUD();
 
+        /*
+                if (GameManager.Instance.loadRandomMap)             //If randomMap loading Active
+                {
+                    SceneController.Instance.LoadRandomMap();
+                }
+                //Load Level before SpawnPoints
+        //        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
+        */
     }
 
+    public void ClearLevel()
+    {
+//        DestroyActiveHud();
+        DestroyActiveMap();
+    }
+    private void LoadMaps()
+    {
+        mapsToLoad = Resources.LoadAll<GameObject>("Prefabs/Maps");
+    }
+    public void InstantiateMAP()
+    {
+        int ran = Random.Range(0, mapsToLoad.Length - 1);
+//        int ran = 1;
+        map = Instantiate(mapsToLoad[ran]);
+        
+    }
+
+    private void Player1Present()
+    {
+        if (_player1 != null)
+            return;
+
+       _player1 = Instantiate(player1);
+    }
+    private void Player2Present()
+    {
+        if (_player2 != null)
+            return;
+
+        _player2 = Instantiate(player2);
+    }
     public void InstantiateHUD()
     {
+        Instantiate(HUD);
+    }
 
+    public void DestroyActiveMap()
+    {
+        if (map == null) return;
+
+        Destroy(map);
+    }
+
+    public void DestroyActiveHud()
+    {
+        if (HUD ==  null) return;
+
+        Destroy(HUD);
     }
 }

@@ -2,9 +2,12 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] public bool sceneReady = false;
     public static SceneController Instance { get; private set; }
 
     private void Awake()
@@ -27,7 +30,7 @@ public class SceneController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        LoadRandomMap();
+//        LoadRandomMap();
     }
 
     // Update is called once per frame
@@ -49,12 +52,17 @@ public class SceneController : MonoBehaviour
             if (sceneName != "GameLoader")
             {
                 availableLevels.Add(sceneName);
+                Debug.Log($"Added {sceneName} to {scenePath}");
             }
         }
 
         Debug.Log($"Loaded {availableLevels.Count} playable Levels.");
     }
 
+    public void LoadPlayScene()
+    {
+        SceneManager.LoadScene("PlayScene");
+    }
     public void LoadRandomMap()
     {
         if (availableLevels.Count == 0)
@@ -62,22 +70,46 @@ public class SceneController : MonoBehaviour
             Debug.LogWarning("No available Levels to Load!");
             return;
         }
-        string nextLevel = availableLevels[Random.Range(0, availableLevels.Count)];
+        //        string nextLevel = availableLevels[Random.Range(0, availableLevels.Count)];
+        string nextLevel = availableLevels[1];
         currentLevel = nextLevel;
         Debug.Log($"Opening {nextLevel} scene");
         SceneManager.LoadScene(nextLevel);
     }
 
-    public void LoadSpecificLevel(string levelName)
+    public void LoadSpecificLevel(string levelName, Action onLoaded = null)
     {
-        if (!availableLevels.Contains(levelName))
+        sceneReady = false;
+        Debug.Log($"Trying to load level: {levelName}");
+        if (availableLevels.Contains(levelName))
         {
-            currentLevel = levelName;
-            SceneManager.LoadScene(levelName);
+            if (SceneManager.GetActiveScene().name == levelName)
+            {
+                onLoaded?.Invoke();
+                return;
+            }
+            else
+            {
+                currentLevel = levelName;
+//                SceneManager.LoadScene(levelName);
+                StartCoroutine(LoadSceneAsync(levelName, onLoaded));
+            }
         }
         else
         {
-            Debug.LogError("LevelName not found from list!");
+            Debug.LogError($"LevelName {levelName} not found from list!");
         }
+    }
+
+    private IEnumerator LoadSceneAsync(string levelName, Action onLoaded)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName);
+//        asyncLoad.allowSceneActivation = false; // Prevents scene activation until it's fully loaded
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        onLoaded?.Invoke();
     }
 }

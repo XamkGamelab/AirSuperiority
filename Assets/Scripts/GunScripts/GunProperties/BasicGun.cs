@@ -14,7 +14,7 @@ public class BasicGun : Gun
         ammonition = "Gun1Bullet";
         speed = 10f;
         destroyTime = 3f;
-        damage = 60.0f;
+        damage = 20.0f;
         gunSprite = GunSprite;
 }
 }

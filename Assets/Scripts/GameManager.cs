@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
-        StartGame();
+//        StartGame();
         
     }
 
@@ -112,25 +113,52 @@ public class GameManager : MonoBehaviour
             BeginNextLevel();
         }
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameObject.SetActive(true); // Re-activate this object after a new scene is loaded
+    }
 
     public void StartGame()                             //Use method when first time starting game
     {
         //Every action needed for game to begin correctly
+        SceneController.Instance.LoadSpecificLevel("PlayScene", OnPlaySceneLoaded);    //Check if PlayScene is active / Load if different scene
+                                                                    //        SceneController.Instance.LoadPlayScene();
+//        StartCoroutine(TimeDelay());
 
-        LevelManager.Instance.OnGameBegin();
-        StartCoroutine(DelaydStart());
-        isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
 
         //Call SceneController method
     }
 
+    private void OnPlaySceneLoaded()
+    {
+        LevelManager.Instance.OnGameBegin();
+        SpawnManager.Instance.LoadLevelSpawnPoints();
+        //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
+        isGameOver = false;
+        isPlaying = true;
+        updateHud = true;
+
+    }
+
+    private IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(2);
+    }
     private IEnumerator DelaydStart()
     {
         Debug.Log("Entering DelaydStart");
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         SpawnManager.Instance.LoadLevelSpawnPoints();
         StopCoroutine(DelaydStart());
     }

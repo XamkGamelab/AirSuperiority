@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SpecialGunBulletScript : MonoBehaviour
 {
     private float speed;
     private float destroyTime;
-    public int whoShot;
+    private int life = 6;
+    private Vector2 velocity;
 
     private void Awake()
     {
@@ -12,14 +14,20 @@ public class SpecialGunBulletScript : MonoBehaviour
         destroyTime = GunManager.Instance.GetGunData("SpecialGun").DestroyTime;
     }
 
+    void Start()
+    {
+        // initial velocity in the direction the bullet is facing
+        velocity = transform.up * speed; 
+
+        // Destroy bullets 
+        Destroy(gameObject, destroyTime);
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Bullet flies forward
-        transform.position += transform.up * Time.deltaTime * speed;
-
-        // Destroy bullets 
-        Destroy(gameObject, destroyTime);
+        transform.position += (Vector3)velocity * Time.deltaTime;
     }
 
     // Detect if the bullet hit a player
@@ -30,9 +38,18 @@ public class SpecialGunBulletScript : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("LevelElement"))
+        life--;
+        if (life <= 0)
         {
             Destroy(gameObject);
         }
+ 
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("LevelElement"))
+        {
+            // Reflect the bullet's velocity based on the collision normal
+            velocity = Vector2.Reflect(velocity, collision.contacts[0].normal);
+        }
+
     }
 }
