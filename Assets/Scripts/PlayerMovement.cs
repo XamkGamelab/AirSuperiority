@@ -302,13 +302,21 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         if (!kamikaze) { 
-            float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
+            string gunPointer = StatsManager.Instance.player[enemy].CurrentGun.GunName;
+            float bulletDamage = GunManager.Instance.GetGunData(gunPointer).Damage;
 
             for (int i = 0; i < bulletDamage; i++)
             {
-
-                if (StatsManager.Instance.player[player].Shield == 0)
+                if (StatsManager.Instance.player[player].Health <= 0)
                 {
+                    // Check if player is alive, if not alive -> destroy player, or hide player?
+                    StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
+                    Destroy(gameObject);
+                    StatsManager.Instance.playerXDead = true;
+                    return;
+                }
+                else if (StatsManager.Instance.player[player].Shield == 0)
+                { 
                     StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
                 }
                 else if (StatsManager.Instance.player[player].Shield != 0)
@@ -317,12 +325,12 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (StatsManager.Instance.player[player].Health <= 0)
+            /*if (StatsManager.Instance.player[player].Health <= 0)
             {
                 // Check if player is alive, if not alive -> destroy player, or hide player?
                 StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
                 Destroy(gameObject);
-            }
+            }*/
         }
         else if (kamikaze)
         {
