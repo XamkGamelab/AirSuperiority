@@ -198,6 +198,49 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Health"))
+        {
+            Debug.Log($"HEALTH PICKED UP");
+            Destroy(collision.gameObject);
+            for (int j = 0; j < 25; j++) 
+            {
+                
+                if (StatsManager.Instance.player[player].Health <= 0)
+                {
+                    return;
+                }
+                else if (StatsManager.Instance.player[player].Health != 100)
+                {
+                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", 1f);
+                }
+                else
+                {
+                    return;
+                }
+                
+            } 
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            Debug.Log($"HEALTH PICKED UP");
+            Destroy(collision.gameObject);
+            for (int l = 0; l < 25; l++)
+            {
+                if (StatsManager.Instance.player[player].Shield != 100)
+                {
+                    StatsManager.Instance.AffectPlayer(player, "ConsumeShield", 1f);
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+        }
+
+
+
         /*Gun gun = other.GetComponent<Gun>();
         if (gun != null)
         {
