@@ -102,7 +102,6 @@ public class StatsManager : MonoBehaviour
         public int Victories = 0;
         public float Health = 100f;
         public float Shield = 100f;
-//        public int CurrentGun = 0;
         public GunData CurrentGun;                          //Gundata for CurrentGun inside PlayerData
         public bool playerDead = false;
     }
@@ -195,6 +194,7 @@ public class StatsManager : MonoBehaviour
         {
             case "AddScore":                                //Add/substract score by amount of value
                 player[playerIndex].Score += (int)value;
+                Debug.Log($"Player{playerIndex} score is: {player[playerIndex].Score}");
                 break;
             case "TakeDamage":                              //Negative value removes Health, positive adds health
                 player[playerIndex].Health += value;

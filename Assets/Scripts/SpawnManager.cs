@@ -48,6 +48,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private bool spawningGuns = false;
     [SerializeField] public bool spawningAllowed = false;
 
+    //[SerializeField] private GameObject spawnedGun;
+    //[SerializeField] private GameObject spawnedItem;
+
     public bool onceDone = false;                           //Controls spawnpoint loading.
 
     private void Awake()
@@ -215,7 +218,7 @@ public class SpawnManager : MonoBehaviour
         Debug.Log("Spawning Items");
         Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];    //Randomize spanPosition
 
-        Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity);
+        GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity);
     }
 
     private IEnumerator SpawnGunRoutine()                               //GunSpawner
