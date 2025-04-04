@@ -164,14 +164,26 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"Shoot Action is Called");
 
-        // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
+        if (StatsManager.Instance.player[player].CurrentGun.AmmoCount >= 1)
+        {
+            //Substract player ammoCount by 1 
+            StatsManager.Instance.player[player].CurrentGun.AmmoCount -= 1;
 
-        // Instantiate bullet prefab...
-        bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
-        
-        //Example how to use CurrentGun data inside PlayerData
-        Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
-        Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
+            Debug.Log($"Player1 ammoCount: {StatsManager.Instance.player[0].CurrentGun.AmmoCount}, Player2 ammoCount: {StatsManager.Instance.player[1].CurrentGun.AmmoCount}");
+
+            // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
+
+            // Instantiate bullet prefab...
+            bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
+
+            //Example how to use CurrentGun data inside PlayerData
+//            Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
+//            Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
+        }
+        else
+        {
+            Debug.Log($"Player {player} is out of ammo!");
+        }
     }
 
     // Detect a gun pickup

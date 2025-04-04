@@ -41,7 +41,8 @@ public class GameLoader : MonoBehaviour
 
         //Scene to load after singleton setup
         //SceneManager.LoadScene("Level1");
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene("MainMenu");
+//        SceneManager.LoadScene("MainMenu");
     }
 
     private void EnsureSingleton(GameObject prefab)

@@ -148,10 +148,26 @@ public class Player2Movement : MonoBehaviour
 
     void PlayerShoot()
     {
-        Debug.Log($"Player2Shoot Action is Called");
+        Debug.Log($"Shoot Action is Called By player {player}");
 
-        // Instantiate bullet prefab...
-        bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
+        if (StatsManager.Instance.player[player].CurrentGun.AmmoCount >= 1)
+        {
+            //Substract player ammoCount by 1 
+            StatsManager.Instance.player[player].CurrentGun.AmmoCount -= 1;
+
+            // Need to figure out which script calls the shoot() function. Guns can be stored in a list or array and can be called from there: gun[0].shoot(); etc. This the retrieves the bullet fired.
+
+            // Instantiate bullet prefab...
+            bulletInst = (GameObject)Instantiate(Resources.Load($"Prefabs/Bullets/{StatsManager.Instance.player[player].CurrentGun.Ammonition}"), bulletSpawnPoint.position, transform.rotation);
+
+            //Example how to use CurrentGun data inside PlayerData
+//            Debug.Log($"Player shot with: {StatsManager.Instance.player[player].CurrentGun.GunName}");
+//            Debug.Log($"Player has {StatsManager.Instance.player[player].CurrentGun.AmmoCount} bullets left.");
+        }
+        else
+        {
+            Debug.Log($"Player {player} is out of ammo!");
+        }
     }
 
     // Detect a gun pickup

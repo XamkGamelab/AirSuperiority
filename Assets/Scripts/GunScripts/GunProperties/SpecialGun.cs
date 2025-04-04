@@ -17,3 +17,4 @@ public class SpecialGun : Gun
         gunSprite = GunSprite;
     }
 }
+//Possible problem on playerdeath, game wont continue to next level.
