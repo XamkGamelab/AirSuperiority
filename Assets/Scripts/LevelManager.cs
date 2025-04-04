@@ -27,6 +27,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject player1;
     [SerializeField] private GameObject player2;
 
+    [SerializeField] private GameObject _player1;
+    [SerializeField] private GameObject _player2;
+
     [SerializeField] private GameObject[] mapsToLoad;
     public GameObject map;
 
@@ -84,23 +87,23 @@ public class LevelManager : MonoBehaviour
     {
         int ran = Random.Range(0, mapsToLoad.Length - 1);
 //        int ran = 1;
-        map = mapsToLoad[ran];
-        Instantiate(map);
+        map = Instantiate(mapsToLoad[ran]);
+        
     }
 
     private void Player1Present()
     {
-        if (player1 != null)
+        if (_player1 != null)
             return;
 
-        Instantiate(player1);
+       _player1 = Instantiate(player1);
     }
     private void Player2Present()
     {
-        if (player2 != null)
+        if (_player2 != null)
             return;
 
-        Instantiate(player2);
+        _player2 = Instantiate(player2);
     }
     public void InstantiateHUD()
     {
