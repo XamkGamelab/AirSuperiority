@@ -171,7 +171,7 @@ public class SpawnManager : MonoBehaviour
             if (playAreaTilemap.HasTile(cellPosition))                  //Check if the tile exist in the playArea
             {
                 Vector3 worldPosition = playAreaTilemap.GetCellCenterWorld(cellPosition);
-                if (!Physics2D.OverlapCircle(worldPosition, 0.5f, LevelElementLayer))   //avoid obstacles, 0.3f is radius of spawnable object
+                if (!Physics2D.OverlapCircle(worldPosition, 0.5f, LevelElementLayer))   //avoid obstacles, 0.5f is radius of spawnable object
                 {
                     validSpawnPositions.Add(worldPosition);
 
@@ -303,4 +303,20 @@ public class SpawnManager : MonoBehaviour
             spawnContainer = null;
         }
     }
+    public Vector3 PlayerSpawnPoint()
+    {
+        if (validSpawnPositions.Count == 0)
+        {
+            Debug.LogWarning("No valid spawn positions found! Defaulting to Vector3.zero.");
+            return Vector3.zero;
+        }
+        Vector3 spawnPosition = validSpawnPositions[Random.Range(0, validSpawnPositions.Count)];    //Randomize spanPosition
+
+        if (!Physics2D.OverlapCircle(spawnPosition, 0.5f, LevelElementLayer))
+        {
+            return spawnPosition;
+        }
+        return Vector3.zero;
+    }
+    
 }

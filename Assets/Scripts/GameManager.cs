@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Entering DelaydStart");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         SpawnManager.Instance.LoadLevelSpawnPoints();
         StopCoroutine(DelaydStart());
     }
@@ -177,9 +177,10 @@ public class GameManager : MonoBehaviour
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
+        StartCoroutine(DelaydStart());
         SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();
-        StartCoroutine(DelaydStart());
+        
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
 //        LevelManager.Instance.InstantiateHUD();
         isGameOver = false;
