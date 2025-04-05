@@ -34,8 +34,6 @@ public class Player2Movement : MonoBehaviour
     InputAction rotateLeftAction2;
     InputAction rotateRightAction2;
     InputAction shootAction2;
-    private string gunPointer;
-    private float bulletDamage;
 
     void Start()
     {
@@ -221,7 +219,7 @@ public class Player2Movement : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
         {
-            Debug.Log($"SHIELD PICKED UP");
+            Debug.Log($"HEALTH PICKED UP");
             Destroy(collision.gameObject);
             for (int l = 0; l < 25; l++)
             {
@@ -243,8 +241,7 @@ public class Player2Movement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            gunPointer = collision.gameObject.name;
-            Debug.Log($"PLAYER WAS HIT BY: " + gunPointer);
+            Debug.Log($"!!!!! Player2 hit !!!!!");
             CalculateDamage();
         }
 
@@ -261,18 +258,7 @@ public class Player2Movement : MonoBehaviour
         // Write method for getting current gun bullet damage
         if (!kamikaze)
         {
-            if (gunPointer == "Gun1Bullet(Clone)")
-            {
-                bulletDamage = GunManager.Instance.GetGunData("BasicGun").Damage;
-            }
-            else if (gunPointer == "Gun2Bullet(Clone)")
-            {
-                bulletDamage = GunManager.Instance.GetGunData("AdvancedGun").Damage;
-            }
-            else if (gunPointer == "Gun3Bullet(Clone)")
-            {
-                bulletDamage = GunManager.Instance.GetGunData("SpecialGun").Damage;
-            }
+            float bulletDamage = StatsManager.Instance.player[enemy].CurrentGun.Damage;
 
             for (int i = 0; i < bulletDamage; i++)
             {

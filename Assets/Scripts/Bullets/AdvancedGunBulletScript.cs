@@ -9,8 +9,8 @@ public class AdvancedGunBulletScript : MonoBehaviour
 
     private void Awake()
     {
-        speed = GunManager.Instance.GetGunData("AdvancedGun").Speed;
-        destroyTime = GunManager.Instance.GetGunData("AdvancedGun").DestroyTime;
+        speed = GunManager.Instance.GetGunData("BasicGun").Speed;
+        destroyTime = GunManager.Instance.GetGunData("BasicGun").DestroyTime;
     }
 
     void Start()

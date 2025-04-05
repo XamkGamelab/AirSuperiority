@@ -47,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
     InputAction rotateLeftAction;
     InputAction rotateRightAction;
     InputAction shootAction;
-    private string gunPointer;
-    private float bulletDamage;
 
     private void Start()
     {
@@ -237,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
         {
-            Debug.Log($"SHIELD PICKED UP");
+            Debug.Log($"HEALTH PICKED UP");
             Destroy(collision.gameObject);
             for (int l = 0; l < 25; l++)
             {
@@ -275,8 +273,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            gunPointer = collision.gameObject.name;
-            Debug.Log($"PLAYER WAS HIT BY: " + gunPointer);
+            Debug.Log($"!!!!! Player1 hit !!!!!");
             CalculateDamage();
         }
 
@@ -317,42 +314,28 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         if (!kamikaze) { 
-            if (gunPointer == "Gun1Bullet(Clone)")
-            {
-                bulletDamage = GunManager.Instance.GetGunData("BasicGun").Damage;
-            } 
-            else if (gunPointer == "Gun2Bullet(Clone)")
-            {
-                bulletDamage = GunManager.Instance.GetGunData("AdvancedGun").Damage;
-            }
-            else if (gunPointer == "Gun3Bullet(Clone)")
-            {
-                bulletDamage = GunManager.Instance.GetGunData("SpecialGun").Damage;
-            }
-            else
-            {
-                Debug.Log(gunPointer + " Didnt work properly");
-            }
+            string gunPointer = StatsManager.Instance.player[enemy].CurrentGun.GunName;
+            float bulletDamage = GunManager.Instance.GetGunData(gunPointer).Damage;
 
-                for (int i = 0; i < bulletDamage; i++)
+            for (int i = 0; i < bulletDamage; i++)
+            {
+                if (StatsManager.Instance.player[player].Health <= 0)
                 {
-                    if (StatsManager.Instance.player[player].Health <= 0)
-                    {
-                        // Check if player is alive, if not alive -> destroy player, or hide player?
-                        StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
-                        Destroy(gameObject);
-                        StatsManager.Instance.playerXDead = true;
-                        return;
-                    }
-                    else if (StatsManager.Instance.player[player].Shield == 0)
-                    {
-                        StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
-                    }
-                    else if (StatsManager.Instance.player[player].Shield != 0)
-                    {
-                        StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
-                    }
+                    // Check if player is alive, if not alive -> destroy player, or hide player?
+                    StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
+                    Destroy(gameObject);
+                    StatsManager.Instance.playerXDead = true;
+                    return;
                 }
+                else if (StatsManager.Instance.player[player].Shield == 0)
+                { 
+                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", -1);
+                }
+                else if (StatsManager.Instance.player[player].Shield != 0)
+                {
+                    StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
+                }
+            }
 
             /*if (StatsManager.Instance.player[player].Health <= 0)
             {
