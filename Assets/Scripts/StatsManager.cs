@@ -198,32 +198,46 @@ public class StatsManager : MonoBehaviour
                 if (player[playerIndex].TotalScore < player[playerIndex].Score)
                     player[playerIndex].TotalScore += (int)value;
                 break;
-            case "TakeDamage":                              //Negative value removes Health, positive adds health
-
-                //Compare if player has shield, decrease shield while shield >= 0 and then decrease health!
-
-                player[playerIndex].Health += value;        
-                if (player[playerIndex].Health <= 0)
+            case "TakeDamage":
                 {
-                    Debug.Log($"Player 2 health {player[1].Health}, player 2 {player[1].Victories}");
-                    Debug.Log($"Player 1 health {player[0].Health}, player 1 {player[0].Victories}");
-                    player[playerIndex].Health = 0;
-                    player[playerIndex].playerDead = true;
-                    
-                    if (playerIndex == 0 && !playerXDead)
+                    float remainingDamage = -value; // Assume value is negative for damage
+
+                    // Apply damage to shield
+                    if (player[playerIndex].Shield > 0)
                     {
-                        player[1].Victories++;
-                        Debug.Log($"player {player[1].Victories}");
-                        playerXDead = true;
+                        float shieldAbsorb = Mathf.Min(remainingDamage, player[playerIndex].Shield);
+                        player[playerIndex].Shield -= shieldAbsorb;
+                        remainingDamage -= shieldAbsorb;
                     }
-                    else if (playerIndex == 1 && !playerXDead)
+
+                    // Apply leftover damage to health
+                    if (remainingDamage > 0)
                     {
-                        player[0].Victories++;
-                        Debug.Log($"player {player[0].Victories}");
-                        playerXDead = true;
+                        player[playerIndex].Health -= remainingDamage;
                     }
+
+                    // Clamp health and handle death
+                    if (player[playerIndex].Health <= 0)
+                    {
+                        player[playerIndex].Health = 0;
+                        player[playerIndex].playerDead = true;
+
+                        Debug.Log($"Player {playerIndex} died!");
+
+                        if (playerIndex == 0 && !playerXDead)
+                        {
+                            player[1].Victories++;
+                            playerXDead = true;
+                        }
+                        else if (playerIndex == 1 && !playerXDead)
+                        {
+                            player[0].Victories++;
+                            playerXDead = true;
+                        }
+                    }
+
+                    break;
                 }
-                break;
             case "ConsumeShield":                           //Negative value removes shield, positive value adds shield
                 player[playerIndex].Shield += value;
                 if (player[playerIndex].Shield < 0)
@@ -270,3 +284,35 @@ public class StatsManager : MonoBehaviour
     }
 
 }
+/*
+ *             case "TakeDamage":                              //Negative value removes Health, positive adds health
+
+                //Compare if player has shield, decrease shield while shield >= 0 and then decrease health!
+                if (player[playerIndex].Shield >  0)
+                {
+                    AffectPlayer(playerIndex, "ConsumeShield", value - player[playerIndex].Shield);
+                }
+
+                player[playerIndex].Health += value;        
+                if (player[playerIndex].Health <= 0)
+                {
+                    Debug.Log($"Player 2 health {player[1].Health}, player 2 {player[1].Victories}");
+                    Debug.Log($"Player 1 health {player[0].Health}, player 1 {player[0].Victories}");
+                    player[playerIndex].Health = 0;
+                    player[playerIndex].playerDead = true;
+                    
+                    if (playerIndex == 0 && !playerXDead)
+                    {
+                        player[1].Victories++;
+                        Debug.Log($"player {player[1].Victories}");
+                        playerXDead = true;
+                    }
+                    else if (playerIndex == 1 && !playerXDead)
+                    {
+                        player[0].Victories++;
+                        Debug.Log($"player {player[0].Victories}");
+                        playerXDead = true;
+                    }
+                }
+                break;
+*/
