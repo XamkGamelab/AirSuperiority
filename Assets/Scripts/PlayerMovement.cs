@@ -225,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (StatsManager.Instance.player[player].Health != 100)
                 {
-                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", 1f);
+                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", 25f);
                 }
                 else
                 {
@@ -317,6 +317,7 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         if (!kamikaze) { 
+            // Get bullet damage
             if (gunPointer == "Gun1Bullet(Clone)")
             {
                 bulletDamage = GunManager.Instance.GetGunData("BasicGun").Damage;
