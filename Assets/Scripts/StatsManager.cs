@@ -199,7 +199,10 @@ public class StatsManager : MonoBehaviour
                     player[playerIndex].TotalScore += (int)value;
                 break;
             case "TakeDamage":                              //Negative value removes Health, positive adds health
-                player[playerIndex].Health += value;
+
+                //Compare if player has shield, decrease shield while shield >= 0 and then decrease health!
+
+                player[playerIndex].Health += value;        
                 if (player[playerIndex].Health <= 0)
                 {
                     Debug.Log($"Player 2 health {player[1].Health}, player 2 {player[1].Victories}");
