@@ -106,15 +106,15 @@ public class LevelManager : MonoBehaviour
     {
         if (_player1 != null)
             return;
-
-       _player1 = Instantiate(player1);
+        Vector3 playerSpawn = SpawnManager.Instance.PlayerSpawnPoint();        
+       _player1 = Instantiate(player1, playerSpawn, Quaternion.identity);
     }
     private void Player2Present()
     {
         if (_player2 != null)
             return;
-
-        _player2 = Instantiate(player2);
+        Vector3 playerSpawn = SpawnManager.Instance.PlayerSpawnPoint();
+        _player2 = Instantiate(player2, playerSpawn, Quaternion.identity);
     }
     public void InstantiateHUD()
     {
