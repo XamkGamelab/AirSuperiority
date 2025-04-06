@@ -63,6 +63,10 @@ public class StatsManager : MonoBehaviour
     [SerializeField] public bool playerXDead = false;
     [SerializeField] public string deadPlayerName;
 
+    [Header("Constants")]
+    public const float maxHealth = 100;
+    public const float maxShield = 100;
+
     //Gun information
     //public GunData[] gun = new GunData[3];
 
@@ -100,8 +104,8 @@ public class StatsManager : MonoBehaviour
         public int Score = 0;
         public int TotalScore = 0;
         public int Victories = 0;
-        public float Health = 100f;
-        public float Shield = 100f;
+        public float Health = maxHealth;
+        public float Shield = maxShield;
         public GunData CurrentGun;                          //Gundata for CurrentGun inside PlayerData
         public bool playerDead = false;
     }
