@@ -347,6 +347,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4658898709683234744, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9151672291875447863}
+    - target: {fileID: 4658898709683234744, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4658898709683234744, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleHUDController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6905135354858861507, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -392,6 +404,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+--- !u!114 &9151672291875447863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8237744619155303393, guid: dd4bdd0d59b3e404e8f25a9b55986c8f, type: 3}
+  m_PrefabInstance: {fileID: 9151672291875447862}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03dcd951308d6a4f99eb3b7ab0fb213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

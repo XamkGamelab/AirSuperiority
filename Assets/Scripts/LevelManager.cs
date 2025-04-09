@@ -31,11 +31,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject _player2;
 
     [SerializeField] private GameObject[] mapsToLoad;
-    public GameObject map;
+    [SerializeField] private int prevMap;
+    [SerializeField] public GameObject map;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         LoadMaps();
     }
 
@@ -86,7 +88,16 @@ public class LevelManager : MonoBehaviour
     public void InstantiateMAP()
     {
         int ran = Random.Range(0, mapsToLoad.Length - 1);
-//        int ran = 1;
+        if (prevMap == ran)
+        {
+            while (prevMap == ran)
+            {
+                Debug.Log("Tried to load same as current map. Randomizing again.");
+                ran = Random.Range(0, mapsToLoad.Length - 1);
+            }
+            
+        }
+        prevMap = ran;
         map = Instantiate(mapsToLoad[ran]);
         
     }
@@ -95,15 +106,15 @@ public class LevelManager : MonoBehaviour
     {
         if (_player1 != null)
             return;
-
-       _player1 = Instantiate(player1);
+        Vector3 playerSpawn = SpawnManager.Instance.PlayerSpawnPoint();        
+       _player1 = Instantiate(player1, playerSpawn, Quaternion.identity);
     }
     private void Player2Present()
     {
         if (_player2 != null)
             return;
-
-        _player2 = Instantiate(player2);
+        Vector3 playerSpawn = SpawnManager.Instance.PlayerSpawnPoint();
+        _player2 = Instantiate(player2, playerSpawn, Quaternion.identity);
     }
     public void InstantiateHUD()
     {

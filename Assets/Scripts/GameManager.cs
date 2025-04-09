@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         }
         if (pauseMenuAction.IsPressed())
         {
-            isPaused = true;
+            GamePaused();
         }
 
 
@@ -141,19 +141,25 @@ public class GameManager : MonoBehaviour
 
     private void OnPlaySceneLoaded()
     {
+        Cursor.visible = false;
         LevelManager.Instance.OnGameBegin();
         SpawnManager.Instance.LoadLevelSpawnPoints();
+        //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
 
     }
 
+    private IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(2);
+    }
     private IEnumerator DelaydStart()
     {
         Debug.Log("Entering DelaydStart");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         SpawnManager.Instance.LoadLevelSpawnPoints();
         StopCoroutine(DelaydStart());
     }
@@ -171,11 +177,12 @@ public class GameManager : MonoBehaviour
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
-
+        StartCoroutine(DelaydStart());
+        SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();
-//        StartCoroutine(DelaydStart());
+        
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
-        LevelManager.Instance.InstantiateHUD();
+//        LevelManager.Instance.InstantiateHUD();
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -190,10 +197,18 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
+        
+//        SpawnManager.Instance.onceDone = false;
+
+        //Method propably Ending to StartGame();
+        //Or method BeginNextLevel();
+        //StartGame();
+        //BeginNextLevel();
     }
 
     public void GamePaused()                            //Enter PauseState
     {
+        Cursor.visible = true;
         isPaused = true;
         isPlaying = false;
         updateHud = false;
@@ -204,13 +219,19 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         isPlaying = true;
         updateHud = true;
+        Cursor.visible = false;
     }
 
     public void EnterMainMenu()
     {
-        EndLevel();
-        SceneController.Instance.LoadSpecificLevel("MainMenu", OnPlaySceneLoaded);
-//        QuitGame();
+        //EndLevel();
+        SceneController.Instance.LoadSpecificLevel("MainMenu", OnMainMenuLoaded);
+        QuitGame();
+    }
+
+    private void OnMainMenuLoaded()
+    {
+        Cursor.visible = true;
     }
     public static void QuitGame()
     {

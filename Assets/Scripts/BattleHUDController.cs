@@ -46,7 +46,7 @@ public class BattleHUDController : MonoBehaviour
         {
             //Start Coroutine for updating Hud
             updatingHud = true;
-            Debug.Log("Updating HUD...");
+            //Debug.Log("Updating HUD...");
 
             //Setting Player names
             playerNameText0.text = ($"{StatsManager.Instance.player[0].name}");
@@ -110,6 +110,13 @@ public class BattleHUDController : MonoBehaviour
         pauseMenu.SetActive(false);
         
         GameManager.Instance.ExitPauseState();
+    }
+
+    public void MainMenu()
+    {
+        pauseMenu.SetActive(false);
+        GameManager.Instance.ExitPauseState();
+        GameManager.Instance.EnterMainMenu();
     }
 
     //Here will be coroutine for Updating Hud
