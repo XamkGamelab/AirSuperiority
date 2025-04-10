@@ -95,6 +95,8 @@ public class StatsManager : MonoBehaviour
         {
             deadPlayerName = WhichPlayerIsDead();
         }
+
+        playTime = Time.time;
     }
 
     [System.Serializable]
