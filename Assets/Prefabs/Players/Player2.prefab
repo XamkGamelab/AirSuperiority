@@ -56,6 +56,8 @@ MonoBehaviour:
   enemy: 0
   kamikaze: 0
   bulletSpawnPoint: {fileID: 8281847506461276856}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashTime: 1
 --- !u!50 &7564945004095332904
 Rigidbody2D:
   serializedVersion: 5
@@ -175,7 +177,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 47fe4790e46b3a44bb557a94c01d170b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
