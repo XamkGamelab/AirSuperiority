@@ -28,6 +28,7 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private Image currentGunSprite1;
 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -86,6 +87,7 @@ public class BattleHUDController : MonoBehaviour
             int seconds = totalgameTime % 60;
             gameTime.text = ($"Game time: {minutes:D2}:{seconds:D2}");
 
+
         }
         else if (!GameManager.Instance.updateHud && GameManager.Instance.isPaused)
         {
@@ -97,6 +99,17 @@ public class BattleHUDController : MonoBehaviour
         {
             EnterPauseMenu();
         }
+        /*
+        if (GameManager.Instance.isGameOver)
+        {
+            GameOver();
+        }
+        if (!GameManager.Instance.isGameOver && gameOverMenu.activeSelf)
+        {
+            gameOverMenu.SetActive(false);
+        }
+        */
+
     }
 
     private void EnterPauseMenu()
@@ -114,6 +127,13 @@ public class BattleHUDController : MonoBehaviour
         
         GameManager.Instance.ExitPauseState();
     }
+
+    /*
+    private void GameOver()
+    {
+        gameOverMenu.SetActive(true);        
+    }
+    */
 
     public void MainMenu()
     {

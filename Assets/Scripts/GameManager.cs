@@ -176,6 +176,11 @@ public class GameManager : MonoBehaviour
         ActivateNextMap = true;
     }
 
+    public void ActivateNextLevel()
+    {
+        //ActivateNextMap = true;
+    }
+
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
