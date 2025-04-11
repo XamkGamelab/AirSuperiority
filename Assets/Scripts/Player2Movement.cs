@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,6 +37,33 @@ public class Player2Movement : MonoBehaviour
     InputAction shootAction2;
     private string gunPointer;
     private float bulletDamage;
+
+    // DamageFlash
+    [SerializeField] private Color flashColor = Color.white;
+    [SerializeField] private float flashTime = 1f;
+
+    private SpriteRenderer[] spriteRenderers;
+    private Material[] materials;
+
+    private Coroutine damageFlashCoroutine;
+
+    private void Awake()
+    {
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        Init();
+    }
+
+    private void Init()
+    {
+        materials = new Material[spriteRenderers.Length];
+
+        // Assign sprite renderer materials
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            materials[i] = spriteRenderers[i].material;
+        }
+    }
 
     void Start()
     {
@@ -251,6 +279,7 @@ public class Player2Movement : MonoBehaviour
             gunPointer = collision.gameObject.name;
             Debug.Log($"PLAYER WAS HIT BY: " + gunPointer);
             CalculateDamage();
+            CallDamageFlash();
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -306,6 +335,48 @@ public class Player2Movement : MonoBehaviour
         {
             Destroy(gameObject);
             StatsManager.Instance.playerXDead = true;
+        }
+    }
+
+    // Damage Flash Code
+    public void CallDamageFlash()
+    {
+        damageFlashCoroutine = StartCoroutine(DamageFlasher());
+    }
+
+    private IEnumerator DamageFlasher()
+    {
+        // Set color
+        SetFlashColor();
+        // Lerp flash amount
+        float currentFlashAmount = 0f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < flashTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            currentFlashAmount = Mathf.Lerp(1f, 0f, (elapsedTime / flashTime));
+            SetFlashAmount(currentFlashAmount);
+
+            yield return null;
+        }
+    }
+
+    private void SetFlashColor()
+    {
+        // Set the color
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].SetColor("_FlashColor", flashColor);
+        }
+    }
+
+    private void SetFlashAmount(float amount)
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].SetFloat("_FlashAmount", amount);
         }
     }
 }
