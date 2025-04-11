@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     InputAction controlAction;
     InputAction pauseMenuAction;
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -91,13 +90,14 @@ public class GameManager : MonoBehaviour
             updateHud = false;
             isPlaying = false;
         }
-
+/*
         if (controlAction.IsPressed())
         {
-//            QuitGame();
+            QuitGame();
             EnterMainMenu();
         }
-        if (pauseMenuAction.IsPressed())
+*/
+        if (controlAction.IsPressed())
         {
             GamePaused();
         }
@@ -142,9 +142,11 @@ public class GameManager : MonoBehaviour
     private void OnPlaySceneLoaded()
     {
         Cursor.visible = false;
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         LevelManager.Instance.OnGameBegin();
         SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
+        StatsManager.Instance.ResetPlayTime();
         isGameOver = false;
         isPlaying = true;
         updateHud = true;
@@ -234,6 +236,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = true;
     }
+
     public static void QuitGame()
     {
         Debug.Log("Quit Game called");
