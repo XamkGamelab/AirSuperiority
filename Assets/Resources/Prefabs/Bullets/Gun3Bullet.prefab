@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3249379626078673360}
   - component: {fileID: 7871400138830670023}
   - component: {fileID: 5058207472952628042}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Gun3Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 126976
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -128,8 +128,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a6de4dfd24562e043b75bc25f6a65efd, type: 3}
-  m_Resource: {fileID: 8300000, guid: a6de4dfd24562e043b75bc25f6a65efd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 78069f5d419651142876155bc841d680, type: 3}
+  m_Resource: {fileID: 8300000, guid: 78069f5d419651142876155bc841d680, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -49,6 +50,33 @@ public class PlayerMovement : MonoBehaviour
     InputAction shootAction;
     private string gunPointer;
     private float bulletDamage;
+
+    // DamageFlash
+    [SerializeField] private Color flashColor = Color.white;
+    [SerializeField] private float flashTime = 1f;
+
+    private SpriteRenderer[] spriteRenderers;
+    private Material[] materials;
+
+    private Coroutine damageFlashCoroutine;
+
+    private void Awake()
+    {
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        Init();
+    }
+
+    private void Init()
+    {
+        materials = new Material[spriteRenderers.Length];
+
+        // Assign sprite renderer materials
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            materials[i] = spriteRenderers[i].material;
+        }
+    }
 
     private void Start()
     {
@@ -195,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"BASIC GUN PICKED UP");
             StatsManager.Instance.ChangeGun(player, "BasicGun");
+            AudioController.Instance.OnGunPickUp();
             Destroy(collision.gameObject);
         }
 
@@ -202,6 +231,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"ADVANCED GUN PICKED UP");
             StatsManager.Instance.ChangeGun(player, "AdvancedGun");
+            AudioController.Instance.OnGunPickUp();
             Destroy(collision.gameObject);
         }
 
@@ -209,12 +239,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"Special GUN PICKED UP");
             StatsManager.Instance.ChangeGun(player, "SpecialGun");
+            AudioController.Instance.OnGunPickUp();
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Health"))
         {
             Debug.Log($"HEALTH PICKED UP");
+            AudioController.Instance.OnItemPickUp();
             Destroy(collision.gameObject);
             for (int j = 0; j < 25; j++) 
             {
@@ -225,7 +257,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (StatsManager.Instance.player[player].Health != 100)
                 {
-                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", 1f);
+                    StatsManager.Instance.AffectPlayer(player, "TakeDamage", 25f);
                 }
                 else
                 {
@@ -238,6 +270,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
         {
             Debug.Log($"SHIELD PICKED UP");
+            AudioController.Instance.OnItemPickUp();
             Destroy(collision.gameObject);
             for (int l = 0; l < 25; l++)
             {
@@ -278,6 +311,7 @@ public class PlayerMovement : MonoBehaviour
             gunPointer = collision.gameObject.name;
             Debug.Log($"PLAYER WAS HIT BY: " + gunPointer);
             CalculateDamage();
+            CallDamageFlash();
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -317,6 +351,7 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         if (!kamikaze) { 
+            // Get bullet damage
             if (gunPointer == "Gun1Bullet(Clone)")
             {
                 bulletDamage = GunManager.Instance.GetGunData("BasicGun").Damage;
@@ -352,7 +387,7 @@ public class PlayerMovement : MonoBehaviour
                     }
                     else if (StatsManager.Instance.player[player].Shield != 0)
                     {
-                        StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);
+                        StatsManager.Instance.AffectPlayer(player, "ConsumeShield", -1);    
                     }
                 }
 
@@ -369,6 +404,48 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.playerXDead = true;
         }
 
+    }
+
+    // Damage Flash Code
+    public void CallDamageFlash()
+    {
+        damageFlashCoroutine = StartCoroutine(DamageFlasher());
+    }
+
+    private IEnumerator DamageFlasher()
+    {
+        // Set color
+        SetFlashColor();
+        // Lerp flash amount
+        float currentFlashAmount = 0f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < flashTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            currentFlashAmount = Mathf.Lerp(1f, 0f, (elapsedTime / flashTime));
+            SetFlashAmount(currentFlashAmount);
+
+            yield return null;
+        }
+    }
+
+    private void SetFlashColor()
+    {
+        // Set the color
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].SetColor("_FlashColor", flashColor);
+        }
+    }
+
+    private void SetFlashAmount(float amount)
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].SetFloat("_FlashAmount", amount);
+        }
     }
 
 }

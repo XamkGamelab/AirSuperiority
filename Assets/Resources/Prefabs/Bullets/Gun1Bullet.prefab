@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7796486265646726799}
   - component: {fileID: 9213483151798057165}
   - component: {fileID: 1920030437064509662}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Gun1Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 126976
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -140,8 +140,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fcff92b1af1e8454cbc02e75d4d591cc, type: 3}
-  m_Resource: {fileID: 8300000, guid: fcff92b1af1e8454cbc02e75d4d591cc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 902f667b6a36c5f43987ebab390ad316, type: 3}
+  m_Resource: {fileID: 8300000, guid: 902f667b6a36c5f43987ebab390ad316, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
