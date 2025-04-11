@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour
     {
         //Every action needed for next level to begin correctly
         StartCoroutine(DelaydStart());
+        StatsManager.Instance.ResetPlayTime();
         SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();
         

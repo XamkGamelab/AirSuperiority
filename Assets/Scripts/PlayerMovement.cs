@@ -223,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"BASIC GUN PICKED UP");
             StatsManager.Instance.ChangeGun(player, "BasicGun");
+            AudioController.Instance.OnGunPickUp();
             Destroy(collision.gameObject);
         }
 
@@ -230,6 +231,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"ADVANCED GUN PICKED UP");
             StatsManager.Instance.ChangeGun(player, "AdvancedGun");
+            AudioController.Instance.OnGunPickUp();
             Destroy(collision.gameObject);
         }
 
@@ -237,12 +239,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"Special GUN PICKED UP");
             StatsManager.Instance.ChangeGun(player, "SpecialGun");
+            AudioController.Instance.OnGunPickUp();
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Health"))
         {
             Debug.Log($"HEALTH PICKED UP");
+            AudioController.Instance.OnItemPickUp();
             Destroy(collision.gameObject);
             for (int j = 0; j < 25; j++) 
             {
@@ -266,6 +270,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
         {
             Debug.Log($"SHIELD PICKED UP");
+            AudioController.Instance.OnItemPickUp();
             Destroy(collision.gameObject);
             for (int l = 0; l < 25; l++)
             {

@@ -3,6 +3,9 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     public static AudioController Instance { get; private set; }
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip itemPickUp;
+    [SerializeField] private AudioClip gunPickUp;
 
     private void Awake()
     {
@@ -18,6 +21,16 @@ public class AudioController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnItemPickUp() 
+    {
+        audioSource.PlayOneShot(itemPickUp);
+    }
+
+    public void OnGunPickUp()
+    {
+        audioSource.PlayOneShot(gunPickUp);
     }
 }
 //All level music is from: Pixabay
