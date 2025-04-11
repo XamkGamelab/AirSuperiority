@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -22383723474554198}
   - component: {fileID: 244478886210839616}
   - component: {fileID: 6006505909285392229}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Gun2Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 126976
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
