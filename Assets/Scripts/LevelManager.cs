@@ -87,13 +87,13 @@ public class LevelManager : MonoBehaviour
     }
     public void InstantiateMAP()
     {
-        int ran = Random.Range(0, mapsToLoad.Length - 1);
+        int ran = Random.Range(0, mapsToLoad.Length);
         if (prevMap == ran)
         {
             while (prevMap == ran)
             {
                 Debug.Log("Tried to load same as current map. Randomizing again.");
-                ran = Random.Range(0, mapsToLoad.Length - 1);
+                ran = Random.Range(0, mapsToLoad.Length);
             }
             
         }
