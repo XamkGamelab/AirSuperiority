@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+
+    [SerializeField] private GameObject infoPanel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,5 +15,14 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+    public void EnableInfo()
+    {
+        infoPanel.SetActive(true);
+    }
+
+    public void DisableInfo()
+    {
+        infoPanel.SetActive(false);
     }
 }
