@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour
     private void OnPlaySceneLoaded()
     {
         Cursor.visible = false;
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         LevelManager.Instance.OnGameBegin();
         SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
