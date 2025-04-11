@@ -81,7 +81,7 @@ public class BattleHUDController : MonoBehaviour
             player2Victories.text = ($"{StatsManager.Instance.player[1].Victories}");
 
             //Game time update
-            int totalgameTime = Mathf.FloorToInt(StatsManager.Instance.playTime);
+            int totalgameTime = Mathf.FloorToInt(StatsManager.Instance.GetPlayTime());
             int minutes = totalgameTime / 60;
             int seconds = totalgameTime % 60;
             gameTime.text = ($"Game time: {minutes:D2}:{seconds:D2}");

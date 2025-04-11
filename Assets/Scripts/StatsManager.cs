@@ -54,8 +54,10 @@ public class StatsManager : MonoBehaviour
     public float startTime = 0;
     public float stopTime = 0;
     public float timeInterval = 0;
-    public float playTime = 0;
+    private float levelPlayTime = 0;
+    private float totalPlayTime = 0f;
     public bool calculateTimeRef = false;
+    private Coroutine timeCoroutine;
 
     [Header("Player information")]//Players information
     public PlayerData[] player = new PlayerData[2];         //Changing PlayerData[x] changes active player count
@@ -95,8 +97,6 @@ public class StatsManager : MonoBehaviour
         {
             deadPlayerName = WhichPlayerIsDead();
         }
-
-        playTime = Time.time;
     }
 
     [System.Serializable]
@@ -144,52 +144,48 @@ public class StatsManager : MonoBehaviour
 
     public void StartCountTimeCoroutine()                   //Begin Time measuring coroutine
     {
-        StartCoroutine(CountTimeCoroutine());
-        
+        if (timeCoroutine == null)
+        {
+            timeCoroutine = StartCoroutine(CountTimeCoroutine());
+        }        
     }
 
     public void StopCountTime()                             //Stop Time measuring coroutine
     {
-        StopCoroutine(CountTimeCoroutine());
+        if (timeCoroutine != null)
+        {
+            StopCoroutine(timeCoroutine);
+            timeCoroutine = null;
+        }
     }
 
     IEnumerator CountTimeCoroutine()                        //Time measuring coroutine
     {
-
-        if (GameManager.Instance.isPlaying != calculateTimeRef && !GameManager.Instance.isPaused)
+        while (true)
         {
-            startTime = Time.unscaledDeltaTime;             //Get start time
-            calculateTimeRef = true;
-
-        }
-        else
-        {
-            stopTime = Time.unscaledDeltaTime;              //Get stop time
-            calculateTimeRef = false;
-
-        }
-
-        if (GameManager.Instance.isPaused && !calculateTimeRef)
-        {
-            playTime += timeInterval;
-
-            while (GameManager.Instance.isPaused)
+            if (!GameManager.Instance.isPaused && GameManager.Instance.isPlaying)
             {
-                yield return new WaitForSeconds(1.0f);
+                float delta = Time.unscaledDeltaTime;   // Use unscaled time to avoid pausing issues
+                levelPlayTime += delta;                 // Increment level play time
+                totalPlayTime += delta;                 // Increment total play time
             }
-
-            calculateTimeRef = true;
+            yield return null;
         }
-
-        timeInterval = Time.unscaledDeltaTime - startTime;  //Elapsed time
-        
-        yield return new WaitForSeconds(1.0f);
     }
 
 
-    public float GetPlayTime()                              //Get elapsed time
+    public float GetPlayTime()                          //Get elapsed time
     {
-        return timeInterval + playTime;
+        return levelPlayTime;                           //Return elapsed time
+    }
+    public float GetTotalPlayTime()                    //Get elapsed time
+    {
+        return totalPlayTime;                           //Return elapsed time
+    }
+
+    public void ResetPlayTime()                         //Reset elapsed time
+    {
+        levelPlayTime = 0;
     }
 
     public void AffectPlayer(int playerIndex, string action, float value)   //Affect player statistics
