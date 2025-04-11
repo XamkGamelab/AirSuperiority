@@ -25,6 +25,7 @@ public class Player2Movement : MonoBehaviour
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
     private float fireRate = 1f;
+    public bool allowShooting = true;
 
     private float time;
 
@@ -116,24 +117,26 @@ public class Player2Movement : MonoBehaviour
             if (rotateRightAction2.IsPressed())
                 RotatePlayerRight();
 
-
-            // Player shooting action
-            if (shootAction2.IsPressed())
+            if (allowShooting == true)
             {
-                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
+                // Player shooting action
+                if (shootAction2.IsPressed())
                 {
-                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate)
+                    if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
                     {
-                        PlayerShoot();
-                        time = 0;
+                        if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate)
+                        {
+                            PlayerShoot();
+                            time = 0;
+                        }
                     }
-                }
-                else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
-                {
-                    if (time > fireRate)
+                    else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
                     {
-                        PlayerShoot();
-                        time = 0;
+                        if (time > fireRate)
+                        {
+                            PlayerShoot();
+                            time = 0;
+                        }
                     }
                 }
             }
