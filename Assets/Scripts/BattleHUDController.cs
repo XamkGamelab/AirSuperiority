@@ -104,7 +104,7 @@ public class BattleHUDController : MonoBehaviour
         {
             GameOver();
         }
-        if (!GameManager.Instance.isGameOver && gameOverMenu.activeSelf == true)
+        else if (!GameManager.Instance.isGameOver)
         {
             gameOverMenu.SetActive( false );
             Cursor.visible = false;
@@ -139,6 +139,7 @@ public class BattleHUDController : MonoBehaviour
 
     public void MainMenu()
     {
+//        GameManager.Instance.isGameOver = false;
         gameOverMenu.SetActive(false );
         pauseMenu.SetActive(false);
         GameManager.Instance.ExitPauseState();
