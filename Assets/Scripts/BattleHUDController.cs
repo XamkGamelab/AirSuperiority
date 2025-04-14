@@ -99,16 +99,16 @@ public class BattleHUDController : MonoBehaviour
         {
             EnterPauseMenu();
         }
-        /*
+        
         if (GameManager.Instance.isGameOver)
         {
             GameOver();
         }
         if (!GameManager.Instance.isGameOver && gameOverMenu.activeSelf)
         {
-            gameOverMenu.SetActive(false);
+            gameOverMenu.SetActive( false );
         }
-        */
+        
 
     }
 
@@ -128,12 +128,12 @@ public class BattleHUDController : MonoBehaviour
         GameManager.Instance.ExitPauseState();
     }
 
-    /*
+    
     private void GameOver()
     {
         gameOverMenu.SetActive(true);        
     }
-    */
+    
 
     public void MainMenu()
     {

@@ -378,7 +378,7 @@ public class PlayerMovement : MonoBehaviour
                         // Check if player is alive, if not alive -> destroy player, or hide player?
                         StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
                         Destroy(gameObject);
-                        StatsManager.Instance.playerXDead = true;
+//                        StatsManager.Instance.playerXDead = true;
                         return;
                     }
                     else if (StatsManager.Instance.player[player].Shield == 0)
@@ -401,7 +401,11 @@ public class PlayerMovement : MonoBehaviour
         else if (kamikaze)
         {
             Destroy(gameObject);
-            StatsManager.Instance.playerXDead = true;
+            //            StatsManager.Instance.playerXDead = true;
+            StatsManager.Instance.player[0].Shield = 0;
+            StatsManager.Instance.player[1].Shield = 0;
+            StatsManager.Instance.player[0].Health = 0;
+            StatsManager.Instance.player[1].Health = 0;
         }
 
     }
