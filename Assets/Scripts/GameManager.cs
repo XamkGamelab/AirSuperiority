@@ -173,12 +173,13 @@ public class GameManager : MonoBehaviour
         isGameOver= true;
         isPlaying = false;
         updateHud = false;
-        ActivateNextMap = true;
+        //ActivateNextMap = true;
+        
     }
 
     public void ActivateNextLevel()
     {
-        //ActivateNextMap = true;
+        ActivateNextMap = true;
     }
 
     public void BeginNextLevel()
