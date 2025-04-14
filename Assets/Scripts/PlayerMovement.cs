@@ -316,7 +316,7 @@ public class PlayerMovement : MonoBehaviour
             CallDamageFlash();
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.isPlaying)
         {
             kamikaze = true;
             CalculateDamage();
@@ -404,10 +404,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(gameObject);
             //            StatsManager.Instance.playerXDead = true;
-            StatsManager.Instance.player[0].Shield = 0;
-            StatsManager.Instance.player[1].Shield = 0;
-            StatsManager.Instance.player[0].Health = 0;
-            StatsManager.Instance.player[1].Health = 0;
+            StatsManager.Instance.player[0].playerDead = true;
+            StatsManager.Instance.player[1].playerDead = true;
+            StatsManager.Instance.AffectPlayer(enemy, "TakeDamage", -210);
         }
 
     }

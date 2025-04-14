@@ -104,9 +104,10 @@ public class BattleHUDController : MonoBehaviour
         {
             GameOver();
         }
-        if (!GameManager.Instance.isGameOver && gameOverMenu.activeSelf)
+        if (!GameManager.Instance.isGameOver && gameOverMenu.activeSelf == true)
         {
             gameOverMenu.SetActive( false );
+            Cursor.visible = false;
         }
         
 
@@ -131,12 +132,14 @@ public class BattleHUDController : MonoBehaviour
     
     private void GameOver()
     {
+        Cursor.visible = true;
         gameOverMenu.SetActive(true);        
     }
     
 
     public void MainMenu()
     {
+        gameOverMenu.SetActive(false );
         pauseMenu.SetActive(false);
         GameManager.Instance.ExitPauseState();
         GameManager.Instance.EnterMainMenu();

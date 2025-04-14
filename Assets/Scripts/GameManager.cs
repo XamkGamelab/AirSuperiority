@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 
 public class GameManager : MonoBehaviour
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     public bool updateHud = false;                      //Updating HUD information
     public bool loadRandomMap = true;
     public bool ActivateNextMap = false;
+    public bool readyToBegin = false;                   //Ready to activate game
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
@@ -112,6 +114,19 @@ public class GameManager : MonoBehaviour
         {
             BeginNextLevel();
         }
+
+        if (readyToBegin && !isPlaying)
+        {
+            BeginGame();
+        }
+    }
+    private void BeginGame()
+    {
+        isGameOver = false;
+        isPlaying = true;
+        updateHud = true;
+        readyToBegin = false;
+
     }
     private void OnEnable()
     {
@@ -144,12 +159,8 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         LevelManager.Instance.OnGameBegin();
-        SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
         StatsManager.Instance.ResetPlayTime();
-        isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
 
     }
 
@@ -179,6 +190,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateNextLevel()
     {
+        isGameOver = false;
         ActivateNextMap = true;
     }
 
@@ -192,9 +204,9 @@ public class GameManager : MonoBehaviour
         
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
 //        LevelManager.Instance.InstantiateHUD();
-        isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
+//        isGameOver = false;
+//        isPlaying = true;
+//        updateHud = true;
         StatsManager.Instance.playerXDead = false;
 
         ActivateNextMap = false;
@@ -233,9 +245,9 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        //EndLevel();
+        EndLevel();
         SceneController.Instance.LoadSpecificLevel("MainMenu", OnMainMenuLoaded);
-        QuitGame();
+        //QuitGame();
     }
 
     private void OnMainMenuLoaded()
