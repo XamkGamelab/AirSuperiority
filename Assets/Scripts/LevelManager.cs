@@ -62,8 +62,7 @@ public class LevelManager : MonoBehaviour
         //        SceneController.Instance.LoadSpecificLevel("PlayScene");
         ClearLevel();
         InstantiateMAP();
-        Player1Present();
-        Player2Present();
+        Invoke(nameof(delayedOnGameBegin), 1f);
         //        InstantiateHUD();
 
         /*
@@ -75,7 +74,13 @@ public class LevelManager : MonoBehaviour
         //        SpawnManager.Instance.LoadLevelSpawnPoints();     //Use this if boolean controlled spawnPoint loading is not working
         */
     }
-
+    private void delayedOnGameBegin()
+    {
+        SpawnManager.Instance.LoadLevelSpawnPoints();
+        Player1Present();
+        Player2Present();
+        GameManager.Instance.readyToBegin = true;
+    }
     public void ClearLevel()
     {
 //        DestroyActiveHud();
