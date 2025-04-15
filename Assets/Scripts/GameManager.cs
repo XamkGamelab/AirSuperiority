@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     public bool loadRandomMap = true;
     public bool ActivateNextMap = false;
     public bool readyToBegin = false;                   //Ready to activate game
+    public bool menuElementsVisible = false;         //Menu elements visible
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
@@ -99,22 +100,22 @@ public class GameManager : MonoBehaviour
             EnterMainMenu();
         }
 */
-        if (controlAction.IsPressed())
+        if (controlAction.IsPressed() && isPlaying)
         {
             GamePaused();
         }
 
 
-        if (StatsManager.Instance.playerXDead)
+        if (StatsManager.Instance.playerXDead && isPlaying && !isGameOver)
         {
             IsGameOver();
         }
-        
+/*        
         if (ActivateNextMap)
         {
             BeginNextLevel();
         }
-
+*/
         if (readyToBegin && !isPlaying)
         {
             BeginGame();
@@ -122,9 +123,10 @@ public class GameManager : MonoBehaviour
     }
     private void BeginGame()
     {
-        isGameOver = false;
+        menuElementsVisible = false;
         isPlaying = true;
         updateHud = true;
+        isGameOver = false;
         readyToBegin = false;
 
     }
@@ -157,13 +159,14 @@ public class GameManager : MonoBehaviour
 
     private void OnPlaySceneLoaded()
     {
-//        isGameOver = false;
+        ActivateNextLevel();
+        /*
         Cursor.visible = false;
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         LevelManager.Instance.OnGameBegin();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
         StatsManager.Instance.ResetPlayTime();
-
+        */
     }
 
     private IEnumerator TimeDelay()
@@ -181,6 +184,7 @@ public class GameManager : MonoBehaviour
 
     public void IsGameOver()
     {
+        menuElementsVisible = true;
         SpawnManager.Instance.StopSpawning();
         SpawnManager.Instance.spawningAllowed = false;
         isGameOver= true;
@@ -192,19 +196,22 @@ public class GameManager : MonoBehaviour
 
     public void ActivateNextLevel()
     {
-        isGameOver = false;
         ActivateNextMap = true;
+        BeginNextLevel();
     }
 
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
-        StartCoroutine(DelaydStart());
-        StatsManager.Instance.ResetPlayTime();
+        //        StartCoroutine(DelaydStart());
+        isGameOver = false;
+        menuElementsVisible = false;
         SpawnManager.Instance.ClearSpawns();
-        LevelManager.Instance.OnGameBegin();
-        
+        LevelManager.Instance.OnGameBegin();      
+        StatsManager.Instance.ResetPlayTime();
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
+
 //        LevelManager.Instance.InstantiateHUD();
 //        isGameOver = false;
 //        isPlaying = true;
@@ -231,6 +238,7 @@ public class GameManager : MonoBehaviour
 
     public void GamePaused()                            //Enter PauseState
     {
+        menuElementsVisible = true;
         Cursor.visible = true;
         isPaused = true;
         isPlaying = false;
@@ -239,6 +247,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitPauseState()                        //Exit PauseState
     {
+        menuElementsVisible = false;
         isPaused = false;
         isPlaying = true;
         updateHud = true;
@@ -247,7 +256,8 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        EndLevel();
+        IsGameOver();
+        menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("MainMenu", OnMainMenuLoaded);
         //QuitGame();
     }
@@ -255,6 +265,7 @@ public class GameManager : MonoBehaviour
     private void OnMainMenuLoaded()
     {
         Cursor.visible = true;
+        IsGameOver();
     }
 
     public static void QuitGame()
