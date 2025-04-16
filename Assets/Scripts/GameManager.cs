@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
-//        StartGame();
-        
+        //        StartGame();
+
     }
 
 
@@ -120,6 +120,16 @@ public class GameManager : MonoBehaviour
         {
             BeginGame();
         }
+    }
+
+    private void LoadMainMenuOnStart()
+    {
+        //Nothing needed here (Yet)
+    }
+
+    private void LoadPlaySceneOnStart()
+    {
+        EnterMainMenu();
     }
     private void BeginGame()
     {
@@ -223,6 +233,7 @@ public class GameManager : MonoBehaviour
     public void EndLevel()                              //When level ends, do these functions
     {
         //Every Action needed for changing next level
+        SpawnManager.Instance.spawningAllowed = false;
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
@@ -255,7 +266,9 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        IsGameOver();
+        //        IsGameOver();
+        ExitPauseState();
+        EndLevel();
         menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("MainMenu", OnMainMenuLoaded);
         //QuitGame();
