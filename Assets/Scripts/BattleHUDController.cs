@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BattleHUDController : MonoBehaviour
 {
 
-    private bool updatingHud = false;
+    [SerializeField] private bool updatingHud = false;
     public Slider healthSlider0;
     public Slider shieldSlider0;
     public Slider healthSlider1;
@@ -51,6 +51,16 @@ public class BattleHUDController : MonoBehaviour
             //Start Coroutine for updating Hud
             updatingHud = true;
             //Debug.Log("Updating HUD...");
+
+            //Check if player[0] HealthSlider MAX value is correct. If not, assume none slider has been set yet.
+            if (healthSlider0.maxValue != StatsManager.Instance.player[0].Health)
+            {
+                healthSlider0.maxValue = StatsManager.Instance.player[0].Health;
+                healthSlider1.maxValue = StatsManager.Instance.player[1].Health;
+                shieldSlider0.maxValue = StatsManager.Instance.player[0].Shield;
+                shieldSlider0.maxValue = StatsManager.Instance.player[1].Shield;
+
+            }
 
             //Setting Player names
             playerNameText0.text = ($"{StatsManager.Instance.player[0].name}");

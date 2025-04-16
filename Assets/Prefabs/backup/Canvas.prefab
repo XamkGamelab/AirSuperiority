@@ -2154,6 +2154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03dcd951308d6a4f99eb3b7ab0fb213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updatingHud: 0
   healthSlider0: {fileID: 7813574789210735940}
   shieldSlider0: {fileID: 2928000665797401004}
   healthSlider1: {fileID: 2937316953445579031}
@@ -4577,8 +4578,16 @@ PrefabInstance:
       value: QuitToMenu Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7802055521516103644, guid: 1dfb17230d9011948ab725b49ee84a16, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7231247411895911938}
+    - target: {fileID: 7802055521516103644, guid: 1dfb17230d9011948ab725b49ee84a16, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EnterMainMenu
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802055521516103644, guid: 1dfb17230d9011948ab725b49ee84a16, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleHUDController, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4795,14 +4804,14 @@ PrefabInstance:
     - target: {fileID: 6762970202213990133, guid: e3983e368ede21b4dbdea494287097a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 215091483211276753, guid: 9e9316c2dad851842b8621979167af58, type: 3}
+      objectReference: {fileID: 7231247411895911938}
     - target: {fileID: 6762970202213990133, guid: e3983e368ede21b4dbdea494287097a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BeginNextLevel
+      value: newGame
       objectReference: {fileID: 0}
     - target: {fileID: 6762970202213990133, guid: e3983e368ede21b4dbdea494287097a3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: BattleHUDController, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
