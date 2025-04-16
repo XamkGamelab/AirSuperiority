@@ -46,6 +46,11 @@ public class BattleHUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameOverMenu.activeSelf  == true && !GameManager.Instance.isGameOver)
+        {
+            gameOverMenu.SetActive(false);
+            Cursor.visible = false;
+        }
         if (GameManager.Instance.updateHud && GameManager.Instance.isPlaying) //checking !updatingHud only to avoid performing loop on every update.
         {
             //Start Coroutine for updating Hud
