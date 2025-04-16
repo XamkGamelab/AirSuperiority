@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 
 public class GameManager : MonoBehaviour
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
     public bool updateHud = false;                      //Updating HUD information
     public bool loadRandomMap = true;
     public bool ActivateNextMap = false;
+    public bool readyToBegin = false;                   //Ready to activate game
+    public bool menuElementsVisible = false;         //Menu elements visible
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
@@ -66,8 +69,8 @@ public class GameManager : MonoBehaviour
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
-//        StartGame();
-        
+        //        StartGame();
+
     }
 
 
@@ -97,21 +100,45 @@ public class GameManager : MonoBehaviour
             EnterMainMenu();
         }
 */
-        if (controlAction.IsPressed())
+        if (controlAction.IsPressed() && isPlaying)
         {
             GamePaused();
         }
 
 
-        if (StatsManager.Instance.playerXDead)
+        if (StatsManager.Instance.playerXDead && isPlaying && !isGameOver)
         {
             IsGameOver();
         }
-        
+/*        
         if (ActivateNextMap)
         {
             BeginNextLevel();
         }
+*/
+        if (readyToBegin && !isPlaying)
+        {
+            BeginGame();
+        }
+    }
+
+    private void LoadMainMenuOnStart()
+    {
+        //Nothing needed here (Yet)
+    }
+
+    private void LoadPlaySceneOnStart()
+    {
+        EnterMainMenu();
+    }
+    private void BeginGame()
+    {
+        menuElementsVisible = false;
+        isPlaying = true;
+        updateHud = true;
+        isGameOver = false;
+        readyToBegin = false;
+
     }
     private void OnEnable()
     {
@@ -141,16 +168,14 @@ public class GameManager : MonoBehaviour
 
     private void OnPlaySceneLoaded()
     {
+        ActivateNextLevel();
+        /*
         Cursor.visible = false;
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         LevelManager.Instance.OnGameBegin();
-        SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
         StatsManager.Instance.ResetPlayTime();
-        isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
-
+        */
     }
 
     private IEnumerator TimeDelay()
@@ -168,27 +193,38 @@ public class GameManager : MonoBehaviour
 
     public void IsGameOver()
     {
+        menuElementsVisible = true;
         SpawnManager.Instance.StopSpawning();
         SpawnManager.Instance.spawningAllowed = false;
         isGameOver= true;
         isPlaying = false;
         updateHud = false;
+        //ActivateNextMap = true;
+        
+    }
+
+    public void ActivateNextLevel()
+    {
         ActivateNextMap = true;
+        BeginNextLevel();
     }
 
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
-        StartCoroutine(DelaydStart());
-        StatsManager.Instance.ResetPlayTime();
-        SpawnManager.Instance.ClearSpawns();
-        LevelManager.Instance.OnGameBegin();
-        
-        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
-//        LevelManager.Instance.InstantiateHUD();
+        //        StartCoroutine(DelaydStart());
         isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
+        menuElementsVisible = false;
+        SpawnManager.Instance.ClearSpawns();
+        LevelManager.Instance.OnGameBegin();      
+        StatsManager.Instance.ResetPlayTime();
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
+
+//        LevelManager.Instance.InstantiateHUD();
+//        isGameOver = false;
+//        isPlaying = true;
+//        updateHud = true;
         StatsManager.Instance.playerXDead = false;
 
         ActivateNextMap = false;
@@ -197,6 +233,7 @@ public class GameManager : MonoBehaviour
     public void EndLevel()                              //When level ends, do these functions
     {
         //Every Action needed for changing next level
+        SpawnManager.Instance.spawningAllowed = false;
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
@@ -211,6 +248,7 @@ public class GameManager : MonoBehaviour
 
     public void GamePaused()                            //Enter PauseState
     {
+        menuElementsVisible = true;
         Cursor.visible = true;
         isPaused = true;
         isPlaying = false;
@@ -219,6 +257,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitPauseState()                        //Exit PauseState
     {
+        menuElementsVisible = false;
         isPaused = false;
         isPlaying = true;
         updateHud = true;
@@ -227,14 +266,18 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        //EndLevel();
+        //        IsGameOver();
+        ExitPauseState();
+        EndLevel();
+        menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("MainMenu", OnMainMenuLoaded);
-        QuitGame();
+        //QuitGame();
     }
 
     private void OnMainMenuLoaded()
     {
         Cursor.visible = true;
+        IsGameOver();
     }
 
     public static void QuitGame()

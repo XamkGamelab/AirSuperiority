@@ -1,11 +1,12 @@
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleHUDController : MonoBehaviour
 {
 
-    private bool updatingHud = false;
+    [SerializeField] private bool updatingHud = false;
     public Slider healthSlider0;
     public Slider shieldSlider0;
     public Slider healthSlider1;
@@ -28,6 +29,7 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private Image currentGunSprite1;
 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +39,8 @@ public class BattleHUDController : MonoBehaviour
 
         shieldSlider0.maxValue = StatsManager.Instance.player[0].Shield;
         shieldSlider0.maxValue = StatsManager.Instance.player[1].Shield;
+        pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,6 +51,16 @@ public class BattleHUDController : MonoBehaviour
             //Start Coroutine for updating Hud
             updatingHud = true;
             //Debug.Log("Updating HUD...");
+
+            //Check if player[0] HealthSlider MAX value is correct. If not, assume none slider has been set yet.
+            if (healthSlider0.maxValue != StatsManager.Instance.player[0].Health)
+            {
+                healthSlider0.maxValue = StatsManager.Instance.player[0].Health;
+                healthSlider1.maxValue = StatsManager.Instance.player[1].Health;
+                shieldSlider0.maxValue = StatsManager.Instance.player[0].Shield;
+                shieldSlider0.maxValue = StatsManager.Instance.player[1].Shield;
+
+            }
 
             //Setting Player names
             playerNameText0.text = ($"{StatsManager.Instance.player[0].name}");
@@ -86,6 +100,7 @@ public class BattleHUDController : MonoBehaviour
             int seconds = totalgameTime % 60;
             gameTime.text = ($"Game time: {minutes:D2}:{seconds:D2}");
 
+
         }
         else if (!GameManager.Instance.updateHud && GameManager.Instance.isPaused)
         {
@@ -93,10 +108,22 @@ public class BattleHUDController : MonoBehaviour
             updatingHud = false;
         }
 
-        if (GameManager.Instance.isPaused)
+        if (GameManager.Instance.isPaused && !pauseMenu.activeSelf)
         {
             EnterPauseMenu();
         }
+
+        if (GameManager.Instance.isGameOver && !gameOverMenu.activeSelf == true && GameManager.Instance.menuElementsVisible)
+        {
+            GameOver();
+        }
+        if (gameOverMenu.activeSelf == true && updatingHud && !GameManager.Instance.isGameOver)
+        {
+            gameOverMenu.SetActive(false);
+            Cursor.visible = false;
+        }
+        
+
     }
 
     private void EnterPauseMenu()
@@ -115,10 +142,23 @@ public class BattleHUDController : MonoBehaviour
         GameManager.Instance.ExitPauseState();
     }
 
+    public void newGame()
+    {
+        gameOverMenu.SetActive(false);
+        GameManager.Instance.ActivateNextLevel();
+    }
+    
+    private void GameOver()
+    {
+        Cursor.visible = true;
+        gameOverMenu.SetActive(true);        
+    }
+    
+
     public void MainMenu()
     {
+        gameOverMenu.SetActive(false);
         pauseMenu.SetActive(false);
-        GameManager.Instance.ExitPauseState();
         GameManager.Instance.EnterMainMenu();
     }
 

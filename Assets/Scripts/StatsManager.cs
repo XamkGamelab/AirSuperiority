@@ -228,12 +228,20 @@ public class StatsManager : MonoBehaviour
 
                         if (playerIndex == 0 && !playerXDead)
                         {
-                            player[1].Victories++;
+                            if (!player[1].playerDead)
+                            {
+                                player[1].Victories++;
+                            }
+                            
                             playerXDead = true;
                         }
                         else if (playerIndex == 1 && !playerXDead)
                         {
-                            player[0].Victories++;
+                            if (!player[0].playerDead)
+                            {
+                                player[0].Victories++;
+                            }
+                            
                             playerXDead = true;
                         }
                     }
