@@ -33,6 +33,7 @@ public class BattleHUDController : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject creditsPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,6 +50,11 @@ public class BattleHUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.quittingGame)
+        {
+            creditsPanel.SetActive(true);
+        }
+
         if (gameOverMenu.activeSelf  == true && !GameManager.Instance.isGameOver)
         {
             gameOverMenu.SetActive(false);
