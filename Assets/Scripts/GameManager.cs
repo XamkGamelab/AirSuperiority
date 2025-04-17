@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()                             //Use method when first time starting game
     {
+//        isGameOver = false;
         //Every action needed for game to begin correctly
         SceneController.Instance.LoadSpecificLevel("PlayScene", OnPlaySceneLoaded);    //Check if PlayScene is active / Load if different scene
                                                                     //        SceneController.Instance.LoadPlayScene();
