@@ -44,3 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4dbe0e3118bc9429641df74ba52a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlaying: 0
+  isPaused: 0
+  isGameOver: 0
+  updateHud: 0
+  loadRandomMap: 1
+  ActivateNextMap: 0
+  readyToBegin: 0
+  menuElementsVisible: 0
+  endingGame: 0
+  menuMusic: 0
+  inGameMusic: 0
+  uiManager: {fileID: 0}
+  apu2: 0

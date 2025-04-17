@@ -218,6 +218,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f571ddf-d50d-429c-9838-6d3e7d42b0ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Player2RotateLeft"",
                     ""type"": ""Button"",
                     ""id"": ""bf173279-f3d8-4fbd-889d-5abfb6212806"",
@@ -281,6 +290,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""24f75301-92f8-4a50-83c9-f7d53a701a61"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""89e56464-5480-49c2-b635-1d9362179b32"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
@@ -340,6 +360,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Player2Move = m_Player2.FindAction("Player2Move", throwIfNotFound: true);
+        m_Player2_Enter = m_Player2.FindAction("Enter", throwIfNotFound: true);
         m_Player2_Player2RotateLeft = m_Player2.FindAction("Player2RotateLeft", throwIfNotFound: true);
         m_Player2_Player2RotateRight = m_Player2.FindAction("Player2RotateRight", throwIfNotFound: true);
         m_Player2_Player2Shoot = m_Player2.FindAction("Player2Shoot", throwIfNotFound: true);
@@ -505,6 +526,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player2;
     private List<IPlayer2Actions> m_Player2ActionsCallbackInterfaces = new List<IPlayer2Actions>();
     private readonly InputAction m_Player2_Player2Move;
+    private readonly InputAction m_Player2_Enter;
     private readonly InputAction m_Player2_Player2RotateLeft;
     private readonly InputAction m_Player2_Player2RotateRight;
     private readonly InputAction m_Player2_Player2Shoot;
@@ -513,6 +535,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         private @PlayerControls m_Wrapper;
         public Player2Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Player2Move => m_Wrapper.m_Player2_Player2Move;
+        public InputAction @Enter => m_Wrapper.m_Player2_Enter;
         public InputAction @Player2RotateLeft => m_Wrapper.m_Player2_Player2RotateLeft;
         public InputAction @Player2RotateRight => m_Wrapper.m_Player2_Player2RotateRight;
         public InputAction @Player2Shoot => m_Wrapper.m_Player2_Player2Shoot;
@@ -528,6 +551,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Player2Move.started += instance.OnPlayer2Move;
             @Player2Move.performed += instance.OnPlayer2Move;
             @Player2Move.canceled += instance.OnPlayer2Move;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
             @Player2RotateLeft.started += instance.OnPlayer2RotateLeft;
             @Player2RotateLeft.performed += instance.OnPlayer2RotateLeft;
             @Player2RotateLeft.canceled += instance.OnPlayer2RotateLeft;
@@ -544,6 +570,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Player2Move.started -= instance.OnPlayer2Move;
             @Player2Move.performed -= instance.OnPlayer2Move;
             @Player2Move.canceled -= instance.OnPlayer2Move;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
             @Player2RotateLeft.started -= instance.OnPlayer2RotateLeft;
             @Player2RotateLeft.performed -= instance.OnPlayer2RotateLeft;
             @Player2RotateLeft.canceled -= instance.OnPlayer2RotateLeft;
@@ -583,6 +612,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayer2Actions
     {
         void OnPlayer2Move(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
         void OnPlayer2RotateLeft(InputAction.CallbackContext context);
         void OnPlayer2RotateRight(InputAction.CallbackContext context);
         void OnPlayer2Shoot(InputAction.CallbackContext context);

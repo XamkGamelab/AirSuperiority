@@ -15,10 +15,12 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.quittingGame)
+        /*
+        if (GameManager.Instance.endingGame)
         {
             creditsPanel.SetActive(true);
         }
+        */
     }
     public void EnableInfo()
     {
@@ -28,5 +30,14 @@ public class UIManager : MonoBehaviour
     public void DisableInfo()
     {
         infoPanel.SetActive(false);
+    }
+
+    public void EnableCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+    public void callGameManagerQuitGame()
+    {
+        GameManager.Instance.QuitGame();
     }
 }

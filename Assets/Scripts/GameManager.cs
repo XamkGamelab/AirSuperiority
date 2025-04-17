@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     public bool ActivateNextMap = false;
     public bool readyToBegin = false;                   //Ready to activate game
     public bool menuElementsVisible = false;         //Menu elements visible
-    public bool quittingGame = false;                     //Quitting game
+    [SerializeField] private bool endingGame = false;                     //Quitting game
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
@@ -66,14 +66,20 @@ public class GameManager : MonoBehaviour
     InputAction pauseMenuAction;
     InputAction enterAction;
 
+    [SerializeField] private UIManager uiManager;
+
+    public bool apu2 = false; //For testing purposes
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-//        isPlaying = true;
+//        endingGame = false;                      
+        
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
         enterAction = InputSystem.actions.FindAction("Enter");
         //        StartGame();
+
 
     }
 
@@ -124,8 +130,9 @@ public class GameManager : MonoBehaviour
         {
             BeginGame();
         }
-        if (quittingGame && enterAction.IsPressed())
+        if (apu2 && enterAction.IsPressed())
         {
+            Debug.Log("Enter pressed");
             Application.Quit();
         }
     }
@@ -291,7 +298,10 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        quittingGame = true;                        //Booolean for BattleHUDController and MainMenu to check if game is quitting
+        apu2 = true;
+        //        endingGame = true;                        //Booolean for BattleHUDController and MainMenu to check if game is quitting
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        uiManager.EnableCredits();                //Enable credits panel
         Invoke(nameof(QuittingApplication), 5f);
 
         //        Application.Quit();
@@ -302,6 +312,7 @@ public class GameManager : MonoBehaviour
     private void QuittingApplication()
     {
         //            if (Application.isPlaying)
+        Debug.Log("Quitting game...");
         Application.Quit();
     }
 }

@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,10 +49,12 @@ public class BattleHUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.quittingGame)
+        /*
+        if (GameManager.Instance.endingGame)
         {
             creditsPanel.SetActive(true);
         }
+        */
 
         if (gameOverMenu.activeSelf  == true && !GameManager.Instance.isGameOver)
         {

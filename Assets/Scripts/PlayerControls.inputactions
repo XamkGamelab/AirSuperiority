@@ -196,6 +196,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "0f571ddf-d50d-429c-9838-6d3e7d42b0ed",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Player2RotateLeft",
                     "type": "Button",
                     "id": "bf173279-f3d8-4fbd-889d-5abfb6212806",
@@ -256,6 +265,17 @@
                     "action": "Player2Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "24f75301-92f8-4a50-83c9-f7d53a701a61",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

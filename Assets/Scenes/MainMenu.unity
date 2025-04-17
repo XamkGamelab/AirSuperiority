@@ -377,9 +377,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 215091483211276753, guid: 9e9316c2dad851842b8621979167af58, type: 3}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 1362567512}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: callGameManagerQuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
