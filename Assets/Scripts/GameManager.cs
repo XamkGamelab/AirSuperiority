@@ -283,8 +283,12 @@ public class GameManager : MonoBehaviour
     public static void QuitGame()
     {
         Debug.Log("Quit Game called");
-//            if (Application.isPlaying)
-                Application.Quit();
+
     }
 
+    private void QuittingApplication()
+    {
+        //            if (Application.isPlaying)
+        Application.Quit();
+    }
 }
