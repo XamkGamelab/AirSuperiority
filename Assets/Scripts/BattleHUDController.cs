@@ -27,6 +27,7 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player2Victories;
     [SerializeField] private TextMeshProUGUI player1totalScore;
     [SerializeField] private TextMeshProUGUI player2totalScore;
+    [SerializeField] private TextMeshProUGUI totalTime;
     [SerializeField] private Image currentGunSprite0;
     [SerializeField] private Image currentGunSprite1;
 
@@ -159,8 +160,12 @@ public class BattleHUDController : MonoBehaviour
     {
         Cursor.visible = true;
         gameOverMenu.SetActive(true);
-        player1totalScore.text = ($"Player 1 score: {StatsManager.Instance.player[0].TotalScore}");
-        player2totalScore.text = ($"Player 2 score: {StatsManager.Instance.player[1].TotalScore}");
+        player1totalScore.text = ($"Player 1 total score: {StatsManager.Instance.player[0].TotalScore}");
+        player2totalScore.text = ($"Player 2 total score: {StatsManager.Instance.player[1].TotalScore}");
+        int totaltime = Mathf.FloorToInt(StatsManager.Instance.GetTotalPlayTime());
+        int minutes = totaltime / 60;
+        int seconds = totaltime % 60;
+        totalTime.text = ($"Total game time: {minutes:D2}:{seconds:D2}");
     }
     
 
