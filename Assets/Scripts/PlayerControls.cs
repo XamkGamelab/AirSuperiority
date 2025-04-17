@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""27ce3806-5b8c-4c11-ac27-91f5539086b6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -179,6 +188,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e5d0002-274b-42b5-aad6-176846d17bdd"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -316,6 +336,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player1_Shoot = m_Player1.FindAction("Shoot", throwIfNotFound: true);
         m_Player1_Control = m_Player1.FindAction("Control", throwIfNotFound: true);
         m_Player1_PauseMenu = m_Player1.FindAction("PauseMenu", throwIfNotFound: true);
+        m_Player1_Enter = m_Player1.FindAction("Enter", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Player2Move = m_Player2.FindAction("Player2Move", throwIfNotFound: true);
@@ -395,6 +416,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player1_Shoot;
     private readonly InputAction m_Player1_Control;
     private readonly InputAction m_Player1_PauseMenu;
+    private readonly InputAction m_Player1_Enter;
     public struct Player1Actions
     {
         private @PlayerControls m_Wrapper;
@@ -405,6 +427,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player1_Shoot;
         public InputAction @Control => m_Wrapper.m_Player1_Control;
         public InputAction @PauseMenu => m_Wrapper.m_Player1_PauseMenu;
+        public InputAction @Enter => m_Wrapper.m_Player1_Enter;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -432,6 +455,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @Enter.started += instance.OnEnter;
+            @Enter.performed += instance.OnEnter;
+            @Enter.canceled += instance.OnEnter;
         }
 
         private void UnregisterCallbacks(IPlayer1Actions instance)
@@ -454,6 +480,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @Enter.started -= instance.OnEnter;
+            @Enter.performed -= instance.OnEnter;
+            @Enter.canceled -= instance.OnEnter;
         }
 
         public void RemoveCallbacks(IPlayer1Actions instance)
@@ -549,6 +578,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnControl(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnEnter(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {

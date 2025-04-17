@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     InputAction controlAction;
     InputAction pauseMenuAction;
+    InputAction enterAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
+        enterAction = InputSystem.actions.FindAction("Enter");
         //        StartGame();
 
     }
@@ -121,6 +123,10 @@ public class GameManager : MonoBehaviour
         if (readyToBegin && !isPlaying)
         {
             BeginGame();
+        }
+        if (quittingGame && enterAction.IsPressed())
+        {
+            Application.Quit();
         }
     }
 
