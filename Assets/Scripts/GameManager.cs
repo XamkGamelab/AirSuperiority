@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System;
 
 
 public class GameManager : MonoBehaviour
@@ -56,12 +57,14 @@ public class GameManager : MonoBehaviour
     public bool ActivateNextMap = false;
     public bool readyToBegin = false;                   //Ready to activate game
     public bool menuElementsVisible = false;         //Menu elements visible
+    public bool quittingGame = false;                     //Quitting game
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
 
     InputAction controlAction;
     InputAction pauseMenuAction;
+    InputAction enterAction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,6 +72,7 @@ public class GameManager : MonoBehaviour
 //        isPlaying = true;
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
+        enterAction = InputSystem.actions.FindAction("Enter");
         //        StartGame();
 
     }
@@ -119,6 +123,10 @@ public class GameManager : MonoBehaviour
         if (readyToBegin && !isPlaying)
         {
             BeginGame();
+        }
+        if (quittingGame && enterAction.IsPressed())
+        {
+            Application.Quit();
         }
     }
 
@@ -281,9 +289,13 @@ public class GameManager : MonoBehaviour
         IsGameOver();
     }
 
-    public static void QuitGame()
+    public void QuitGame()
     {
-        Debug.Log("Quit Game called");
+        quittingGame = true;                        //Booolean for BattleHUDController and MainMenu to check if game is quitting
+        Invoke(nameof(QuittingApplication), 5f);
+
+        //        Application.Quit();
+        //        Debug.Log("Quit");
 
     }
 

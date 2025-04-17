@@ -747,6 +747,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5137763426760386166, guid: 892944ac18c707b408efc0e9cc558da6, type: 3}
   m_PrefabInstance: {fileID: 493108830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &493108832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5862584999708465883, guid: 892944ac18c707b408efc0e9cc558da6, type: 3}
+  m_PrefabInstance: {fileID: 493108830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &620477394 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5452053481226985588, guid: 40113b88c688e3449b6012c4d440396c, type: 3}
@@ -1356,6 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoPanel: {fileID: 344353822}
+  creditsPanel: {fileID: 493108832}
 --- !u!224 &1497226570 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4362447956309710123, guid: ec66438d588992b43bf6173dec1d736f, type: 3}
