@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System;
 
 
 public class GameManager : MonoBehaviour
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
     public bool ActivateNextMap = false;
     public bool readyToBegin = false;                   //Ready to activate game
     public bool menuElementsVisible = false;         //Menu elements visible
+    public bool quittingGame = false;                     //Quitting game
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
@@ -281,9 +283,13 @@ public class GameManager : MonoBehaviour
         IsGameOver();
     }
 
-    public static void QuitGame()
+    public void QuitGame()
     {
-        Debug.Log("Quit Game called");
+        quittingGame = true;                        //Booolean for BattleHUDController and MainMenu to check if game is quitting
+        Invoke(nameof(QuittingApplication), 5f);
+
+        //        Application.Quit();
+        //        Debug.Log("Quit");
 
     }
 
