@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
     {
         menuElementsVisible = true;
         SpawnManager.Instance.StopSpawning();
-        SpawnManager.Instance.spawningAllowed = false;
+//        SpawnManager.Instance.spawningAllowed = false;
         isGameOver= true;
         isPlaying = false;
         updateHud = false;
@@ -206,6 +206,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateNextLevel()
     {
+        isGameOver = false;
         ActivateNextMap = true;
         BeginNextLevel();
     }
@@ -215,26 +216,25 @@ public class GameManager : MonoBehaviour
         //Every action needed for next level to begin correctly
         //        StartCoroutine(DelaydStart());
         isGameOver = false;
+        StatsManager.Instance.ResetPlayTime();
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         menuElementsVisible = false;
         SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();      
-        StatsManager.Instance.ResetPlayTime();
-        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
-        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
 
 //        LevelManager.Instance.InstantiateHUD();
 //        isGameOver = false;
 //        isPlaying = true;
 //        updateHud = true;
         StatsManager.Instance.playerXDead = false;
-
+        Cursor.visible = false;
         ActivateNextMap = false;
     }
 
     public void EndLevel()                              //When level ends, do these functions
     {
         //Every Action needed for changing next level
-        SpawnManager.Instance.spawningAllowed = false;
+//        SpawnManager.Instance.spawningAllowed = false;
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
