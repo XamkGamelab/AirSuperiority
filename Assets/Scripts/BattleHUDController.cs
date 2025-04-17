@@ -27,6 +27,7 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player1totalScore;
     [SerializeField] private TextMeshProUGUI player2totalScore;
     [SerializeField] private TextMeshProUGUI totalTime;
+    [SerializeField] private TextMeshProUGUI matchTime;
     [SerializeField] private Image currentGunSprite0;
     [SerializeField] private Image currentGunSprite1;
 
@@ -173,6 +174,11 @@ public class BattleHUDController : MonoBehaviour
         int minutes = totaltime / 60;
         int seconds = totaltime % 60;
         totalTime.text = ($"Total game time: {minutes:D2}:{seconds:D2}");
+
+        int levelTime = Mathf.FloorToInt(StatsManager.Instance.GetPlayTime());
+        int minutes2 = levelTime / 60;
+        int seconds2 = levelTime % 60;
+        matchTime.text = ($"Level time: {minutes2:D2}:{seconds2:D2}");
     }
     
 
