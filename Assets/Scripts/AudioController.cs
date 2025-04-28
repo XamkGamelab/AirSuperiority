@@ -6,6 +6,10 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip itemPickUp;
     [SerializeField] private AudioClip gunPickUp;
+    [SerializeField] private AudioClip gun1Shot;
+    [SerializeField] private AudioClip gun2Shot;
+    [SerializeField] private AudioClip gun3Shot;
+    [SerializeField] private AudioClip testBulletShot;
 
     private void Awake()
     {
@@ -31,6 +35,28 @@ public class AudioController : MonoBehaviour
     public void OnGunPickUp()
     {
         audioSource.PlayOneShot(gunPickUp);
+    }
+
+    public void Shotfired(string file)
+    {
+        switch (file)
+        {
+            case "Gun1Bullet":
+                audioSource.PlayOneShot(gun1Shot);
+                break;
+            case "Gun2Bullet":
+                audioSource.PlayOneShot(gun2Shot);
+                break;
+            case "Gun3Bullet":
+                audioSource.PlayOneShot(gun3Shot);
+                break;
+
+            default:
+                Debug.LogWarning("Unknown bullet type: " + file);
+                audioSource.PlayOneShot(testBulletShot);
+                return;
+        }
+
     }
 }
 //All level music is from: https://opengameart.org/content/nes-shooter-music-5-tracks-3-jingles
