@@ -316,7 +316,7 @@ public class PlayerMovement : MonoBehaviour
             CallDamageFlash();
         }
 
-        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.isPlaying)
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.isPlaying && StatsManager.Instance.GetPlayTime() > GameManager.Instance.kamikazeActivation)
         {
             kamikaze = true;
             CalculateDamage();

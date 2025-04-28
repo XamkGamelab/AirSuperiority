@@ -34,6 +34,7 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject kamiKazeInfoPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,6 +46,7 @@ public class BattleHUDController : MonoBehaviour
         shieldSlider0.maxValue = StatsManager.Instance.player[1].Shield;
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
+        kamiKazeInfoPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,6 +58,21 @@ public class BattleHUDController : MonoBehaviour
             creditsPanel.SetActive(true);
         }
         */
+        if (kamiKazeInfoPanel.activeSelf && !GameManager.Instance.updateHud)
+        {
+            DeactKamikaze();
+        }
+
+        if (GameManager.Instance.kamikazeActivation < StatsManager.Instance.GetPlayTime() && GameManager.Instance.kamikazeActivation + 5f > StatsManager.Instance.GetPlayTime())
+        {
+            Debug.Log("Activate kamikaze info panel");
+            kamiKazeInfoPanel.SetActive(true);
+        }
+        else if (GameManager.Instance.kamikazeActivation + 5f < StatsManager.Instance.GetPlayTime() && kamiKazeInfoPanel.activeSelf)
+        {
+            Debug.Log("DeActivate kamikaze info panel");
+            kamiKazeInfoPanel.SetActive(false);
+        }
 
         if (gameOverMenu.activeSelf  == true && !GameManager.Instance.isGameOver)
         {
@@ -158,18 +175,20 @@ public class BattleHUDController : MonoBehaviour
     public void ExitPauseMenu()
     {
         pauseMenu.SetActive(false);
-        
+        DeactKamikaze();   
         GameManager.Instance.ExitPauseState();
     }
 
     public void newGame()
     {
+        DeactKamikaze();
         gameOverMenu.SetActive(false);
         GameManager.Instance.ActivateNextLevel();
     }
     
     private void GameOver()
     {
+        DeactKamikaze();
         Cursor.visible = true;
         gameOverMenu.SetActive(true);
         player1totalScore.text = ($"Player 1 total score: {StatsManager.Instance.player[0].TotalScore}");
@@ -191,6 +210,11 @@ public class BattleHUDController : MonoBehaviour
         gameOverMenu.SetActive(false);
         pauseMenu.SetActive(false);
         GameManager.Instance.EnterMainMenu();
+    }
+
+    private void DeactKamikaze()
+    {
+        kamiKazeInfoPanel.SetActive(false);
     }
 
     //Here will be coroutine for Updating Hud
