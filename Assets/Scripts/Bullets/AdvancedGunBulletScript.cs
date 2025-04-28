@@ -18,6 +18,8 @@ public class AdvancedGunBulletScript : MonoBehaviour
         // initial velocity in the direction the bullet is facing
         velocity = transform.up * speed;
 
+        AudioController.Instance.Shotfired("Gun2Bullet");
+
         // Destroy bullets 
         Destroy(gameObject, destroyTime);
     }

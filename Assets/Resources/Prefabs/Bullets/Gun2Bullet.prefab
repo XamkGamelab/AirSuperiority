@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -22383723474554198}
   - component: {fileID: 244478886210839616}
   - component: {fileID: 6006505909285392229}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Gun2Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7519751148010600833}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 21a9910710825e34c9cf496fc4bac818, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System;
 
 
 public class GameManager : MonoBehaviour
@@ -56,20 +57,30 @@ public class GameManager : MonoBehaviour
     public bool ActivateNextMap = false;
     public bool readyToBegin = false;                   //Ready to activate game
     public bool menuElementsVisible = false;         //Menu elements visible
+    public float kamikazeActivation = 10;            //Kamikaze activation time
+    [SerializeField] private bool endingGame = false;                     //Quitting game
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
 
     InputAction controlAction;
     InputAction pauseMenuAction;
+    InputAction enterAction;
+
+    [SerializeField] private UIManager uiManager;
+
+    public bool apu2 = false; //For testing purposes
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-//        isPlaying = true;
+//        endingGame = false;                      
+        
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
+        enterAction = InputSystem.actions.FindAction("Enter");
         //        StartGame();
+
 
     }
 
@@ -120,6 +131,11 @@ public class GameManager : MonoBehaviour
         {
             BeginGame();
         }
+        if (apu2 && enterAction.IsPressed())
+        {
+            Debug.Log("Enter pressed");
+            Application.Quit();
+        }
     }
 
     private void LoadMainMenuOnStart()
@@ -157,7 +173,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()                             //Use method when first time starting game
     {
+        //        isGameOver = false;
         //Every action needed for game to begin correctly
+        isGameOver = false;
+        menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("PlayScene", OnPlaySceneLoaded);    //Check if PlayScene is active / Load if different scene
                                                                     //        SceneController.Instance.LoadPlayScene();
 //        StartCoroutine(TimeDelay());
@@ -195,7 +214,7 @@ public class GameManager : MonoBehaviour
     {
         menuElementsVisible = true;
         SpawnManager.Instance.StopSpawning();
-        SpawnManager.Instance.spawningAllowed = false;
+//        SpawnManager.Instance.spawningAllowed = false;
         isGameOver= true;
         isPlaying = false;
         updateHud = false;
@@ -205,6 +224,7 @@ public class GameManager : MonoBehaviour
 
     public void ActivateNextLevel()
     {
+        isGameOver = false;
         ActivateNextMap = true;
         BeginNextLevel();
     }
@@ -214,26 +234,26 @@ public class GameManager : MonoBehaviour
         //Every action needed for next level to begin correctly
         //        StartCoroutine(DelaydStart());
         isGameOver = false;
+        StatsManager.Instance.ResetPlayTime();
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         menuElementsVisible = false;
         SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();      
-        StatsManager.Instance.ResetPlayTime();
-        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
-        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
 
 //        LevelManager.Instance.InstantiateHUD();
 //        isGameOver = false;
 //        isPlaying = true;
 //        updateHud = true;
         StatsManager.Instance.playerXDead = false;
-
+        Cursor.visible = false;
         ActivateNextMap = false;
     }
 
     public void EndLevel()                              //When level ends, do these functions
     {
         //Every Action needed for changing next level
-        SpawnManager.Instance.spawningAllowed = false;
+        //        SpawnManager.Instance.spawningAllowed = false;
+        menuElementsVisible = false;
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
@@ -277,14 +297,26 @@ public class GameManager : MonoBehaviour
     private void OnMainMenuLoaded()
     {
         Cursor.visible = true;
-        IsGameOver();
+//        IsGameOver();
     }
 
-    public static void QuitGame()
+    public void QuitGame()
     {
-        Debug.Log("Quit Game called");
-//            if (Application.isPlaying)
-                Application.Quit();
+        apu2 = true;
+        //        endingGame = true;                        //Booolean for BattleHUDController and MainMenu to check if game is quitting
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        uiManager.EnableCredits();                //Enable credits panel
+        Invoke(nameof(QuittingApplication), 5f);
+
+        //        Application.Quit();
+        //        Debug.Log("Quit");
+
     }
 
+    private void QuittingApplication()
+    {
+        //            if (Application.isPlaying)
+        Debug.Log("Quitting game...");
+        Application.Quit();
+    }
 }

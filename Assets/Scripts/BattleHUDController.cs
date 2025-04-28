@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,11 +24,17 @@ public class BattleHUDController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameTime;
     [SerializeField] private TextMeshProUGUI player1Victories;
     [SerializeField] private TextMeshProUGUI player2Victories;
+    [SerializeField] private TextMeshProUGUI player1totalScore;
+    [SerializeField] private TextMeshProUGUI player2totalScore;
+    [SerializeField] private TextMeshProUGUI totalTime;
+    [SerializeField] private TextMeshProUGUI matchTime;
     [SerializeField] private Image currentGunSprite0;
     [SerializeField] private Image currentGunSprite1;
 
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject kamiKazeInfoPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,11 +46,39 @@ public class BattleHUDController : MonoBehaviour
         shieldSlider0.maxValue = StatsManager.Instance.player[1].Shield;
         pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
+        kamiKazeInfoPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (GameManager.Instance.endingGame)
+        {
+            creditsPanel.SetActive(true);
+        }
+        */
+        if (kamiKazeInfoPanel.activeSelf && !GameManager.Instance.updateHud)
+        {
+            DeactKamikaze();
+        }
+
+        if (GameManager.Instance.kamikazeActivation < StatsManager.Instance.GetPlayTime() && GameManager.Instance.kamikazeActivation + 5f > StatsManager.Instance.GetPlayTime())
+        {
+            Debug.Log("Activate kamikaze info panel");
+            kamiKazeInfoPanel.SetActive(true);
+        }
+        else if (GameManager.Instance.kamikazeActivation + 5f < StatsManager.Instance.GetPlayTime() && kamiKazeInfoPanel.activeSelf)
+        {
+            Debug.Log("DeActivate kamikaze info panel");
+            kamiKazeInfoPanel.SetActive(false);
+        }
+
+        if (gameOverMenu.activeSelf  == true && !GameManager.Instance.isGameOver)
+        {
+            gameOverMenu.SetActive(false);
+            Cursor.visible = false;
+        }
         if (GameManager.Instance.updateHud && GameManager.Instance.isPlaying) //checking !updatingHud only to avoid performing loop on every update.
         {
             //Start Coroutine for updating Hud
@@ -53,7 +86,7 @@ public class BattleHUDController : MonoBehaviour
             //Debug.Log("Updating HUD...");
 
             //Check if player[0] HealthSlider MAX value is correct. If not, assume none slider has been set yet.
-            if (healthSlider0.maxValue != StatsManager.Instance.player[0].Health)
+            if (healthSlider0.maxValue != StatsManager.Instance.player[0].Health && StatsManager.Instance.GetPlayTime() < 2)
             {
                 healthSlider0.maxValue = StatsManager.Instance.player[0].Health;
                 healthSlider1.maxValue = StatsManager.Instance.player[1].Health;
@@ -73,12 +106,16 @@ public class BattleHUDController : MonoBehaviour
             //Updating sliders
             healthSlider0.value = StatsManager.Instance.player[0].Health;
             healthSlider1.value = StatsManager.Instance.player[1].Health;
+            Debug.Log($"HealthSliderValue Player1: {healthSlider0.value}");
+            Debug.Log($"HealthSliderValue Player2: {healthSlider1.value}");
 
             shieldSlider0.value = StatsManager.Instance.player[0].Shield;
             shieldSlider1.value = StatsManager.Instance.player[1].Shield;
 
             healthValue0.text = ($"{StatsManager.Instance.player[0].Health}/100");
             healthValue1.text = ($"{StatsManager.Instance.player[1].Health}/100");
+            Debug.Log($"HealthSliderValue text Player1: {healthValue0.text}");
+            Debug.Log($"HealthSliderValue text Player2: {healthValue1.text}");
 
             shieldValue0.text = ($"{StatsManager.Instance.player[0].Shield}/100");
             shieldValue1.text = ($"{StatsManager.Instance.player[1].Shield}/100");
@@ -138,20 +175,33 @@ public class BattleHUDController : MonoBehaviour
     public void ExitPauseMenu()
     {
         pauseMenu.SetActive(false);
-        
+        DeactKamikaze();   
         GameManager.Instance.ExitPauseState();
     }
 
     public void newGame()
     {
+        DeactKamikaze();
         gameOverMenu.SetActive(false);
         GameManager.Instance.ActivateNextLevel();
     }
     
     private void GameOver()
     {
+        DeactKamikaze();
         Cursor.visible = true;
-        gameOverMenu.SetActive(true);        
+        gameOverMenu.SetActive(true);
+        player1totalScore.text = ($"Player 1 total score: {StatsManager.Instance.player[0].TotalScore}");
+        player2totalScore.text = ($"Player 2 total score: {StatsManager.Instance.player[1].TotalScore}");
+        int totaltime = Mathf.FloorToInt(StatsManager.Instance.GetTotalPlayTime());
+        int minutes = totaltime / 60;
+        int seconds = totaltime % 60;
+        totalTime.text = ($"Total game time: {minutes:D2}:{seconds:D2}");
+
+        int levelTime = Mathf.FloorToInt(StatsManager.Instance.GetPlayTime());
+        int minutes2 = levelTime / 60;
+        int seconds2 = levelTime % 60;
+        matchTime.text = ($"Level time: {minutes2:D2}:{seconds2:D2}");
     }
     
 
@@ -160,6 +210,11 @@ public class BattleHUDController : MonoBehaviour
         gameOverMenu.SetActive(false);
         pauseMenu.SetActive(false);
         GameManager.Instance.EnterMainMenu();
+    }
+
+    private void DeactKamikaze()
+    {
+        kamiKazeInfoPanel.SetActive(false);
     }
 
     //Here will be coroutine for Updating Hud
