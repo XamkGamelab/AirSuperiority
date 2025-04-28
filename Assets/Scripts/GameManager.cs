@@ -172,8 +172,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()                             //Use method when first time starting game
     {
-//        isGameOver = false;
+        //        isGameOver = false;
         //Every action needed for game to begin correctly
+        isGameOver = false;
+        menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("PlayScene", OnPlaySceneLoaded);    //Check if PlayScene is active / Load if different scene
                                                                     //        SceneController.Instance.LoadPlayScene();
 //        StartCoroutine(TimeDelay());
@@ -249,7 +251,8 @@ public class GameManager : MonoBehaviour
     public void EndLevel()                              //When level ends, do these functions
     {
         //Every Action needed for changing next level
-//        SpawnManager.Instance.spawningAllowed = false;
+        //        SpawnManager.Instance.spawningAllowed = false;
+        menuElementsVisible = false;
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
@@ -293,7 +296,7 @@ public class GameManager : MonoBehaviour
     private void OnMainMenuLoaded()
     {
         Cursor.visible = true;
-        IsGameOver();
+//        IsGameOver();
     }
 
     public void QuitGame()
