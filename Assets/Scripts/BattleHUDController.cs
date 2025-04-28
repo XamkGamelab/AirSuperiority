@@ -69,7 +69,7 @@ public class BattleHUDController : MonoBehaviour
             //Debug.Log("Updating HUD...");
 
             //Check if player[0] HealthSlider MAX value is correct. If not, assume none slider has been set yet.
-            if (healthSlider0.maxValue != StatsManager.Instance.player[0].Health)
+            if (healthSlider0.maxValue != StatsManager.Instance.player[0].Health && StatsManager.Instance.GetPlayTime() < 2)
             {
                 healthSlider0.maxValue = StatsManager.Instance.player[0].Health;
                 healthSlider1.maxValue = StatsManager.Instance.player[1].Health;
@@ -89,12 +89,16 @@ public class BattleHUDController : MonoBehaviour
             //Updating sliders
             healthSlider0.value = StatsManager.Instance.player[0].Health;
             healthSlider1.value = StatsManager.Instance.player[1].Health;
+            Debug.Log($"HealthSliderValue Player1: {healthSlider0.value}");
+            Debug.Log($"HealthSliderValue Player2: {healthSlider1.value}");
 
             shieldSlider0.value = StatsManager.Instance.player[0].Shield;
             shieldSlider1.value = StatsManager.Instance.player[1].Shield;
 
             healthValue0.text = ($"{StatsManager.Instance.player[0].Health}/100");
             healthValue1.text = ($"{StatsManager.Instance.player[1].Health}/100");
+            Debug.Log($"HealthSliderValue text Player1: {healthValue0.text}");
+            Debug.Log($"HealthSliderValue text Player2: {healthValue1.text}");
 
             shieldValue0.text = ($"{StatsManager.Instance.player[0].Shield}/100");
             shieldValue1.text = ($"{StatsManager.Instance.player[1].Shield}/100");
