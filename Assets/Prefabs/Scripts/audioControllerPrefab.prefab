@@ -48,6 +48,10 @@ MonoBehaviour:
   audioSource: {fileID: 4218089479823725654}
   itemPickUp: {fileID: 8300000, guid: 0bc7b94c0437d0049b3434b27973daae, type: 3}
   gunPickUp: {fileID: 8300000, guid: 0bc7b94c0437d0049b3434b27973daae, type: 3}
+  gun1Shot: {fileID: 8300000, guid: 902f667b6a36c5f43987ebab390ad316, type: 3}
+  gun2Shot: {fileID: 8300000, guid: 21a9910710825e34c9cf496fc4bac818, type: 3}
+  gun3Shot: {fileID: 8300000, guid: 78069f5d419651142876155bc841d680, type: 3}
+  testBulletShot: {fileID: 8300000, guid: 0bc7b94c0437d0049b3434b27973daae, type: 3}
 --- !u!82 &4218089479823725654
 AudioSource:
   m_ObjectHideFlags: 0

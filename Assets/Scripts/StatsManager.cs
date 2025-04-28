@@ -228,12 +228,20 @@ public class StatsManager : MonoBehaviour
 
                         if (playerIndex == 0 && !playerXDead)
                         {
-                            player[1].Victories++;
+                            if (!player[1].playerDead)
+                            {
+                                player[1].Victories++;
+                            }
+                            
                             playerXDead = true;
                         }
                         else if (playerIndex == 1 && !playerXDead)
                         {
-                            player[0].Victories++;
+                            if (!player[0].playerDead)
+                            {
+                                player[0].Victories++;
+                            }
+                            
                             playerXDead = true;
                         }
                     }
@@ -264,8 +272,8 @@ public class StatsManager : MonoBehaviour
             player[i].Health = 100;
             player[i].Shield = 100;
             //            player[i].CurrentGun = 0;
-            player[i].CurrentGun = GunManager.Instance.GetGunData(defaultGun);   //Set players gun to default 
-            GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);       //Get default gunData
+            player[i].CurrentGun.GunName = defaultGun;                          //Set players gun to default 
+            player[i].CurrentGun = GunManager.Instance.GetGunData(player[i].CurrentGun.GunName);       //Get default gunData
             player[i].playerDead = false;
         }
 

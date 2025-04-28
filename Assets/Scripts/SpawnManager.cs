@@ -195,13 +195,13 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawning()                                         //Begins Coroutines for item- and gunSpawning by GameManagers booleans 
     {
-        if (!spawningItems && GameManager.Instance.isPlaying && spawningAllowed && (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive))
+        if (!spawningItems && GameManager.Instance.isPlaying && spawningAllowed && !GameManager.Instance.isPaused && (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive))
         {
 //            Debug.Log($"Starting coroutine SpawnItemroutine ({spawningItems})");
             StartCoroutine(SpawnItemRoutine());                         //ItemSpawner
         }
 
-        if (!spawningGuns && GameManager.Instance.isPlaying && spawningAllowed && (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive))
+        if (!spawningGuns && GameManager.Instance.isPlaying && spawningAllowed && !GameManager.Instance.isPaused && (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive))
         {
             StartCoroutine(SpawnGunRoutine());                          //GunSpawner
         }
@@ -211,7 +211,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawningItems = true;
 
-        while (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive && spawningAllowed && !GameManager.Instance.isGameOver && !StatsManager.Instance.playerXDead)
+        while (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive && spawningAllowed && !GameManager.Instance.isGameOver && !StatsManager.Instance.playerXDead && !GameManager.Instance.isPaused)
         {
             Debug.Log("Spawning items Coroutine");
             float itemWaitTime = Random.Range(itemSpawnRate * 0.8f, itemSpawnRate * 1.6f);      //Randomize spawnTime using itemSpawnRate factor
@@ -233,15 +233,18 @@ public class SpawnManager : MonoBehaviour
         {
             spawnContainer = new GameObject("spawnContainer");
         }
+        if (!GameManager.Instance.isPaused || GameManager.Instance.isPlaying)
+        {
+            GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
+        }
 
-        GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
     }
 
     private IEnumerator SpawnGunRoutine()                               //GunSpawner
     {
         spawningGuns = true;
 
-        while (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive && spawningAllowed && !GameManager.Instance.isGameOver && !StatsManager.Instance.playerXDead)
+        while (LevelManager.Instance.spawnGunActive || LevelManager.Instance.spawnActive && spawningAllowed && !GameManager.Instance.isGameOver && !StatsManager.Instance.playerXDead && !GameManager.Instance.isPaused)
         {
 
             float gunWaitTime = Random.Range(gunSpawnRate * 0.8f, gunSpawnRate * 1.6f);         //Randomize spawnTime using gunSpawnRate factor
@@ -267,11 +270,13 @@ public class SpawnManager : MonoBehaviour
         {
             spawnContainer = new GameObject("spawnContainer");
         }
+        if (!GameManager.Instance.isPaused || GameManager.Instance.isPlaying)
+        {
+            //        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
+            GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
 
-        //        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
-        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
-
-//        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);       //Make sure spawning happens on right depth (this was partly for debugging)
+            //        spawnedGun.transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);       //Make sure spawning happens on right depth (this was partly for debugging)
+        }
     }
 
     public void StopSpawning()                                                                  //Stops spawner coroutines

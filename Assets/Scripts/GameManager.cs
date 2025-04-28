@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System;
 
 
 public class GameManager : MonoBehaviour
@@ -53,22 +55,33 @@ public class GameManager : MonoBehaviour
     public bool updateHud = false;                      //Updating HUD information
     public bool loadRandomMap = true;
     public bool ActivateNextMap = false;
+    public bool readyToBegin = false;                   //Ready to activate game
+    public bool menuElementsVisible = false;         //Menu elements visible
+    public float kamikazeActivation = 10;            //Kamikaze activation time
+    [SerializeField] private bool endingGame = false;                     //Quitting game
     [Header("Audio controls")]
     public bool menuMusic = false;
     public bool inGameMusic = false;
 
     InputAction controlAction;
     InputAction pauseMenuAction;
+    InputAction enterAction;
 
+    [SerializeField] private UIManager uiManager;
+
+    public bool apu2 = false; //For testing purposes
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-//        isPlaying = true;
+//        endingGame = false;                      
+        
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
-//        StartGame();
-        
+        enterAction = InputSystem.actions.FindAction("Enter");
+        //        StartGame();
+
+
     }
 
 
@@ -91,27 +104,57 @@ public class GameManager : MonoBehaviour
             updateHud = false;
             isPlaying = false;
         }
-
+/*
         if (controlAction.IsPressed())
         {
-//            QuitGame();
+            QuitGame();
             EnterMainMenu();
         }
-        if (pauseMenuAction.IsPressed())
+*/
+        if (controlAction.IsPressed() && isPlaying)
         {
             GamePaused();
         }
 
 
-        if (StatsManager.Instance.playerXDead)
+        if (StatsManager.Instance.playerXDead && isPlaying && !isGameOver)
         {
             IsGameOver();
         }
-        
+/*        
         if (ActivateNextMap)
         {
             BeginNextLevel();
         }
+*/
+        if (readyToBegin && !isPlaying)
+        {
+            BeginGame();
+        }
+        if (apu2 && enterAction.IsPressed())
+        {
+            Debug.Log("Enter pressed");
+            Application.Quit();
+        }
+    }
+
+    private void LoadMainMenuOnStart()
+    {
+        //Nothing needed here (Yet)
+    }
+
+    private void LoadPlaySceneOnStart()
+    {
+        EnterMainMenu();
+    }
+    private void BeginGame()
+    {
+        menuElementsVisible = false;
+        isPlaying = true;
+        updateHud = true;
+        isGameOver = false;
+        readyToBegin = false;
+
     }
     private void OnEnable()
     {
@@ -130,7 +173,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()                             //Use method when first time starting game
     {
+        //        isGameOver = false;
         //Every action needed for game to begin correctly
+        isGameOver = false;
+        menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("PlayScene", OnPlaySceneLoaded);    //Check if PlayScene is active / Load if different scene
                                                                     //        SceneController.Instance.LoadPlayScene();
 //        StartCoroutine(TimeDelay());
@@ -141,14 +187,14 @@ public class GameManager : MonoBehaviour
 
     private void OnPlaySceneLoaded()
     {
+        ActivateNextLevel();
+        /*
         Cursor.visible = false;
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         LevelManager.Instance.OnGameBegin();
-        SpawnManager.Instance.LoadLevelSpawnPoints();
         //        StartCoroutine(DelaydStart());                  //Load level spawnpoints after delay, making sure scene is loaded
-        isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
-
+        StatsManager.Instance.ResetPlayTime();
+        */
     }
 
     private IEnumerator TimeDelay()
@@ -166,35 +212,48 @@ public class GameManager : MonoBehaviour
 
     public void IsGameOver()
     {
+        menuElementsVisible = true;
         SpawnManager.Instance.StopSpawning();
-        SpawnManager.Instance.spawningAllowed = false;
+//        SpawnManager.Instance.spawningAllowed = false;
         isGameOver= true;
         isPlaying = false;
         updateHud = false;
+        //ActivateNextMap = true;
+        
+    }
+
+    public void ActivateNextLevel()
+    {
+        isGameOver = false;
         ActivateNextMap = true;
+        BeginNextLevel();
     }
 
     public void BeginNextLevel()
     {
         //Every action needed for next level to begin correctly
-        StartCoroutine(DelaydStart());
-        StatsManager.Instance.ResetPlayTime();
-        SpawnManager.Instance.ClearSpawns();
-        LevelManager.Instance.OnGameBegin();
-        
-        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
-//        LevelManager.Instance.InstantiateHUD();
+        //        StartCoroutine(DelaydStart());
         isGameOver = false;
-        isPlaying = true;
-        updateHud = true;
-        StatsManager.Instance.playerXDead = false;
+        StatsManager.Instance.ResetPlayTime();
+        StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
+        menuElementsVisible = false;
+        SpawnManager.Instance.ClearSpawns();
+        LevelManager.Instance.OnGameBegin();      
 
+//        LevelManager.Instance.InstantiateHUD();
+//        isGameOver = false;
+//        isPlaying = true;
+//        updateHud = true;
+        StatsManager.Instance.playerXDead = false;
+        Cursor.visible = false;
         ActivateNextMap = false;
     }
 
     public void EndLevel()                              //When level ends, do these functions
     {
         //Every Action needed for changing next level
+        //        SpawnManager.Instance.spawningAllowed = false;
+        menuElementsVisible = false;
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
@@ -209,6 +268,7 @@ public class GameManager : MonoBehaviour
 
     public void GamePaused()                            //Enter PauseState
     {
+        menuElementsVisible = true;
         Cursor.visible = true;
         isPaused = true;
         isPlaying = false;
@@ -217,6 +277,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitPauseState()                        //Exit PauseState
     {
+        menuElementsVisible = false;
         isPaused = false;
         isPlaying = true;
         updateHud = true;
@@ -225,20 +286,37 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
-        //EndLevel();
+        //        IsGameOver();
+        ExitPauseState();
+        EndLevel();
+        menuElementsVisible = false;
         SceneController.Instance.LoadSpecificLevel("MainMenu", OnMainMenuLoaded);
-        QuitGame();
+        //QuitGame();
     }
 
     private void OnMainMenuLoaded()
     {
         Cursor.visible = true;
-    }
-    public static void QuitGame()
-    {
-        Debug.Log("Quit Game called");
-//            if (Application.isPlaying)
-                Application.Quit();
+//        IsGameOver();
     }
 
+    public void QuitGame()
+    {
+        apu2 = true;
+        //        endingGame = true;                        //Booolean for BattleHUDController and MainMenu to check if game is quitting
+        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        uiManager.EnableCredits();                //Enable credits panel
+        Invoke(nameof(QuittingApplication), 5f);
+
+        //        Application.Quit();
+        //        Debug.Log("Quit");
+
+    }
+
+    private void QuittingApplication()
+    {
+        //            if (Application.isPlaying)
+        Debug.Log("Quitting game...");
+        Application.Quit();
+    }
 }

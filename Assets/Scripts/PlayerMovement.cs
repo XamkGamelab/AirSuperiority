@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Weapon variables
     [SerializeField] private Transform bulletSpawnPoint;
     private float fireRate = 1f;
+    public bool allowShooting = true;
 
     private float time;
 
@@ -130,23 +131,24 @@ public class PlayerMovement : MonoBehaviour
             if (rotateRightAction.IsPressed())
                 RotatePlayerRight();
             
-
-            // Player shooting action
-            if (shootAction.IsPressed())
-            {
-                if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
+            if (allowShooting == true) { 
+                // Player shooting action
+                if (shootAction.IsPressed())
                 {
-                    if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate) 
+                    if (StatsManager.Instance.player[player].CurrentGun.GunName != "BasicGun")
                     {
-                        PlayerShoot();
-                        time = 0;
-                    }
-                } else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
-                {
-                    if (time > fireRate) 
+                        if (time > fireRate / StatsManager.Instance.player[player].CurrentGun.FireRate) 
+                        {
+                            PlayerShoot();
+                            time = 0;
+                        }
+                    } else if (StatsManager.Instance.player[player].CurrentGun.GunName == "BasicGun")
                     {
-                        PlayerShoot();
-                        time = 0;
+                        if (time > fireRate) 
+                        {
+                            PlayerShoot();
+                            time = 0;
+                        }
                     }
                 }
             }
@@ -314,7 +316,7 @@ public class PlayerMovement : MonoBehaviour
             CallDamageFlash();
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && GameManager.Instance.isPlaying && StatsManager.Instance.GetPlayTime() > GameManager.Instance.kamikazeActivation)
         {
             kamikaze = true;
             CalculateDamage();
@@ -378,7 +380,7 @@ public class PlayerMovement : MonoBehaviour
                         // Check if player is alive, if not alive -> destroy player, or hide player?
                         StatsManager.Instance.AffectPlayer(enemy, "AddScore", 10);
                         Destroy(gameObject);
-                        StatsManager.Instance.playerXDead = true;
+//                        StatsManager.Instance.playerXDead = true;
                         return;
                     }
                     else if (StatsManager.Instance.player[player].Shield == 0)
@@ -401,7 +403,10 @@ public class PlayerMovement : MonoBehaviour
         else if (kamikaze)
         {
             Destroy(gameObject);
-            StatsManager.Instance.playerXDead = true;
+            //            StatsManager.Instance.playerXDead = true;
+            StatsManager.Instance.player[0].playerDead = true;
+            StatsManager.Instance.player[1].playerDead = true;
+            StatsManager.Instance.AffectPlayer(enemy, "TakeDamage", -210);
         }
 
     }
