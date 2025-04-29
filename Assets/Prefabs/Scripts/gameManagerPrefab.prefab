@@ -52,6 +52,7 @@ MonoBehaviour:
   ActivateNextMap: 0
   readyToBegin: 0
   menuElementsVisible: 0
+  kamikazeActivation: 20
   endingGame: 0
   menuMusic: 0
   inGameMusic: 0

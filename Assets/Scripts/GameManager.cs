@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     public bool ActivateNextMap = false;
     public bool readyToBegin = false;                   //Ready to activate game
     public bool menuElementsVisible = false;         //Menu elements visible
-    public float kamikazeActivation = 10;            //Kamikaze activation time
+    [SerializeField] public float kamikazeActivation = 20f;            //Kamikaze activation time
     [SerializeField] private bool endingGame = false;                     //Quitting game
     [Header("Audio controls")]
     public bool menuMusic = false;
