@@ -1,16 +1,19 @@
 using UnityEngine;
+using FMODUnity;
 
 public class AudioController : MonoBehaviour
 {
     public static AudioController Instance { get; private set; }
 //    [SerializeField] private AudioSource audioSource;
+/*
     [SerializeField] private AudioClip itemPickUp;
     [SerializeField] private AudioClip gunPickUp;
     [SerializeField] private AudioClip gun1Shot;
     [SerializeField] private AudioClip gun2Shot;
     [SerializeField] private AudioClip gun3Shot;
     [SerializeField] private AudioClip testBulletShot;
-
+*/
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,6 +24,13 @@ public class AudioController : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public void PlayOneShot(EventReference sound, Vector3 worldPos)
+    {
+        RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+    
+    
     // Update is called once per frame
     void Update()
     {

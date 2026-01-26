@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8946927030848255775
+--- !u!114 &-7008142541070769506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,24 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/projectile_hit
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/projectile_hit
-  Guid:
-    Data1: 2064491004
-    Data2: 1311781025
-    Data3: 1693026433
-    Data4: -413271868
-  Banks:
-  - {fileID: -6682449665253092214}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/amb_music/heartBeat
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: heartBeat
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1445376557
+    data2: 3071480381
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6682449665253092214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,12 +39,12 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639050271780143750
+  lastModified: 639050494275659646
   FileSizes:
   - Name: Desktop
-    Value: 1379776
+    Value: 1648256
   Exists: 1
---- !u!114 &-5306890237361455544
+--- !u!114 &-5142066997466526377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,25 +54,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/firing
+  m_Name: event:/Player/projectile_hit
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/firing
+  Path: event:/Player/projectile_hit
   Guid:
-    Data1: -2062174037
-    Data2: 1301909299
-    Data3: 829048196
-    Data4: -2008165638
+    Data1: 2064491004
+    Data2: 1311781025
+    Data3: 1693026433
+    Data4: -413271868
   Banks:
   - {fileID: -6682449665253092214}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters:
-  - {fileID: -911918143949480304}
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-911918143949480304
+--- !u!114 &-4885510829917013059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,6 +98,33 @@ MonoBehaviour:
   - gun2
   - gun3
   Exists: 1
+--- !u!114 &-1980169181005636879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Collectables/pickup
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Collectables/pickup
+  Guid:
+    Data1: 162404602
+    Data2: 1328928328
+    Data3: 1677625235
+    Data4: 251004120
+  Banks:
+  - {fileID: -6682449665253092214}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,29 +142,29 @@ MonoBehaviour:
   - {fileID: -6682449665253092214}
   EditorEvents:
   - {fileID: 8325373827710086507}
-  - {fileID: 3864439318235762013}
-  - {fileID: -5306890237361455544}
-  - {fileID: 2484847221838626557}
-  - {fileID: -8946927030848255775}
+  - {fileID: 6194302512651015708}
+  - {fileID: 1981225160155495449}
+  - {fileID: -1980169181005636879}
+  - {fileID: -5142066997466526377}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6682449665253092214}
   StringsBanks:
   - {fileID: 3290254443178305694}
   cacheVersion: 131858
-  cacheTime: 639050271780153769
+  cacheTime: 639050494275669689
   SerializableEventsDict:
   - key: snapshot:/pause_menu
     index: 0
-  - key: event:/amb_music
+  - key: event:/Music/amb_music
     index: 1
-  - key: event:/firing
+  - key: event:/Player/firing
     index: 2
-  - key: event:/pickup
+  - key: event:/Collectables/pickup
     index: 3
-  - key: event:/projectile_hit
+  - key: event:/Player/projectile_hit
     index: 4
---- !u!114 &2484847221838626557
+--- !u!114 &1981225160155495449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,20 +174,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/pickup
+  m_Name: event:/Player/firing
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/pickup
+  Path: event:/Player/firing
   Guid:
-    Data1: 162404602
-    Data2: 1328928328
-    Data3: 1677625235
-    Data4: 251004120
+    Data1: -2062174037
+    Data2: 1301909299
+    Data3: 829048196
+    Data4: -2008165638
   Banks:
   - {fileID: -6682449665253092214}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -4885510829917013059}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -183,12 +207,12 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639050271780153769
+  lastModified: 639050494275669689
   FileSizes:
   - Name: Desktop
-    Value: 1048
+    Value: 1128
   Exists: 1
---- !u!114 &3864439318235762013
+--- !u!114 &6194302512651015708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,9 +222,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/amb_music
+  m_Name: event:/Music/amb_music
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/amb_music
+  Path: event:/Music/amb_music
   Guid:
     Data1: 139810431
     Data2: 1164081143
@@ -211,7 +235,8 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: -7008142541070769506}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
