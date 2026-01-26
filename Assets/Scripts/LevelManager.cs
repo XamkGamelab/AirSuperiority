@@ -54,6 +54,7 @@ public class LevelManager : MonoBehaviour
         {
             spawnActive = false;
             spawning = false;
+            SpawnManager.Instance.spawningAllowed = false;
         }
     }
 
@@ -85,6 +86,7 @@ public class LevelManager : MonoBehaviour
     {
 //        DestroyActiveHud();
         DestroyActiveMap();
+        SpawnManager.Instance.ClearSpawns();
     }
     private void LoadMaps()
     {

@@ -87,7 +87,15 @@ public class SpawnManager : MonoBehaviour
 //            onceDone = true;                                            //Control through GameManager when starting new map
 //        }
 
-        StartSpawning();
+        if (spawningAllowed || spawningItems || spawningGuns && GameManager.Instance.isPlaying)
+        {
+            StartSpawning();
+        }
+        else if (!GameManager.Instance.isPlaying)
+        {
+            StopSpawning();
+            ClearSpawns();
+        }
 
     }
 
@@ -233,7 +241,7 @@ public class SpawnManager : MonoBehaviour
         {
             spawnContainer = new GameObject("spawnContainer");
         }
-        if (!GameManager.Instance.isPaused || GameManager.Instance.isPlaying)
+        if (!GameManager.Instance.isPaused || GameManager.Instance.isPlaying && GameManager.Instance.isPlaying)
         {
             GameObject spawnedItem = Instantiate(itemsToSpawn[Random.Range(0, itemsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);
         }
@@ -270,7 +278,7 @@ public class SpawnManager : MonoBehaviour
         {
             spawnContainer = new GameObject("spawnContainer");
         }
-        if (!GameManager.Instance.isPaused || GameManager.Instance.isPlaying)
+        if (!GameManager.Instance.isPaused || GameManager.Instance.isPlaying && GameManager.Instance.isPlaying)
         {
             //        GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity);
             GameObject spawnedGun = Instantiate(gunsToSpawn[Random.Range(0, gunsToSpawn.Length)], spawnPosition, Quaternion.identity, spawnContainer.transform);

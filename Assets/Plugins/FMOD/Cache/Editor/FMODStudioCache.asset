@@ -39,10 +39,10 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639050494275659646
+  lastModified: 639050516979179706
   FileSizes:
   - Name: Desktop
-    Value: 1648256
+    Value: 1668160
   Exists: 1
 --- !u!114 &-5142066997466526377
 MonoBehaviour:
@@ -98,6 +98,33 @@ MonoBehaviour:
   - gun2
   - gun3
   Exists: 1
+--- !u!114 &-2150620281090798073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Collectables/pickupIdle
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Collectables/pickupIdle
+  Guid:
+    Data1: 346258773
+    Data2: 1132797151
+    Data3: 1367254170
+    Data4: 89152769
+  Banks:
+  - {fileID: -6682449665253092214}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3607
 --- !u!114 &-1980169181005636879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,13 +173,14 @@ MonoBehaviour:
   - {fileID: 1981225160155495449}
   - {fileID: -1980169181005636879}
   - {fileID: -5142066997466526377}
+  - {fileID: -2150620281090798073}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6682449665253092214}
   StringsBanks:
   - {fileID: 3290254443178305694}
   cacheVersion: 131858
-  cacheTime: 639050494275669689
+  cacheTime: 639050516979194068
   SerializableEventsDict:
   - key: snapshot:/pause_menu
     index: 0
@@ -164,6 +192,8 @@ MonoBehaviour:
     index: 3
   - key: event:/Player/projectile_hit
     index: 4
+  - key: event:/Collectables/pickupIdle
+    index: 5
 --- !u!114 &1981225160155495449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,10 +237,10 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639050494275669689
+  lastModified: 639050516979194068
   FileSizes:
   - Name: Desktop
-    Value: 1128
+    Value: 1174
   Exists: 1
 --- !u!114 &6194302512651015708
 MonoBehaviour:

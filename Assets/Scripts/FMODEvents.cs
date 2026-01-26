@@ -5,6 +5,8 @@ public class FMODEvents : MonoBehaviour
 {
     [field: Header("PickUp SFX")]
     [field: SerializeField] public EventReference pickUp { get; private set; }
+    [field: SerializeField] public EventReference pickUpIdle {get; private set;}
+    
     [field: Header("Weapon Fire SFX")]
     [field: SerializeField] public EventReference fire { get; private set; }
 

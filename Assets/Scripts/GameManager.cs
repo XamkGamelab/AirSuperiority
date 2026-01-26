@@ -213,6 +213,7 @@ public class GameManager : MonoBehaviour
     public void IsGameOver()
     {
         menuElementsVisible = true;
+        SpawnManager.Instance.spawningAllowed = false;
         SpawnManager.Instance.StopSpawning();
 //        SpawnManager.Instance.spawningAllowed = false;
         isGameOver= true;
@@ -224,6 +225,8 @@ public class GameManager : MonoBehaviour
 
     public void ActivateNextLevel()
     {
+//        AudioController.Instance.CleanUp();             //*****FMODEmitter CleanUp routines*****
+        SpawnManager.Instance.ClearSpawns();            //Just to be sure container is cleared
         isGameOver = false;
         ActivateNextMap = true;
         BeginNextLevel();
@@ -237,7 +240,6 @@ public class GameManager : MonoBehaviour
         StatsManager.Instance.ResetPlayTime();
         StatsManager.Instance.ResetPlayerStats();       //Reset everything else but TotalScore for each player
         menuElementsVisible = false;
-        SpawnManager.Instance.ClearSpawns();
         LevelManager.Instance.OnGameBegin();      
 
 //        LevelManager.Instance.InstantiateHUD();
@@ -257,6 +259,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         isPlaying = false;
         updateHud = false;
+        SpawnManager.Instance.ClearSpawns();
         
 //        SpawnManager.Instance.onceDone = false;
 
@@ -286,6 +289,7 @@ public class GameManager : MonoBehaviour
 
     public void EnterMainMenu()
     {
+        SpawnManager.Instance.ClearSpawns();
         //        IsGameOver();
         ExitPauseState();
         EndLevel();
@@ -296,6 +300,7 @@ public class GameManager : MonoBehaviour
 
     private void OnMainMenuLoaded()
     {
+        SpawnManager.Instance.ClearSpawns();
         Cursor.visible = true;
 //        IsGameOver();
     }

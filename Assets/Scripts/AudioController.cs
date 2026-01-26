@@ -1,18 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 using FMODUnity;
+using FMOD.Studio;
 
 public class AudioController : MonoBehaviour
 {
+    private List<EventInstance> eventInstances;
+    private List<StudioEventEmitter> eventEmitters;
+    
     public static AudioController Instance { get; private set; }
-//    [SerializeField] private AudioSource audioSource;
-/*
-    [SerializeField] private AudioClip itemPickUp;
-    [SerializeField] private AudioClip gunPickUp;
-    [SerializeField] private AudioClip gun1Shot;
-    [SerializeField] private AudioClip gun2Shot;
-    [SerializeField] private AudioClip gun3Shot;
-    [SerializeField] private AudioClip testBulletShot;
-*/
     
     private void Awake()
     {
@@ -23,13 +19,45 @@ public class AudioController : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        eventInstances = new List<EventInstance>();
+        eventEmitters = new List<StudioEventEmitter>();
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
+
+    public EventInstance CreateInstance(EventReference eventReference)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstances.Add(eventInstance);
+        return eventInstance;
+    }
+
+    public StudioEventEmitter InitializeEventEmitter(EventReference EventReference, GameObject emitterGameObject)
+    {
+        StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
+        emitter.EventReference = EventReference;
+        eventEmitters.Add(emitter);
+        return emitter;
+    }
     
+    //Shutdown emitters
+    public void CleanUp()
+    {
+        foreach (EventInstance eventInstance in eventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
+
+        foreach (StudioEventEmitter emitter in eventEmitters)
+        {
+            emitter.Stop();
+        }
+    }
     
     // Update is called once per frame
     void Update()
