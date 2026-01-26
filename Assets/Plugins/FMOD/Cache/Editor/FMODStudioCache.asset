@@ -1,6 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5605269026934519258
+--- !u!114 &-8946927030848255775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/projectile_hit
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/projectile_hit
+  Guid:
+    Data1: 2064491004
+    Data2: 1311781025
+    Data3: 1693026433
+    Data4: -413271868
+  Banks:
+  - {fileID: -6682449665253092214}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6682449665253092214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,10 +42,65 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639050220723671827
+  lastModified: 639050271780143750
   FileSizes:
   - Name: Desktop
-    Value: 2102
+    Value: 1379776
+  Exists: 1
+--- !u!114 &-5306890237361455544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/firing
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/firing
+  Guid:
+    Data1: -2062174037
+    Data2: 1301909299
+    Data3: 829048196
+    Data4: -2008165638
+  Banks:
+  - {fileID: -6682449665253092214}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -911918143949480304}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-911918143949480304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/firing/guntype
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: guntype
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3294477968
+    data2: 917170683
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - gun1
+  - gun2
+  - gun3
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -33,21 +115,107 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
-  - {fileID: 7431413708704871266}
-  - {fileID: -5605269026934519258}
+  - {fileID: 3290254443178305694}
+  - {fileID: -6682449665253092214}
   EditorEvents:
-  - {fileID: 5854833911368717355}
+  - {fileID: 8325373827710086507}
+  - {fileID: 3864439318235762013}
+  - {fileID: -5306890237361455544}
+  - {fileID: 2484847221838626557}
+  - {fileID: -8946927030848255775}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -5605269026934519258}
+  - {fileID: -6682449665253092214}
   StringsBanks:
-  - {fileID: 7431413708704871266}
-  cacheVersion: 131857
-  cacheTime: 639050220723681830
+  - {fileID: 3290254443178305694}
+  cacheVersion: 131858
+  cacheTime: 639050271780153769
   SerializableEventsDict:
   - key: snapshot:/pause_menu
     index: 0
---- !u!114 &5854833911368717355
+  - key: event:/amb_music
+    index: 1
+  - key: event:/firing
+    index: 2
+  - key: event:/pickup
+    index: 3
+  - key: event:/projectile_hit
+    index: 4
+--- !u!114 &2484847221838626557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/pickup
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/pickup
+  Guid:
+    Data1: 162404602
+    Data2: 1328928328
+    Data3: 1677625235
+    Data4: 251004120
+  Banks:
+  - {fileID: -6682449665253092214}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3290254443178305694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639050271780153769
+  FileSizes:
+  - Name: Desktop
+    Value: 1048
+  Exists: 1
+--- !u!114 &3864439318235762013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/amb_music
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/amb_music
+  Guid:
+    Data1: 139810431
+    Data2: 1164081143
+    Data3: 816735412
+    Data4: -1026370028
+  Banks:
+  - {fileID: -6682449665253092214}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8325373827710086507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,7 +234,7 @@ MonoBehaviour:
     Data3: -654710098
     Data4: 960718037
   Banks:
-  - {fileID: -5605269026934519258}
+  - {fileID: -6682449665253092214}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -74,23 +242,3 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
---- !u!114 &7431413708704871266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
-  Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 639050220723681830
-  FileSizes:
-  - Name: Desktop
-    Value: 860
-  Exists: 1
