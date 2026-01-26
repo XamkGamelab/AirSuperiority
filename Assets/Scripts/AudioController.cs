@@ -3,7 +3,7 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     public static AudioController Instance { get; private set; }
-    [SerializeField] private AudioSource audioSource;
+//    [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip itemPickUp;
     [SerializeField] private AudioClip gunPickUp;
     [SerializeField] private AudioClip gun1Shot;
@@ -29,12 +29,12 @@ public class AudioController : MonoBehaviour
 
     public void OnItemPickUp() 
     {
-        audioSource.PlayOneShot(itemPickUp);
+  //      audioSource.PlayOneShot(itemPickUp);
     }
 
     public void OnGunPickUp()
     {
-        audioSource.PlayOneShot(gunPickUp);
+ //       audioSource.PlayOneShot(gunPickUp);
     }
 
     public void Shotfired(string file)
@@ -42,18 +42,18 @@ public class AudioController : MonoBehaviour
         switch (file)
         {
             case "Gun1Bullet":
-                audioSource.PlayOneShot(gun1Shot);
+ //               audioSource.PlayOneShot(gun1Shot);
                 break;
             case "Gun2Bullet":
-                audioSource.PlayOneShot(gun2Shot);
+ //               audioSource.PlayOneShot(gun2Shot);
                 break;
             case "Gun3Bullet":
-                audioSource.PlayOneShot(gun3Shot);
+ //               audioSource.PlayOneShot(gun3Shot);
                 break;
 
             default:
                 Debug.LogWarning("Unknown bullet type: " + file);
-                audioSource.PlayOneShot(testBulletShot);
+ //               audioSource.PlayOneShot(testBulletShot);
                 return;
         }
 
