@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8191106123580916703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639050516970000000
+  FileSizes:
+  - Name: Desktop
+    Value: 1174
+  Exists: 1
+--- !u!114 &-7657708166018919476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639050516970000000
+  FileSizes:
+  - Name: Desktop
+    Value: 1668160
+  Exists: 1
 --- !u!114 &-7008142541070769506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +138,33 @@ MonoBehaviour:
   - gun2
   - gun3
   Exists: 1
+--- !u!114 &-4501628763109752405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Collectables/pickup
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Collectables/pickup
+  Guid:
+    Data1: 162404602
+    Data2: 1328928328
+    Data3: 1677625235
+    Data4: 251004120
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2150620281090798073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +192,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3607
+--- !u!114 &-1998017648721626161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/firing/guntype
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: guntype
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3294477968
+    data2: 917170683
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - gun1
+  - gun2
+  - gun3
+  Exists: 1
 --- !u!114 &-1980169181005636879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +246,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-775326426968864347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/pause_menu
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: snapshot:/pause_menu
+  Guid:
+    Data1: -144946269
+    Data2: 1298409138
+    Data3: -654710098
+    Data4: 960718037
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-347881998431761738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/amb_music/heartBeat
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: heartBeat
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1445376557
+    data2: 3071480381
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,34 +310,34 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EventCache
   EditorBanks:
-  - {fileID: 3290254443178305694}
-  - {fileID: -6682449665253092214}
+  - {fileID: -8191106123580916703}
+  - {fileID: -7657708166018919476}
   EditorEvents:
-  - {fileID: 8325373827710086507}
-  - {fileID: 6194302512651015708}
-  - {fileID: 1981225160155495449}
-  - {fileID: -1980169181005636879}
-  - {fileID: -5142066997466526377}
-  - {fileID: -2150620281090798073}
+  - {fileID: 2419063301736637246}
+  - {fileID: 4916400829882296294}
+  - {fileID: -775326426968864347}
+  - {fileID: 7325741467000484324}
+  - {fileID: -4501628763109752405}
+  - {fileID: 5906516527722981800}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6682449665253092214}
+  - {fileID: -7657708166018919476}
   StringsBanks:
-  - {fileID: 3290254443178305694}
+  - {fileID: -8191106123580916703}
   cacheVersion: 131858
-  cacheTime: 639050516979194068
+  cacheTime: 639050516970000000
   SerializableEventsDict:
-  - key: snapshot:/pause_menu
+  - key: event:/Collectables/pickupIdle
     index: 0
   - key: event:/Music/amb_music
     index: 1
-  - key: event:/Player/firing
+  - key: snapshot:/pause_menu
     index: 2
-  - key: event:/Collectables/pickup
+  - key: event:/Player/firing
     index: 3
-  - key: event:/Player/projectile_hit
+  - key: event:/Collectables/pickup
     index: 4
-  - key: event:/Collectables/pickupIdle
+  - key: event:/Player/projectile_hit
     index: 5
 --- !u!114 &1981225160155495449
 MonoBehaviour:
@@ -222,6 +367,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2419063301736637246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Collectables/pickupIdle
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Collectables/pickupIdle
+  Guid:
+    Data1: 346258773
+    Data2: 1132797151
+    Data3: 1367254170
+    Data4: 89152769
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3607
 --- !u!114 &3290254443178305694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +414,61 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1174
   Exists: 1
+--- !u!114 &4916400829882296294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/amb_music
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Music/amb_music
+  Guid:
+    Data1: 139810431
+    Data2: 1164081143
+    Data3: 816735412
+    Data4: -1026370028
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -347881998431761738}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5906516527722981800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/projectile_hit
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Player/projectile_hit
+  Guid:
+    Data1: 2064491004
+    Data2: 1311781025
+    Data3: 1693026433
+    Data4: -413271868
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6194302512651015708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +494,34 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: -7008142541070769506}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7325741467000484324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/firing
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Player/firing
+  Guid:
+    Data1: -2062174037
+    Data2: 1301909299
+    Data3: 829048196
+    Data4: -2008165638
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1998017648721626161}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
