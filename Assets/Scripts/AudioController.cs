@@ -7,7 +7,8 @@ public class AudioController : MonoBehaviour
 {
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
-    
+
+    private EventInstance musicEventInstance;
     public static AudioController Instance { get; private set; }
     
     private void Awake()
@@ -24,6 +25,11 @@ public class AudioController : MonoBehaviour
         eventEmitters = new List<StudioEventEmitter>();
     }
 
+    private void Start()
+    {
+        InitializeMusic(FMODEvents.Instance.music);
+    }
+
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
@@ -36,10 +42,16 @@ public class AudioController : MonoBehaviour
         return eventInstance;
     }
 
-    public StudioEventEmitter InitializeEventEmitter(EventReference EventReference, GameObject emitterGameObject)
+    private void InitializeMusic(EventReference musicEventReference)
+    {
+        musicEventInstance = CreateInstance(musicEventReference);
+        musicEventInstance.start();
+    }
+
+    public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)
     {
         StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
-        emitter.EventReference = EventReference;
+        emitter.EventReference = eventReference;
         eventEmitters.Add(emitter);
         return emitter;
     }

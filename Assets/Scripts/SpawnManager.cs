@@ -203,6 +203,10 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawning()                                         //Begins Coroutines for item- and gunSpawning by GameManagers booleans 
     {
+        if (spawnContainer == null)
+        {
+            spawnContainer = new GameObject("spawnContainer");
+        }
         if (!spawningItems && GameManager.Instance.isPlaying && spawningAllowed && !GameManager.Instance.isPaused && (LevelManager.Instance.spawnItemActive || LevelManager.Instance.spawnActive))
         {
 //            Debug.Log($"Starting coroutine SpawnItemroutine ({spawningItems})");

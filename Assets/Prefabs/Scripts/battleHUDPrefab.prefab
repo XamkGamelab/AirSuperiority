@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03dcd951308d6a4f99eb3b7ab0fb213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updatingHud: 0
   healthSlider0: {fileID: 0}
   shieldSlider0: {fileID: 0}
   healthSlider1: {fileID: 0}
@@ -61,7 +62,13 @@ MonoBehaviour:
   gameTime: {fileID: 0}
   player1Victories: {fileID: 0}
   player2Victories: {fileID: 0}
+  player1totalScore: {fileID: 0}
+  player2totalScore: {fileID: 0}
+  totalTime: {fileID: 0}
+  matchTime: {fileID: 0}
   currentGunSprite0: {fileID: 0}
   currentGunSprite1: {fileID: 0}
   pauseMenu: {fileID: 0}
   gameOverMenu: {fileID: 0}
+  creditsPanel: {fileID: 0}
+  kamiKazeInfoPanel: {fileID: 0}

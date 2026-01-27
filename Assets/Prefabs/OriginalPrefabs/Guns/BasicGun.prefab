@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4417540947043325303}
   - component: {fileID: 5825323048437156605}
+  - component: {fileID: 6425310921550034023}
   m_Layer: 0
   m_Name: BasicGun
   m_TagString: Gun
@@ -44,3 +45,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0474797fdc3bc2f46af2e68baecfb27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GunSprite: {fileID: 0}
+--- !u!114 &6425310921550034023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778141145013558803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 346258773
+      Data2: 1132797151
+      Data3: 1367254170
+      Data4: 89152769
+    Path: event:/Collectables/pickupIdle
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 2

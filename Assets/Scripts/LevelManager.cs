@@ -47,12 +47,14 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance.isPlaying && !spawning)
         {
             spawnActive = true;
+//            spawnItemActive = true;
             spawning = true;
         }
 
         if (spawning && !GameManager.Instance.isPlaying) 
         {
             spawnActive = false;
+//            spawnItemActive = false;
             spawning = false;
             SpawnManager.Instance.spawningAllowed = false;
         }

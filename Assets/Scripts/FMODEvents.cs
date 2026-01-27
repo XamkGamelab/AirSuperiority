@@ -10,6 +10,9 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Weapon Fire SFX")]
     [field: SerializeField] public EventReference fire { get; private set; }
 
+    [field: Header("Music Event")]
+    [field: SerializeField] public EventReference music { get; private set; }
+    
     public static FMODEvents Instance;
     private void Awake()
     {

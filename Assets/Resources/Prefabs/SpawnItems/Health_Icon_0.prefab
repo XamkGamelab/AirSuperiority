@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7604258557008243148}
   - component: {fileID: 8562261424954932835}
   - component: {fileID: -4691380763564286098}
+  - component: {fileID: -1020434097154675384}
   m_Layer: 15
   m_Name: Health_Icon_0
   m_TagString: Untagged
@@ -151,3 +152,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eae7709d099eb440b5d28ceba310581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthItem
+--- !u!114 &-1020434097154675384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593471522078709533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 346258773
+      Data2: 1132797151
+      Data3: 1367254170
+      Data4: 89152769
+    Path: event:/Collectables/pickupIdle
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 2

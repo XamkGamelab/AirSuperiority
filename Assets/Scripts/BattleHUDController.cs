@@ -65,7 +65,7 @@ public class BattleHUDController : MonoBehaviour
 
         if (GameManager.Instance.kamikazeActivation < StatsManager.Instance.GetPlayTime() && GameManager.Instance.kamikazeActivation + 5f > StatsManager.Instance.GetPlayTime())
         {
-            Debug.Log("Activate kamikaze info panel");
+//            Debug.Log("Activate kamikaze info panel");
             kamiKazeInfoPanel.SetActive(true);
         }
         else if (GameManager.Instance.kamikazeActivation + 5f < StatsManager.Instance.GetPlayTime() && kamiKazeInfoPanel.activeSelf)
@@ -106,16 +106,16 @@ public class BattleHUDController : MonoBehaviour
             //Updating sliders
             healthSlider0.value = StatsManager.Instance.player[0].Health;
             healthSlider1.value = StatsManager.Instance.player[1].Health;
-            Debug.Log($"HealthSliderValue Player1: {healthSlider0.value}");
-            Debug.Log($"HealthSliderValue Player2: {healthSlider1.value}");
+//            Debug.Log($"HealthSliderValue Player1: {healthSlider0.value}");
+//            Debug.Log($"HealthSliderValue Player2: {healthSlider1.value}");
 
             shieldSlider0.value = StatsManager.Instance.player[0].Shield;
             shieldSlider1.value = StatsManager.Instance.player[1].Shield;
 
             healthValue0.text = ($"{StatsManager.Instance.player[0].Health}/100");
             healthValue1.text = ($"{StatsManager.Instance.player[1].Health}/100");
-            Debug.Log($"HealthSliderValue text Player1: {healthValue0.text}");
-            Debug.Log($"HealthSliderValue text Player2: {healthValue1.text}");
+//            Debug.Log($"HealthSliderValue text Player1: {healthValue0.text}");
+//            Debug.Log($"HealthSliderValue text Player2: {healthValue1.text}");
 
             shieldValue0.text = ($"{StatsManager.Instance.player[0].Shield}/100");
             shieldValue1.text = ($"{StatsManager.Instance.player[1].Shield}/100");

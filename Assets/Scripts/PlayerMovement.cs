@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
             time += Time.deltaTime;
 
             Vector2 moveValue = moveAction.ReadValue<Vector2>();
-            Debug.Log(moveValue);
+//            Debug.Log(moveValue);
 
             // Move Player forward/backward
             if (moveAction.IsPressed())
@@ -227,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.ChangeGun(player, "BasicGun");
 //            AudioController.Instance.OnGunPickUp();
             AudioController.Instance.PlayOneShot(FMODEvents.Instance.pickUp, this.transform.position);
-            Destroy(collision.gameObject);
+//            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("AdvancedGun"))
@@ -236,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.ChangeGun(player, "AdvancedGun");
 //            AudioController.Instance.OnGunPickUp();
             AudioController.Instance.PlayOneShot(FMODEvents.Instance.pickUp, this.transform.position);
-            Destroy(collision.gameObject);
+//            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("SpecialGun"))
@@ -245,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
             StatsManager.Instance.ChangeGun(player, "SpecialGun");
 //            AudioController.Instance.OnGunPickUp();
             AudioController.Instance.PlayOneShot(FMODEvents.Instance.pickUp, this.transform.position);
-            Destroy(collision.gameObject);
+//            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Health"))
@@ -253,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log($"HEALTH PICKED UP");
 //            AudioController.Instance.OnItemPickUp();
             AudioController.Instance.PlayOneShot(FMODEvents.Instance.pickUp, this.transform.position);
-            Destroy(collision.gameObject);
+//            Destroy(collision.gameObject);
             for (int j = 0; j < 25; j++) 
             {
                 
@@ -278,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log($"SHIELD PICKED UP");
 //            AudioController.Instance.OnItemPickUp();
             AudioController.Instance.PlayOneShot(FMODEvents.Instance.pickUp, this.transform.position);
-            Destroy(collision.gameObject);
+//            Destroy(collision.gameObject);
             for (int l = 0; l < 25; l++)
             {
                 if (StatsManager.Instance.player[player].Shield != 100)

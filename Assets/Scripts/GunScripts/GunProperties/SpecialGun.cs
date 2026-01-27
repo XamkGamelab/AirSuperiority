@@ -1,8 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using FMODUnity;
 
+[RequireComponent(typeof(StudioEventEmitter))]
 public class SpecialGun : Gun
 {
+    private StudioEventEmitter emitter;
+    
     [SerializeField] private Sprite GunSprite;
     protected override void Awake()
     {
@@ -15,6 +19,18 @@ public class SpecialGun : Gun
         destroyTime = 3.0f;
         damage = 75.0f;
         gunSprite = GunSprite;
+    }
+
+    private void Start()
+    {
+        emitter = AudioController.Instance.InitializeEventEmitter(FMODEvents.Instance.pickUpIdle, this.gameObject);
+//        emitter.Play();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+            emitter.Stop();
+            Destroy(this.gameObject);
     }
 }
 //Possible problem on playerdeath, game wont continue to next level.

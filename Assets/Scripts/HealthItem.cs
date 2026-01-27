@@ -1,16 +1,21 @@
 using UnityEngine;
+using FMODUnity;
 
+[RequireComponent(typeof(StudioEventEmitter))]
 public class HealthItem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private StudioEventEmitter emitter;
+
+    private void Start()
     {
-        
+        emitter = AudioController.Instance.InitializeEventEmitter(FMODEvents.Instance.pickUpIdle, this.gameObject);
+//        Debug.Log(emitter);
+        emitter.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+            emitter.Stop();
+            Destroy(this.gameObject);
     }
 }

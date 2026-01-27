@@ -65,3 +65,10 @@ MonoBehaviour:
       Data3: 829048196
       Data4: -2008165638
     Path: event:/Player/firing
+  <music>k__BackingField:
+    Guid:
+      Data1: 139810431
+      Data2: 1164081143
+      Data3: 816735412
+      Data4: -1026370028
+    Path: event:/Music/amb_music
