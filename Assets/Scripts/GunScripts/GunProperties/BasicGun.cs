@@ -19,6 +19,7 @@ public class BasicGun : Gun
         destroyTime = 3f;
         damage = 20.0f;
         gunSprite = GunSprite;
+        gunID = 0;
     }
 
     private void Start()

@@ -74,8 +74,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-//        endingGame = false;                      
-        
+//        endingGame = false; 
         controlAction = InputSystem.actions.FindAction("Control");
         pauseMenuAction = InputSystem.actions.FindAction("PauseMenu");
         enterAction = InputSystem.actions.FindAction("Enter");
@@ -145,6 +144,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadPlaySceneOnStart()
     {
+        AudioController.Instance.SetMusicParameter("mx_amb_type", 4);
         EnterMainMenu();
     }
     private void BeginGame()
@@ -300,6 +300,7 @@ public class GameManager : MonoBehaviour
 
     private void OnMainMenuLoaded()
     {
+        AudioController.Instance.SetMusicParameter("mx_amb_type", 4);
         SpawnManager.Instance.ClearSpawns();
         Cursor.visible = true;
 //        IsGameOver();

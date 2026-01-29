@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639050516970000000
+  lastModified: 639052360012887791
   FileSizes:
   - Name: Desktop
-    Value: 1174
+    Value: 1272
   Exists: 1
 --- !u!114 &-7657708166018919476
 MonoBehaviour:
@@ -35,10 +35,10 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639050516970000000
+  lastModified: 639052360012882765
   FileSizes:
   - Name: Desktop
-    Value: 1668160
+    Value: 1669888
   Exists: 1
 --- !u!114 &-7008142541070769506
 MonoBehaviour:
@@ -165,6 +165,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2485803844221097512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/amd_musics
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Music/amd_musics
+  Guid:
+    Data1: -1513418351
+    Data2: 1320364129
+    Data3: 536008843
+    Data4: 563687597
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1037947433684000564}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2150620281090798073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +274,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1037947433684000564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/amd_musics/mx_amb_type
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: mx_amb_type
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3106822545
+    data2: 392773133
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - mx_01
+  - mx_02
+  - mx_03
+  - mx_04
+  Exists: 1
 --- !u!114 &-775326426968864347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,30 +329,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 0
---- !u!114 &-347881998431761738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/amb_music/heartBeat
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
-  Name: heartBeat
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1445376557
-    data2: 3071480381
-  Type: 1
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,31 +346,58 @@ MonoBehaviour:
   - {fileID: -7657708166018919476}
   EditorEvents:
   - {fileID: 2419063301736637246}
-  - {fileID: 4916400829882296294}
   - {fileID: -775326426968864347}
   - {fileID: 7325741467000484324}
   - {fileID: -4501628763109752405}
   - {fileID: 5906516527722981800}
+  - {fileID: 5238379636594215222}
+  - {fileID: -2485803844221097512}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7657708166018919476}
   StringsBanks:
   - {fileID: -8191106123580916703}
   cacheVersion: 131858
-  cacheTime: 639050516970000000
+  cacheTime: 639052360012887791
   SerializableEventsDict:
   - key: event:/Collectables/pickupIdle
     index: 0
-  - key: event:/Music/amb_music
-    index: 1
   - key: snapshot:/pause_menu
-    index: 2
+    index: 1
   - key: event:/Player/firing
-    index: 3
+    index: 2
   - key: event:/Collectables/pickup
-    index: 4
+    index: 3
   - key: event:/Player/projectile_hit
+    index: 4
+  - key: event:/Music/amb_musics_RND
     index: 5
+  - key: event:/Music/amd_musics
+    index: 6
+--- !u!114 &834297977257095848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/amb_musics_RND/heartBeat
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: heartBeat
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1445376557
+    data2: 3071480381
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1981225160155495449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,7 +473,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1174
   Exists: 1
---- !u!114 &4916400829882296294
+--- !u!114 &5238379636594215222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,9 +483,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/amb_music
+  m_Name: event:/Music/amb_musics_RND
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Music/amb_music
+  Path: event:/Music/amb_musics_RND
   Guid:
     Data1: 139810431
     Data2: 1164081143
@@ -438,7 +497,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -347881998431761738}
+  - {fileID: 834297977257095848}
   MinDistance: 1
   MaxDistance: 20
   Length: 0

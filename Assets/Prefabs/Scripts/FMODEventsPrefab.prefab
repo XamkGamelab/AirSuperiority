@@ -65,10 +65,24 @@ MonoBehaviour:
       Data3: 829048196
       Data4: -2008165638
     Path: event:/Player/firing
-  <music>k__BackingField:
+  <musicRND>k__BackingField:
     Guid:
       Data1: 139810431
       Data2: 1164081143
       Data3: 816735412
       Data4: -1026370028
-    Path: event:/Music/amb_music
+    Path: event:/Music/amb_musics_RND
+  <amdMusic>k__BackingField:
+    Guid:
+      Data1: -1513418351
+      Data2: 1320364129
+      Data3: 536008843
+      Data4: 563687597
+    Path: event:/Music/amd_musics
+  <gunSound>k__BackingField:
+    Guid:
+      Data1: -2062174037
+      Data2: 1301909299
+      Data3: 829048196
+      Data4: -2008165638
+    Path: event:/Player/firing

@@ -27,12 +27,23 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
-        InitializeMusic(FMODEvents.Instance.music);
+//        InitializeMusic(FMODEvents.Instance.musicRND);
+        InitializeMusic(FMODEvents.Instance.amdMusic);
+        SetMusicParameter("mx_amb_type", 4);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+
+    public void PlayGunShot(Vector3 position, int guntype)
+    {
+        EventInstance gunshot = RuntimeManager.CreateInstance("event:/Player/firing");
+        gunshot.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+        gunshot.setParameterByName("guntype", guntype);
+        gunshot.start();
+        gunshot.release();
     }
 
     public EventInstance CreateInstance(EventReference eventReference)
@@ -46,6 +57,18 @@ public class AudioController : MonoBehaviour
     {
         musicEventInstance = CreateInstance(musicEventReference);
         musicEventInstance.start();
+    }
+
+    public void SetMusicParameter(string parameterName, float parameterValue)
+    {
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        musicEventInstance.setParameterByName(parameterName, parameterValue);
+        musicEventInstance.start();
+    }
+
+    public void SetAmbienceParameter(string parameterName, string parameterValue)
+    {
+
     }
 
     public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)

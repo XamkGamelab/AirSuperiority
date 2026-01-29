@@ -11,9 +11,10 @@ public class GunData
     public float DestroyTime;                       //Time before bullet is destroyed
     public float Damage;                            //Affected damage to player
     public Sprite gunSprite;
+    public int GunID;
 
     //Constructor
-    public GunData(string gunName, float fireRate, float ammoCount, string ammonition, float speed, float destroyTime, float damage, Sprite gunSprite)
+    public GunData(string gunName, float fireRate, float ammoCount, string ammonition, float speed, float destroyTime, float damage, Sprite gunSprite, int gunID)
     {
         GunName = gunName;
         FireRate = fireRate;
@@ -23,6 +24,7 @@ public class GunData
         DestroyTime = destroyTime;
         Damage = damage;
         this.gunSprite = gunSprite;
+        GunID = gunID;
     }
 
     public GunData(GunData other)
@@ -37,6 +39,7 @@ public class GunData
         DestroyTime = other.DestroyTime;
         Damage = other.Damage;
         this.gunSprite = other.gunSprite;
+        GunID = other.GunID;
 
     }
 

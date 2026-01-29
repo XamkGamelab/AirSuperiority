@@ -19,6 +19,7 @@ public class SpecialGun : Gun
         destroyTime = 3.0f;
         damage = 75.0f;
         gunSprite = GunSprite;
+        gunID = 2;
     }
 
     private void Start()

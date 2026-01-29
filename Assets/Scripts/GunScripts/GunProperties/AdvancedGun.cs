@@ -19,6 +19,7 @@ public class AdvancedGun : Gun
         destroyTime = 3.0f;
         damage = 25.0f;
         gunSprite = GunSprite;
+        gunID = 1;
     }
 
     private void Start()

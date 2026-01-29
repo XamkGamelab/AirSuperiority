@@ -109,6 +109,8 @@ public class LevelManager : MonoBehaviour
         prevMap = ran;
         map = Instantiate(mapsToLoad[ran]);
         
+        //Play level music
+        AudioController.Instance.SetMusicParameter("mx_amb_type", ran);
     }
 
     private void Player1Present()
