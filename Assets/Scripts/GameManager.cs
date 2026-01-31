@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         {
             updateHud = false;
             isPlaying = false;
+
         }
 /*
         if (controlAction.IsPressed())
@@ -271,6 +272,7 @@ public class GameManager : MonoBehaviour
 
     public void GamePaused()                            //Enter PauseState
     {
+        AudioController.Instance.ActivatePauseSnapshot();
         menuElementsVisible = true;
         Cursor.visible = true;
         isPaused = true;
@@ -280,6 +282,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitPauseState()                        //Exit PauseState
     {
+        AudioController.Instance.DeActivatePauseSnapshot();
         menuElementsVisible = false;
         isPaused = false;
         isPlaying = true;

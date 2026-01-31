@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using FMODUnity;
 using FMOD.Studio;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class AudioController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class AudioController : MonoBehaviour
     private List<StudioEventEmitter> eventEmitters;
 
     private EventInstance musicEventInstance;
+    private EventInstance pauseSnapshot;
     public static AudioController Instance { get; private set; }
     
     private void Awake()
@@ -61,9 +63,9 @@ public class AudioController : MonoBehaviour
 
     public void SetMusicParameter(string parameterName, float parameterValue)
     {
-        musicEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+//        musicEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         musicEventInstance.setParameterByName(parameterName, parameterValue);
-        musicEventInstance.start();
+
     }
 
     public void SetAmbienceParameter(string parameterName, string parameterValue)
@@ -93,7 +95,18 @@ public class AudioController : MonoBehaviour
             emitter.Stop();
         }
     }
-    
+
+    public void ActivatePauseSnapshot()
+    {
+        pauseSnapshot = RuntimeManager.CreateInstance("snapshot:/pause_menu");
+        pauseSnapshot.start();
+    }
+
+    public void DeActivatePauseSnapshot()
+    {
+        pauseSnapshot.stop(STOP_MODE.ALLOWFADEOUT);
+        pauseSnapshot.release();
+    }
     // Update is called once per frame
     void Update()
     {

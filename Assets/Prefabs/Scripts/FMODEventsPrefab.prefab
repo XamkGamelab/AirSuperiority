@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8337f1444d34646a4e33504efb8874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
+  <pauseState>k__BackingField:
+    Guid:
+      Data1: -144946269
+      Data2: 1298409138
+      Data3: -654710098
+      Data4: 960718037
+    Path: snapshot:/pause_menu
   <pickUp>k__BackingField:
     Guid:
       Data1: 162404602
