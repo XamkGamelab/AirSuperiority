@@ -3,6 +3,9 @@ using FMODUnity;
 
 public class FMODEvents : MonoBehaviour
 {
+    [field: Header("Global Variables")]
+    [field: SerializeField] public EventReference pauseState { get; private set; }
+    
     [field: Header("PickUp SFX")]
     [field: SerializeField] public EventReference pickUp { get; private set; }
     [field: SerializeField] public EventReference pickUpIdle {get; private set;}

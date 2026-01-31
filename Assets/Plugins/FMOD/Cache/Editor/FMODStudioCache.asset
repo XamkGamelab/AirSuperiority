@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639052360012887791
+  lastModified: 639054518530612292
   FileSizes:
   - Name: Desktop
-    Value: 1272
+    Value: 1322
   Exists: 1
 --- !u!114 &-7657708166018919476
 MonoBehaviour:
@@ -35,10 +35,10 @@ MonoBehaviour:
   Path: ../../FmodProjects/Airsuperiority/airsuperiority/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639052360012882765
+  lastModified: 639054518530612292
   FileSizes:
   - Name: Desktop
-    Value: 1669888
+    Value: 1671904
   Exists: 1
 --- !u!114 &-7008142541070769506
 MonoBehaviour:
@@ -187,7 +187,7 @@ MonoBehaviour:
   - {fileID: -7657708166018919476}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
   - {fileID: -1037947433684000564}
   MinDistance: 1
@@ -352,13 +352,14 @@ MonoBehaviour:
   - {fileID: 5906516527722981800}
   - {fileID: 5238379636594215222}
   - {fileID: -2485803844221097512}
+  - {fileID: 3622339388554687547}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7657708166018919476}
   StringsBanks:
   - {fileID: -8191106123580916703}
   cacheVersion: 131858
-  cacheTime: 639052360012887791
+  cacheTime: 639054518530612292
   SerializableEventsDict:
   - key: event:/Collectables/pickupIdle
     index: 0
@@ -374,6 +375,8 @@ MonoBehaviour:
     index: 5
   - key: event:/Music/amd_musics
     index: 6
+  - key: snapshot:/Default
+    index: 7
 --- !u!114 &834297977257095848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +476,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1174
   Exists: 1
+--- !u!114 &3622339388554687547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/Default
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: snapshot:/Default
+  Guid:
+    Data1: 1121467251
+    Data2: 1302906046
+    Data3: 417611418
+    Data4: -1442231991
+  Banks:
+  - {fileID: -7657708166018919476}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &5238379636594215222
 MonoBehaviour:
   m_ObjectHideFlags: 0
