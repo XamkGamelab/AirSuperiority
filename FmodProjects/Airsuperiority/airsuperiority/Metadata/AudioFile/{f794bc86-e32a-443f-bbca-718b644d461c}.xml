@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{f794bc86-e32a-443f-bbca-718b644d461c}">
+		<property name="assetPath">
+			<value>sfx/sx_uni_int_laser_shot_03.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.13124716553287982</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dcc60997-469c-4eb8-940e-a2199445a3f4}</destination>
+		</relationship>
+	</object>
+</objects>

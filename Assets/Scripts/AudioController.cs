@@ -12,7 +12,6 @@ public class AudioController : MonoBehaviour
     private EventInstance musicEventInstance;
     private EventInstance pauseSnapshot;
     public static AudioController Instance { get; private set; }
-    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,19 +25,16 @@ public class AudioController : MonoBehaviour
         eventInstances = new List<EventInstance>();
         eventEmitters = new List<StudioEventEmitter>();
     }
-
     private void Start()
     {
 //        InitializeMusic(FMODEvents.Instance.musicRND);
         InitializeMusic(FMODEvents.Instance.amdMusic);
         SetMusicParameter("mx_amb_type", 4);
     }
-
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
-
     public void PlayGunShot(Vector3 position, int guntype)
     {
         EventInstance gunshot = RuntimeManager.CreateInstance("event:/Player/firing");
@@ -47,32 +43,22 @@ public class AudioController : MonoBehaviour
         gunshot.start();
         gunshot.release();
     }
-
     public EventInstance CreateInstance(EventReference eventReference)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
         eventInstances.Add(eventInstance);
         return eventInstance;
     }
-
     private void InitializeMusic(EventReference musicEventReference)
     {
         musicEventInstance = CreateInstance(musicEventReference);
         musicEventInstance.start();
     }
-
     public void SetMusicParameter(string parameterName, float parameterValue)
     {
 //        musicEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         musicEventInstance.setParameterByName(parameterName, parameterValue);
-
     }
-
-    public void SetAmbienceParameter(string parameterName, string parameterValue)
-    {
-
-    }
-
     public StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject emitterGameObject)
     {
         StudioEventEmitter emitter = emitterGameObject.GetComponent<StudioEventEmitter>();
@@ -80,7 +66,6 @@ public class AudioController : MonoBehaviour
         eventEmitters.Add(emitter);
         return emitter;
     }
-    
     //Shutdown emitters
     public void CleanUp()
     {
@@ -95,22 +80,21 @@ public class AudioController : MonoBehaviour
             emitter.Stop();
         }
     }
-
     public void ActivatePauseSnapshot()
     {
         pauseSnapshot = RuntimeManager.CreateInstance("snapshot:/pause_menu");
         pauseSnapshot.start();
     }
-
     public void DeActivatePauseSnapshot()
     {
         pauseSnapshot.stop(STOP_MODE.ALLOWFADEOUT);
         pauseSnapshot.release();
     }
-    // Update is called once per frame
-    void Update()
+
+    
+    public void SetAmbienceParameter(string parameterName, string parameterValue)
     {
-        
+
     }
 
     public void OnItemPickUp() 

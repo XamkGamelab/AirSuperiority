@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e0ac8f5d-2f14-48c1-983a-3286e424c354}">
+		<property name="assetPath">
+			<value>sfx/sx_uni_env_explosion_01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.31544217687074833</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{dcc60997-469c-4eb8-940e-a2199445a3f4}</destination>
+		</relationship>
+	</object>
+</objects>

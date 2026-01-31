@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{e1dd4837-da70-4c28-838e-e79271ecced2}">
+		<property name="name">
+			<value>mx_amb_type</value>
+		</property>
+		<relationship name="folder">
+			<destination>{3714cddf-dd68-495a-8835-72254c416830}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d7333058-0863-437d-8a7c-1905c7791a14}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d7333058-0863-437d-8a7c-1905c7791a14}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>mx_01</value>
+			<value>mx_02</value>
+			<value>mx_03</value>
+			<value>mx_04</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
